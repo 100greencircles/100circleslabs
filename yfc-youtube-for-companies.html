@@ -119,14 +119,19 @@ body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;
 .video-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:64px}
 .video-desc{font-size:16px;font-weight:300;line-height:1.8;color:var(--ws);margin-top:20px}
 
-/* Thumbnail card grid */
-.video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;max-width:640px;margin:0 auto}
+/* Thumbnail card grid — portrait short left (1fr), landscape long right (2fr) */
+.video-grid{display:grid;grid-template-columns:1fr 2fr;gap:24px;align-items:start}
 .vt-card{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#000;cursor:none;position:relative;transition:transform .3s,box-shadow .3s}
 .vt-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.5)}
 
-/* Thumbnail image fills card, portrait 9:16 */
-.vt-thumb{position:relative;aspect-ratio:9/16;overflow:hidden;display:block}
-.vt-thumb img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .4s ease}
+/* Short — portrait 9:16 */
+.vt-card.vc-short .vt-thumb{aspect-ratio:9/16}
+/* Long — landscape 16:9 */
+.vt-card.vc-long .vt-thumb{aspect-ratio:16/9}
+
+/* Thumbnail base */
+.vt-thumb{position:relative;overflow:hidden;display:block}
+.vt-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .4s ease}
 .vt-card:hover .vt-thumb img{transform:scale(1.04)}
 
 /* Dark gradient overlay bottom */
