@@ -137,10 +137,10 @@ body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;
 /* Dark gradient overlay bottom */
 .vt-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.65) 100%);pointer-events:none}
 
-/* Play button — centered white circle + orange triangle */
-.vt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;z-index:3;transition:transform .2s,background .2s;box-shadow:0 4px 24px rgba(0,0,0,.4)}
-.vt-card:hover .vt-play{transform:translate(-50%,-50%) scale(1.1);background:#fff}
-.vt-play::after{content:'';display:block;width:0;height:0;border-style:solid;border-width:11px 0 11px 20px;border-color:transparent transparent transparent #F97316;margin-left:4px}
+/* Play button — YouTube-style rounded rect */
+.vt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:48px;border-radius:12px;background:#FF0000;display:flex;align-items:center;justify-content:center;z-index:3;transition:transform .2s,background .2s;box-shadow:0 4px 24px rgba(0,0,0,.5)}
+.vt-card:hover .vt-play{transform:translate(-50%,-50%) scale(1.1);background:#cc0000}
+.vt-play::after{content:'';display:block;width:0;height:0;border-style:solid;border-width:10px 0 10px 18px;border-color:transparent transparent transparent #fff;margin-left:3px}
 
 /* Card footer label */
 .vt-foot{padding:16px 18px;background:#111}
@@ -151,12 +151,13 @@ body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;
 .vt-sub{font-size:11px;font-weight:300;color:var(--wd)}
 
 /* Modal overlay */
-.vid-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:1000;align-items:center;justify-content:center;cursor:none}
+.vid-modal{display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;cursor:none}
 .vid-modal.open{display:flex}
-.vid-modal-inner{position:relative;width:90vw;max-width:900px}
+.vid-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.88)}
+.vid-modal-inner{position:relative;width:90vw;max-width:960px;z-index:2}
 .vid-modal-inner iframe{width:100%;aspect-ratio:16/9;border:none;border-radius:12px;display:block}
-.vid-modal-close{position:absolute;top:-44px;right:0;background:transparent;border:none;color:#fff;font-size:28px;cursor:none;opacity:.7;transition:opacity .2s;line-height:1}
-.vid-modal-close:hover{opacity:1}
+.vid-modal-close{position:absolute;top:-48px;right:0;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:20px;width:36px;height:36px;border-radius:50%;cursor:none;opacity:.8;transition:opacity .2s,background .2s;display:flex;align-items:center;justify-content:center;line-height:1}
+.vid-modal-close:hover{opacity:1;background:rgba(255,255,255,.2)}
 
 /* ── SERVICES ── */
 .services-section{padding:120px 64px;border-top:1px solid var(--border);position:relative;overflow:hidden}
@@ -191,7 +192,9 @@ body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;
 .ow-label.l2{bottom:-28px;left:50%;transform:translateX(-50%)}
 .ow-label.l3{top:-24px;left:50%;transform:translateX(-50%)}
 
-/* ── PROCESS ── */
+/* Process section two-col layout for CTA */
+.process-layout{display:grid;grid-template-columns:1fr 280px;gap:80px;align-items:center;justify-items:stretch}
+.process-cta-col{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;width:280px;text-align:center}
 .process-section{padding:120px 64px;background:var(--black-2);border-top:1px solid var(--border)}
 .process-steps{position:relative;margin-top:64px;max-width:700px}
 .process-steps::before{content:'';position:absolute;left:28px;top:28px;bottom:28px;width:1px;background:linear-gradient(to bottom,var(--orange),var(--blue),transparent)}
@@ -289,7 +292,7 @@ body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;
 @media(max-width:960px){
   .hero{padding:60px 24px 60px}
   .why-section,.video-section,.services-section,.process-section,.enquiry-section{padding-left:24px;padding-right:24px}
-  .why-header,.video-intro,.services-grid{grid-template-columns:1fr;gap:40px}
+  .why-header,.video-intro,.services-grid,.process-layout{grid-template-columns:1fr;gap:40px}
   .why-cards,.stats-bar,.enq-perks{grid-template-columns:1fr}
   .video-grid{grid-template-columns:1fr}
   .orbit-wrap{display:none}
@@ -407,10 +410,9 @@ body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;
   <div class="video-intro">
     <div>
       <div class="section-tag reveal">Watch · The Case For YouTube</div>
-      <h2 class="section-title reveal">See why <em>now</em><br>is the moment<br>to start</h2>
+      <h2 class="section-title reveal">See why <em>now</em> is<br>the moment to start</h2>
     </div>
     <div>
-      <p class="video-desc reveal">Choose your format — a 60-second Short for a quick take, or the full deep-dive if you want the complete picture before making a decision.</p>
     </div>
   </div>
 
@@ -430,29 +432,33 @@ body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;
       </div>
     </div>
 
-    <!-- Long -->
-    <div class="vt-card vc-long" onclick="openModal('https://www.youtube.com/embed/IW-E2TNwoiQ?autoplay=1')">
-      <div class="vt-thumb">
-        <img src="https://img.youtube.com/vi/IW-E2TNwoiQ/maxresdefault.jpg"
-             onerror="this.src='https://img.youtube.com/vi/IW-E2TNwoiQ/hqdefault.jpg'"
-             alt="Why YouTube For Companies – Full"/>
-        <div class="vt-play"></div>
+    <!-- Long + CTA below -->
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div class="vt-card vc-long" onclick="openModal('https://www.youtube.com/embed/IW-E2TNwoiQ?autoplay=1')">
+        <div class="vt-thumb">
+          <img src="https://img.youtube.com/vi/IW-E2TNwoiQ/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/IW-E2TNwoiQ/hqdefault.jpg'"
+               alt="Why YouTube For Companies – Full"/>
+          <div class="vt-play"></div>
+        </div>
+        <div class="vt-foot">
+          <div class="vt-badge">○ Full Video · Deep Dive</div>
+          <div class="vt-title">The full breakdown</div>
+          <div class="vt-sub">All three reasons in detail</div>
+        </div>
       </div>
-      <div class="vt-foot">
-        <div class="vt-badge">○ Full Video · Deep Dive</div>
-        <div class="vt-title">The full breakdown</div>
-        <div class="vt-sub">All three reasons in detail</div>
+      <div style="display:flex;justify-content:center">
+        <button class="btn-orange" onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'})">Talk to Us</button>
       </div>
     </div>
   </div>
 </section>
-
-<!-- VIDEO MODAL -->
-<div class="vid-modal" id="vid-modal" onclick="closeModal(event)">
+<div class="vid-modal" id="vid-modal">
+  <div class="vid-modal-backdrop" onclick="closeModal()"></div>
   <div class="vid-modal-inner">
     <button class="vid-modal-close" onclick="closeModal()">✕</button>
     <iframe id="vid-iframe" src="" allowfullscreen
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
   </div>
 </div>
 
@@ -532,45 +538,52 @@ body{background:var(--black);color:var(--white);font-family:'Outfit',sans-serif;
 <section id="process" class="process-section">
   <div class="section-tag reveal">How It Works</div>
   <h2 class="section-title reveal">From strategy<br>to <em>first publish</em><br>in 2 weeks</h2>
-  <div class="process-steps">
-    <div class="ps-item reveal">
-      <div class="ps-circle">1</div>
-      <div class="ps-body">
-        <div class="ps-tag tag-orange">Week 1</div>
-        <div class="ps-name">Strategy &amp; Channel Audit</div>
-        <div class="ps-desc">We audit your brand, audience, and competitors. You leave with a clear content positioning, channel strategy, and a content plan built for your specific industry.</div>
+  <div class="process-layout">
+    <div class="process-steps">
+      <div class="ps-item reveal">
+        <div class="ps-circle">1</div>
+        <div class="ps-body">
+          <div class="ps-tag tag-orange">Week 1</div>
+          <div class="ps-name">Strategy &amp; Channel Audit</div>
+          <div class="ps-desc">We audit your brand, audience, and competitors. You leave with a clear content positioning, channel strategy, and a content plan built for your specific industry.</div>
+        </div>
+      </div>
+      <div class="ps-item reveal" style="transition-delay:.08s">
+        <div class="ps-circle">2</div>
+        <div class="ps-body">
+          <div class="ps-tag tag-blue">Week 1–2</div>
+          <div class="ps-name">Brand &amp; Content Setup</div>
+          <div class="ps-desc">We set up your channel templates, thumbnail system, intro/outro sequences, and write your first month of scripts — all in your brand's voice.</div>
+        </div>
+      </div>
+      <div class="ps-item reveal" style="transition-delay:.16s">
+        <div class="ps-circle">3</div>
+        <div class="ps-body">
+          <div class="ps-tag tag-orange">Week 2</div>
+          <div class="ps-name">First Video Production</div>
+          <div class="ps-desc">We produce your first video — shooting, editing, captions, thumbnail, and SEO-optimised title and description. All delivered within 72 hours.</div>
+        </div>
+      </div>
+      <div class="ps-item reveal" style="transition-delay:.24s">
+        <div class="ps-circle">4</div>
+        <div class="ps-body">
+          <div class="ps-tag tag-blue">Ongoing</div>
+          <div class="ps-name">Publish, Distribute &amp; Report</div>
+          <div class="ps-desc">We publish consistently across YouTube (and Shorts), monitor performance, and brief you monthly on what's working — and what to do next.</div>
+        </div>
+      </div>
+      <div class="ps-item reveal" style="transition-delay:.32s">
+        <div class="ps-circle">5</div>
+        <div class="ps-body">
+          <div class="ps-tag tag-orange">Compound</div>
+          <div class="ps-name">Grow &amp; Optimise</div>
+          <div class="ps-desc">Every video compounds. SEO authority builds. Your channel becomes a long-term asset that drives inbound leads, builds trust, and owns your category search results.</div>
+        </div>
       </div>
     </div>
-    <div class="ps-item reveal" style="transition-delay:.08s">
-      <div class="ps-circle">2</div>
-      <div class="ps-body">
-        <div class="ps-tag tag-blue">Week 1–2</div>
-        <div class="ps-name">Brand &amp; Content Setup</div>
-        <div class="ps-desc">We set up your channel templates, thumbnail system, intro/outro sequences, and write your first month of scripts — all in your brand's voice.</div>
-      </div>
-    </div>
-    <div class="ps-item reveal" style="transition-delay:.16s">
-      <div class="ps-circle">3</div>
-      <div class="ps-body">
-        <div class="ps-tag tag-orange">Week 2</div>
-        <div class="ps-name">First Video Production</div>
-        <div class="ps-desc">We produce your first video — shooting, editing, captions, thumbnail, and SEO-optimised title and description. All delivered within 72 hours.</div>
-      </div>
-    </div>
-    <div class="ps-item reveal" style="transition-delay:.24s">
-      <div class="ps-circle">4</div>
-      <div class="ps-body">
-        <div class="ps-tag tag-blue">Ongoing</div>
-        <div class="ps-name">Publish, Distribute &amp; Report</div>
-        <div class="ps-desc">We publish consistently across YouTube (and Shorts), monitor performance, and brief you monthly on what's working — and what to do next.</div>
-      </div>
-    </div>
-    <div class="ps-item reveal" style="transition-delay:.32s">
-      <div class="ps-circle">5</div>
-      <div class="ps-body">
-        <div class="ps-tag tag-orange">Compound</div>
-        <div class="ps-name">Grow &amp; Optimise</div>
-        <div class="ps-desc">Every video compounds. SEO authority builds. Your channel becomes a long-term asset that drives inbound leads, builds trust, and owns your category search results.</div>
+    <div class="process-cta-col reveal">
+      <div style="display:flex;justify-content:center;width:100%">
+        <button class="btn-orange" style="width:auto" onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'})">Book a Meeting</button>
       </div>
     </div>
   </div>
@@ -703,17 +716,16 @@ document.addEventListener('click',e=>{
 
 /* Video modal */
 function openModal(src){
-  document.getElementById('vid-iframe').src=src;
+  document.getElementById('vid-iframe').src = src;
   document.getElementById('vid-modal').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
-function closeModal(e){
-  if(e&&e.target!==document.getElementById('vid-modal')&&e.type==='click'&&!e.target.classList.contains('vid-modal-close'))return;
-  document.getElementById('vid-iframe').src='';
+function closeModal(){
+  document.getElementById('vid-iframe').src = '';
   document.getElementById('vid-modal').classList.remove('open');
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal({target:document.getElementById('vid-modal')});});
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
 
 /* Form */
 function submitForm(){
