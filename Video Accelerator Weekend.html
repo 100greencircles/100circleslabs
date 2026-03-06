@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Accelerator - Weekend Edition | 100Circles | Bengaluru 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #0B1624;
+    --navy-mid:    #0F2040;
+    --navy-light:  #162B4D;
+    --navy-card:   #122035;
+    --navy-card2:  #0E1C30;
+    --orange:      #E8651A;
+    --orange-l:    #F07D38;
+    --orange-pale: #FDE8D8;
+    --blue:        #1e90ff;
+    --cream:       #F4EEE4;
+    --white:       #FFFFFF;
+    --text:        #D6E4F0;
+    --text-dim:    #7A9BB8;
+    --text-muted:  #4A6A88;
+    --border:      rgba(232,101,26,0.18);
+    --border-soft: rgba(214,228,240,0.08);
+    --border-blue: rgba(30,144,255,0.15);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Noise texture */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 52px;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.4s, border-color 0.4s;
+    border-bottom: 1px solid transparent;
+  }
+  nav.scrolled {
+    background: rgba(11,22,36,0.97);
+    border-bottom-color: var(--border-soft);
+    backdrop-filter: blur(12px);
+  }
+  .nav-brand {
+    display: flex; flex-direction: column; gap: 1px;
+  }
+  .nav-logo {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--text); letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--orange); }
+  .nav-sub {
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .nav-cta {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--navy); background: var(--orange);
+    padding: 11px 28px; text-decoration: none;
+    border-radius: 2px; transition: all 0.3s;
+  }
+  .nav-cta:hover { background: var(--orange-l); transform: translateY(-1px); }
+
+  /* ══════════════════════════
+     FOLD 1 - HERO
+  ══════════════════════════ */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: 130px 24px 100px;
+    position: relative; overflow: hidden;
+  }
+
+  /* DNA circles - background atmosphere */
+  .dna-ring {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .dna-ring-1 {
+    width: 700px; height: 700px;
+    border: 1px solid rgba(232,101,26,0.07);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ringPulse 8s ease-in-out infinite;
+  }
+  .dna-ring-2 {
+    width: 500px; height: 500px;
+    border: 1px solid rgba(30,144,255,0.05);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ringPulse 8s ease-in-out infinite 1.5s;
+  }
+  .dna-ring-3 {
+    width: 300px; height: 300px;
+    border: 1px solid rgba(232,101,26,0.04);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ringPulse 8s ease-in-out infinite 3s;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 800px; height: 500px;
+    background: radial-gradient(ellipse, rgba(232,101,26,0.1) 0%, transparent 65%);
+    top: -100px; left: 50%; transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  @keyframes ringPulse {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.02); }
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--orange);
+    border: 1px solid var(--border);
+    border-radius: 100px; padding: 8px 20px;
+    margin-bottom: 44px; position: relative;
+    background: rgba(232,101,26,0.06);
+    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .badge-dot {
+    width: 6px; height: 6px;
+    background: var(--orange); border-radius: 50%;
+    animation: blink 2s infinite;
+  }
+  @keyframes blink {
+    0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+  }
+
+  .hero-headline {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: clamp(34px, 5vw, 66px);
+    font-weight: 700;
+    line-height: 1.12; letter-spacing: -0.025em;
+    max-width: 960px; position: relative;
+    opacity: 0; animation: fadeUp 0.8s 0.35s forwards;
+    color: var(--cream);
+  }
+  .hl-accent { color: var(--orange); }
+  .hl-white { color: var(--cream); }
+
+  .hero-sub {
+    font-size: 16px; font-weight: 300;
+    color: var(--text-dim); max-width: 560px;
+    margin: 28px auto 0; line-height: 1.85;
+    position: relative;
+    opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+  }
+
+  /* Rectangular stats */
+  .hero-stats {
+    display: flex; gap: 0;
+    margin-top: 52px;
+    border: 1px solid var(--border-soft);
+    border-radius: 4px; overflow: hidden;
+    opacity: 0; animation: fadeUp 0.8s 0.65s forwards;
+    position: relative;
+  }
+  .hero-stat {
+    padding: 24px 40px; text-align: center;
+    border-right: 1px solid var(--border-soft);
+    background: rgba(15,32,64,0.6);
+    backdrop-filter: blur(8px);
+    transition: background 0.3s;
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat:hover { background: rgba(22,43,77,0.8); }
+  .hero-stat-num {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 36px; font-weight: 700;
+    color: var(--orange); display: block; line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted);
+    margin-top: 6px; display: block;
+  }
+
+  .hero-actions {
+    display: flex; gap: 14px; margin-top: 44px;
+    flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+    position: relative;
+  }
+  .btn-main {
+    display: inline-block; background: var(--orange);
+    color: var(--navy);
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 17px 44px; text-decoration: none;
+    border-radius: 2px; transition: all 0.3s;
+  }
+  .btn-main:hover {
+    background: var(--orange-l); transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(232,101,26,0.35);
+  }
+  .btn-ghost {
+    display: inline-block;
+    border: 1px solid rgba(214,228,240,0.2);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px; font-weight: 400;
+    letter-spacing: 0.06em;
+    padding: 17px 36px; text-decoration: none;
+    border-radius: 2px; transition: all 0.3s;
+  }
+  .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+
+  .hero-location {
+    margin-top: 24px; font-size: 12px;
+    color: var(--text-muted); letter-spacing: 0.08em;
+    opacity: 0; animation: fadeUp 0.8s 0.95s forwards;
+    position: relative;
+  }
+  .hero-location strong { color: var(--orange); font-weight: 500; }
+
+  .scroll-hint {
+    position: absolute; bottom: 36px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0; animation: fadeIn 1s 1.5s forwards;
+  }
+  .scroll-line {
+    width: 1px; height: 48px;
+    background: linear-gradient(to bottom, transparent, var(--orange));
+    animation: scrollAnim 2s ease-in-out infinite;
+  }
+  @keyframes scrollAnim {
+    0% { transform: scaleY(0.3); transform-origin: top; opacity: 0; }
+    50% { transform: scaleY(1); opacity: 1; }
+    100% { transform: scaleY(0.3); transform-origin: bottom; opacity: 0; }
+  }
+
+  /* ══════════════════════════
+     SHARED STYLES
+  ══════════════════════════ */
+  .section-inner { max-width: 1180px; margin: 0 auto; }
+
+  .eyebrow {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--orange); display: block; margin-bottom: 16px;
+  }
+  .section-h {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: clamp(30px, 4vw, 52px);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--cream);
+  }
+  .section-h .acc { color: var(--orange); }
+  .section-h .dim { color: var(--text-dim); font-weight: 300; }
+
+  /* ══════════════════════════
+     FOLD 2 - PROBLEM
+  ══════════════════════════ */
+  #problem { padding: 120px 24px; position: relative; }
+
+  .problem-intro {
+    font-size: 16px; color: var(--text-dim);
+    max-width: 600px; margin-top: 18px; line-height: 1.85;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px; margin-top: 60px;
+  }
+  .pain-card {
+    background: var(--navy-card);
+    padding: 36px 30px; position: relative;
+    overflow: hidden; transition: background 0.3s;
+    cursor: default;
+  }
+  .pain-card::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--orange);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .pain-card:hover { background: var(--navy-light); }
+  .pain-card:hover::after { transform: scaleX(1); }
+  .pain-num {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 44px; font-weight: 700;
+    color: rgba(232,101,26,0.1); line-height: 1;
+    margin-bottom: 14px;
+  }
+  .pain-card h3 {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 14px; font-weight: 600;
+    color: var(--cream); margin-bottom: 10px; line-height: 1.35;
+  }
+  .pain-card p { font-size: 13px; color: var(--text-dim); line-height: 1.75; }
+
+  /* Reframe block */
+  .reframe-block {
+    margin-top: 68px;
+    background: linear-gradient(135deg, var(--navy-light), var(--navy-card));
+    border: 1px solid var(--border); border-radius: 4px;
+    padding: 52px 56px;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 48px; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .reframe-block::before {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(232,101,26,0.06);
+    right: -80px; top: -80px;
+    pointer-events: none;
+  }
+  .reframe-block::after {
+    content: '';
+    position: absolute;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 1px solid rgba(30,144,255,0.04);
+    right: -20px; top: -20px;
+    pointer-events: none;
+  }
+  .reframe-block h3 {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-weight: 600; line-height: 1.3; color: var(--cream);
+  }
+  .reframe-block h3 .acc { color: var(--orange); }
+  .reframe-block p {
+    font-size: 14px; color: var(--text-dim);
+    margin-top: 14px; line-height: 1.8; max-width: 580px;
+  }
+  .reframe-tags {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;
+  }
+  .rtag {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--orange); border: 1px solid var(--border);
+    border-radius: 100px; padding: 5px 14px;
+    background: rgba(232,101,26,0.06);
+  }
+
+  /* ══════════════════════════
+     FOLD 3 - VALUE
+  ══════════════════════════ */
+  #value {
+    background: var(--navy-card2);
+    padding: 120px 24px; position: relative; overflow: hidden;
+  }
+  #value::before {
+    content: '';
+    position: absolute; top: -200px; right: -150px;
+    width: 500px; height: 500px; border-radius: 50%;
+    border: 1px solid rgba(232,101,26,0.05);
+    pointer-events: none;
+  }
+  #value::after {
+    content: '';
+    position: absolute; top: -80px; right: -60px;
+    width: 280px; height: 280px; border-radius: 50%;
+    border: 1px solid rgba(30,144,255,0.04);
+    pointer-events: none;
+  }
+
+  /* Lead grid */
+  .value-lead {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start; margin-bottom: 88px;
+  }
+  .value-lead-text p {
+    font-size: 15px; color: var(--text-dim);
+    margin-top: 20px; line-height: 1.9;
+  }
+  .value-numbers { display: flex; flex-direction: column; gap: 3px; }
+  .vnum-row {
+    display: flex; align-items: center; gap: 22px;
+    background: var(--navy-card); padding: 20px 26px;
+    border-left: 3px solid var(--orange);
+    transition: background 0.3s;
+  }
+  .vnum-row:hover { background: var(--navy-light); }
+  .vn {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 38px; font-weight: 700;
+    color: var(--orange); line-height: 1;
+    white-space: nowrap; min-width: 100px;
+  }
+  .vnt strong {
+    display: block; font-size: 14px; font-weight: 600;
+    color: var(--cream); margin-bottom: 3px;
+  }
+  .vnt span { font-size: 12.5px; color: var(--text-dim); line-height: 1.55; }
+
+  /* Outcomes */
+  .outcomes-header {
+    text-align: center; margin-bottom: 44px;
+  }
+  .outcomes-header h2 {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: clamp(26px, 3.2vw, 42px);
+    font-weight: 700; color: var(--cream);
+    letter-spacing: -0.02em; margin-top: 12px;
+  }
+
+  .outcomes-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 3px; margin-bottom: 32px;
+  }
+  .oc {
+    background: var(--navy-card); padding: 34px 28px;
+    transition: all 0.3s; position: relative;
+  }
+  .oc:hover { background: var(--navy-light); transform: translateY(-3px); }
+  .oc-icon { font-size: 26px; margin-bottom: 14px; display: block; }
+  .oc-cat {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 7px; display: block;
+  }
+  .oc-title {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 15px; font-weight: 600;
+    color: var(--cream); margin-bottom: 9px; line-height: 1.3;
+  }
+  .oc-desc { font-size: 13px; color: var(--text-dim); line-height: 1.72; }
+
+  .personalised-note {
+    text-align: center; margin-top: 8px; margin-bottom: 48px;
+    padding: 20px 32px;
+    background: rgba(232,101,26,0.04);
+    border: 1px solid rgba(232,101,26,0.1);
+    border-radius: 2px;
+  }
+  .personalised-note p {
+    font-size: 13.5px; color: var(--text-dim); line-height: 1.7;
+  }
+  .personalised-note a {
+    color: var(--orange); text-decoration: none;
+    font-weight: 500; border-bottom: 1px solid rgba(232,101,26,0.3);
+    transition: border-color 0.2s;
+  }
+  .personalised-note a:hover { border-bottom-color: var(--orange); }
+
+  /* Compound 1% line */
+  .compound-line {
+    margin-top: 16px; margin-bottom: 72px;
+    padding: 32px 48px;
+    border-left: 3px solid var(--orange);
+    background: var(--navy-card);
+  }
+  .compound-line p {
+    font-size: 15px; color: var(--text-dim);
+    line-height: 1.8; font-style: italic;
+  }
+  .compound-line p strong { color: var(--cream); font-style: normal; }
+
+  /* Beyond the weekend */
+  .beyond-header { margin-bottom: 32px; }
+  .beyond-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 3px; margin-bottom: 88px;
+  }
+  .bc {
+    background: var(--navy-card); padding: 26px 24px;
+    border-top: 2px solid transparent; transition: all 0.3s;
+  }
+  .bc:hover { border-top-color: var(--orange); background: var(--navy-light); }
+  .bc-cluster {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 6px; display: block;
+  }
+  .bc-title {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 14px; font-weight: 600;
+    color: var(--cream); margin-bottom: 7px;
+  }
+  .bc-desc { font-size: 12.5px; color: var(--text-dim); line-height: 1.65; }
+
+  /* Experts */
+  .experts-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 3px; margin-top: 36px; margin-bottom: 88px;
+  }
+  .ec {
+    background: var(--navy-card); padding: 32px 28px;
+    display: flex; gap: 18px; transition: background 0.3s;
+  }
+  .ec:hover { background: var(--navy-light); }
+  .ec-num {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 28px; font-weight: 700;
+    color: rgba(232,101,26,0.18); line-height: 1;
+    flex-shrink: 0; width: 32px;
+  }
+  .ec-type {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--orange); display: block; margin-bottom: 5px;
+  }
+  .ec-role {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 14px; font-weight: 700;
+    color: var(--cream); margin-bottom: 7px; line-height: 1.3;
+  }
+  .ec-focus { font-size: 12.5px; color: var(--text-dim); line-height: 1.7; }
+  .ec-days { margin-top: 8px; font-size: 11px; color: var(--orange); font-weight: 600; }
+
+  /* Recording setups */
+  .setups-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 3px; margin-top: 36px;
+  }
+  .sc {
+    background: var(--navy-card); padding: 28px 22px;
+    text-align: center; transition: all 0.3s;
+  }
+  .sc:hover { background: var(--navy-light); }
+  .sc-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+  .sc-loc {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 5px; display: block;
+  }
+  .sc-style {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 13px; font-weight: 600; color: var(--cream); margin-bottom: 5px;
+  }
+  .sc-qty { font-size: 12px; color: var(--text-dim); }
+  .sc-qty strong { color: var(--orange); font-family: 'Comfortaa', sans-serif; }
+
+  /* ══════════════════════════
+     FOLD 4 - PROGRAMME + FORM
+  ══════════════════════════ */
+  #apply { padding: 120px 24px; }
+
+  .programme-intro {
+    text-align: center; max-width: 660px;
+    margin: 0 auto 68px;
+  }
+  .programme-intro p {
+    font-size: 15px; color: var(--text-dim);
+    margin-top: 16px; line-height: 1.85;
+  }
+
+  .days-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3px; margin-bottom: 60px;
+  }
+  .day-card {
+    background: var(--navy-card); padding: 42px 38px;
+  }
+  .day-card.d2 { background: var(--navy-light); }
+  .day-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 8px; display: block;
+  }
+  .day-title {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--cream); margin-bottom: 26px; line-height: 1.25;
+  }
+  .day-items { display: flex; flex-direction: column; gap: 13px; }
+  .day-item {
+    display: flex; align-items: flex-start; gap: 13px;
+    font-size: 13px; color: var(--text-dim); line-height: 1.55;
+  }
+  .day-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--orange); flex-shrink: 0; margin-top: 5px;
+  }
+
+  /* Exclusive banner */
+  .exclusive-banner {
+    background: linear-gradient(135deg, var(--navy-light), var(--navy-card));
+    border: 1px solid var(--border); border-radius: 4px;
+    padding: 52px 56px; text-align: center;
+    margin-bottom: 80px; position: relative; overflow: hidden;
+  }
+  /* Subtle circle motif */
+  .exclusive-banner::before {
+    content: '';
+    position: absolute;
+    width: 320px; height: 320px; border-radius: 50%;
+    border: 1px solid rgba(232,101,26,0.06);
+    right: -80px; top: -80px; pointer-events: none;
+  }
+  .exclusive-banner::after {
+    content: '';
+    position: absolute;
+    width: 160px; height: 160px; border-radius: 50%;
+    border: 1px solid rgba(30,144,255,0.04);
+    right: 20px; top: 20px; pointer-events: none;
+  }
+  .exclusive-banner h3 {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: clamp(20px, 2.5vw, 32px);
+    font-weight: 700; color: var(--cream);
+    max-width: 640px; margin: 0 auto; line-height: 1.3;
+  }
+  .exclusive-banner h3 .acc { color: var(--orange); }
+  .exclusive-banner p {
+    font-size: 14px; color: var(--text-dim);
+    margin-top: 14px; max-width: 500px;
+    margin-left: auto; margin-right: auto; line-height: 1.75;
+  }
+
+  /* FORM */
+  .form-wrap {
+    display: grid; grid-template-columns: 1fr 1.15fr;
+    gap: 72px; align-items: start;
+  }
+  .form-left h2 {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: clamp(26px, 3.2vw, 42px);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--cream);
+    margin-top: 12px;
+  }
+  .form-left h2 .acc { color: var(--orange); }
+  .form-left p {
+    font-size: 14px; color: var(--text-dim);
+    margin-top: 16px; line-height: 1.85;
+  }
+  .wyg { margin-top: 32px; display: flex; flex-direction: column; gap: 10px; }
+  .wyg-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 13px; color: var(--text-dim); line-height: 1.5;
+  }
+  .wyg-check {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: rgba(232,101,26,0.1); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 10px; color: var(--orange); margin-top: 1px;
+  }
+
+  .form-card {
+    background: var(--navy-card);
+    border-top: 3px solid var(--orange);
+    padding: 46px 42px; border-radius: 0 0 4px 4px;
+  }
+  .form-card h3 {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 22px; font-weight: 700; color: var(--cream);
+  }
+  .form-card-sub {
+    font-size: 13px; color: var(--text-dim);
+    margin-top: 4px; margin-bottom: 28px;
+  }
+
+  .fg { margin-bottom: 16px; }
+  .fg label {
+    display: block; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 6px;
+  }
+  .fg label .opt {
+    font-size: 10px; color: var(--text-muted);
+    font-weight: 400; text-transform: none;
+    letter-spacing: 0; margin-left: 4px;
+  }
+  .fg input, .fg select, .fg textarea {
+    width: 100%; background: var(--navy-mid);
+    border: 1px solid var(--border-soft);
+    color: var(--text); padding: 13px 16px;
+    font-size: 14px; font-family: 'Outfit', sans-serif;
+    font-weight: 300; outline: none;
+    transition: border-color 0.3s; border-radius: 2px;
+    -webkit-appearance: none;
+  }
+  .fg select option { background: var(--navy-mid); }
+  .fg input:focus, .fg select:focus, .fg textarea:focus {
+    border-color: var(--orange);
+  }
+  .fg input::placeholder, .fg textarea::placeholder {
+    color: rgba(214,228,240,0.18);
+  }
+  .fg textarea { resize: vertical; min-height: 84px; }
+  .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .fg-social { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .social-note {
+    font-size: 11px; color: var(--text-muted);
+    margin-bottom: 12px; line-height: 1.6;
+    padding: 10px 14px;
+    background: rgba(214,228,240,0.04);
+    border-radius: 2px; border: 1px solid var(--border-soft);
+  }
+
+  .btn-submit {
+    width: 100%; background: var(--orange);
+    color: var(--navy); border: none;
+    padding: 17px; font-family: 'Comfortaa', sans-serif;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.06em; cursor: pointer;
+    border-radius: 2px; transition: all 0.3s; margin-top: 20px;
+  }
+  .btn-submit:hover {
+    background: var(--orange-l); transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(232,101,26,0.35);
+  }
+  .form-note {
+    font-size: 11.5px; color: var(--text-muted);
+    margin-top: 12px; line-height: 1.65;
+    border-top: 1px solid var(--border-soft); padding-top: 12px;
+  }
+
+  /* Success */
+  #successState { display: none; text-align: center; padding: 48px 24px; }
+  .success-mark { font-size: 48px; display: block; margin-bottom: 18px; }
+  #successState h3 {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 26px; font-weight: 700; color: var(--cream); margin-bottom: 12px;
+  }
+  #successState p { font-size: 14px; color: var(--text-dim); line-height: 1.8; }
+  #successState .acc { color: var(--orange); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-card2);
+    border-top: 1px solid var(--border-soft);
+    padding: 44px 52px;
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 17px; font-weight: 700; color: var(--cream);
+  }
+  .footer-logo span { color: var(--orange); }
+  .footer-right { font-size: 12px; color: var(--text-muted); text-align: right; line-height: 1.7; }
+  .footer-right a { color: var(--orange); text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .rd1 { transition-delay: 0.08s; }
+  .rd2 { transition-delay: 0.16s; }
+  .rd3 { transition-delay: 0.24s; }
+  .rd4 { transition-delay: 0.32s; }
+  .rd5 { transition-delay: 0.40s; }
+  .rd6 { transition-delay: 0.48s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .pain-grid { grid-template-columns: 1fr 1fr; }
+    .outcomes-grid { grid-template-columns: 1fr 1fr; }
+    .setups-grid { grid-template-columns: repeat(2, 1fr); }
+    .experts-grid { grid-template-columns: 1fr; }
+    .value-lead { grid-template-columns: 1fr; gap: 48px; }
+    .beyond-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-sub { display: none; }
+    .pain-grid { grid-template-columns: 1fr; }
+    .reframe-block { grid-template-columns: 1fr; gap: 28px; }
+    .outcomes-grid { grid-template-columns: 1fr; }
+    .beyond-grid { grid-template-columns: 1fr; }
+    .days-grid { grid-template-columns: 1fr; }
+    .form-wrap { grid-template-columns: 1fr; gap: 48px; }
+    .fg-row { grid-template-columns: 1fr; }
+    .fg-social { grid-template-columns: 1fr; }
+    .exclusive-banner { padding: 36px 28px; }
+    footer { flex-direction: column; align-items: flex-start; }
+    .footer-right { text-align: left; }
+    .form-card { padding: 32px 24px; }
+    .hero-stats { flex-direction: column; border-radius: 4px; }
+    .hero-stat { border-right: none; border-bottom: 1px solid var(--border-soft); }
+    .hero-stat:last-child { border-bottom: none; }
+  }
+  @media (max-width: 480px) {
+    .setups-grid { grid-template-columns: 1fr 1fr; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .btn-main, .btn-ghost { width: 100%; text-align: center; }
+    .compound-line { padding: 24px 28px; }
+    .reframe-block { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-brand">
+    <div class="nav-logo">100<span>Circles</span></div>
+    <div class="nav-sub">Video Accelerator - Weekend Edition</div>
+  </div>
+  <a href="#apply" class="nav-cta">Claim Your Spot</a>
+</nav>
+
+
+<!-- ══════════════════════════
+     FOLD 1 - HERO
+══════════════════════════ -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="dna-ring dna-ring-1"></div>
+  <div class="dna-ring dna-ring-2"></div>
+  <div class="dna-ring dna-ring-3"></div>
+
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Bengaluru - April / May 2026 - Only 10 Founders
+  </div>
+
+  <h1 class="hero-headline">
+    <span class="hl-accent">Two days.</span><br>
+    <span class="hl-white">A video presence that finally</span><br>
+    reflects <span class="hl-accent">who you are.</span>
+  </h1>
+
+  <p class="hero-sub">
+    A premium, invitation-only cohort experience for founders<br>
+    who are serious about video.
+  </p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num">15-20</span>
+      <span class="hero-stat-label">Videos per Founder</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">5</span>
+      <span class="hero-stat-label">Recording Formats</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">7</span>
+      <span class="hero-stat-label">Expert Coaches</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">10</span>
+      <span class="hero-stat-label">Founders Only</span>
+    </div>
+  </div>
+
+  <div class="hero-actions">
+    <a href="#apply" class="btn-main">Claim Your Spot</a>
+    <a href="#value" class="btn-ghost">See What's Included</a>
+  </div>
+
+  <p class="hero-location">
+    <strong>Bengaluru</strong> &nbsp;-&nbsp; Exclusive Cohort &nbsp;-&nbsp; Venue shared on acceptance
+  </p>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════
+     FOLD 2 - PROBLEM
+══════════════════════════ -->
+<section id="problem">
+  <div class="section-inner">
+
+    <div class="reveal">
+      <span class="eyebrow">For Founders Who Already Know This</span>
+      <h2 class="section-h">
+        You've started.<br>
+        <span class="dim">But something's not</span> <span class="acc">working.</span>
+      </h2>
+      <p class="problem-intro">
+        You're not new to the idea of video. You've thought about it, tried it, maybe even posted. But consistent, high-quality, on-brand video that actually builds your presence? That part hasn't clicked yet.
+      </p>
+    </div>
+
+    <div class="pain-grid">
+      <div class="pain-card reveal rd1">
+        <div class="pain-num">01</div>
+        <h3>"I post occasionally but there's no real system"</h3>
+        <p>Your output is reactive and inconsistent - a burst of posts, then silence for weeks. No framework, no cadence, no clarity on what to make next. Video feels like something you do when you have time, not a presence you're building.</p>
+      </div>
+      <div class="pain-card reveal rd2">
+        <div class="pain-num">02</div>
+        <h3>"The quality of what I produce doesn't match who I am"</h3>
+        <p>Your ideas are sharp. Your thinking is strong. But the videos don't reflect that. The camera flattens something. The delivery doesn't land the way it does in a room. You know you're capable of better - you just don't know how to get there.</p>
+      </div>
+      <div class="pain-card reveal rd3">
+        <div class="pain-num">03</div>
+        <h3>"It takes too long and the return feels unclear"</h3>
+        <p>When you do sit down to record, it takes hours. The time cost doesn't feel justified for the result. And you're not sure if video is actually moving the needle on anything that matters - leads, trust, visibility, talent.</p>
+      </div>
+      <div class="pain-card reveal rd1">
+        <div class="pain-num">04</div>
+        <h3>"I know what to say but not how to say it on camera"</h3>
+        <p>In a room, you command attention. On screen, something shifts - the energy drops, the words come out differently. Nobody's told you exactly what to fix, and you're too busy building a company to figure it out alone.</p>
+      </div>
+      <div class="pain-card reveal rd2">
+        <div class="pain-num">05</div>
+        <h3>"My founder story and POV aren't clearly defined yet"</h3>
+        <p>You have a strong point of view - but it hasn't translated into a consistent video identity. Viewers can't tell from your content what you stand for, who you serve, or why your perspective is worth following.</p>
+      </div>
+      <div class="pain-card reveal rd3">
+        <div class="pain-num">06</div>
+        <h3>"The inertia is real - I keep pushing it to next week"</h3>
+        <p>Video creation keeps getting deprioritised. Not because it's unimportant - you know it is. But without a forcing function, it never rises above the day-to-day. The gap between intention and execution keeps growing.</p>
+      </div>
+    </div>
+
+    <div class="reframe-block reveal">
+      <div>
+        <h3>The gap isn't talent or ideas. It's <span class="acc">consistency,</span><br><span class="acc">system,</span> <span class="acc">time</span> - and the <span class="acc">inertia</span> that kills all three.</h3>
+        <p>The founders building strong video presence aren't better talented. They've solved the infrastructure problem - a framework for what to say, a system for how to show up, and the reps to break through the inertia. That's exactly what this weekend is designed to give you.</p>
+        <div class="reframe-tags">
+          <span class="rtag">No System</span>
+          <span class="rtag">No Consistency</span>
+          <span class="rtag">No Time</span>
+          <span class="rtag">Inertia</span>
+          <span class="rtag">Unclear Positioning</span>
+        </div>
+      </div>
+      <a href="#apply" class="btn-main" style="white-space:nowrap; flex-shrink:0;">This is for me</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════
+     FOLD 3 - VALUE
+══════════════════════════ -->
+<section id="value">
+  <div class="section-inner">
+
+    <!-- Lead -->
+    <div class="value-lead">
+      <div class="value-lead-text reveal">
+        <span class="eyebrow">What You'll Get</span>
+        <h2 class="section-h">
+          Two days of<br>
+          <span class="acc">total immersion.</span>
+        </h2>
+        <p>This isn't a workshop where you watch someone else talk about making videos. You come in, you record, you get coached in real-time across multiple formats - and you leave with a full set of edited, packaged, publish-ready content.</p>
+        <p style="margin-top:14px;">Every session, every coach, every setup is engineered around one outcome - getting you the best possible videos and the foundation to keep making them.</p>
+      </div>
+      <div class="value-numbers reveal rd2">
+        <div class="vnum-row">
+          <span class="vn">15-20</span>
+          <div class="vnt">
+            <strong>Videos per Founder</strong>
+            <span>1 podcast, 5 - 6 podcast clips, 7 - 9 core talking head videos + clips from group discussion, across 5 setups and multiple formats.</span>
+          </div>
+        </div>
+        <div class="vnum-row">
+          <span class="vn">4+3</span>
+          <div class="vnt">
+            <strong>4 Core + 3 Guest Experts</strong>
+            <span>Founder brand and messaging, script and storytelling, on-camera performance, recording direction - plus editing, thumbnail and algorithm specialists.</span>
+          </div>
+        </div>
+        <div class="vnum-row">
+          <span class="vn">2-3</span>
+          <div class="vnt">
+            <strong>Weeks to Full Delivery</strong>
+            <span>Editing begins within 5 - 7 days of the event. All 15 - 20 videos fully edited, captioned, thumbnailed and platform-formatted within 2 - 3 weeks.</span>
+          </div>
+        </div>
+        <div class="vnum-row">
+          <span class="vn">10</span>
+          <div class="vnt">
+            <strong>Founders Maximum</strong>
+            <span>Intentionally small. Every founder gets meaningful coaching time - not just group sessions.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Outcomes - ordered by priority for Premium/Outlier -->
+    <div class="outcomes-header reveal">
+      <span class="eyebrow">Your Complete Outcome Set</span>
+      <h2>Everything you walk out with</h2>
+    </div>
+
+    <div class="outcomes-grid">
+
+      <!-- Strategy first for Premium/Outlier -->
+      <div class="oc reveal rd1">
+        <span class="oc-icon">🧭</span>
+        <span class="oc-cat">Strategy</span>
+        <div class="oc-title">Founder Brand and Messaging Clarity</div>
+        <p class="oc-desc">Defined positioning, POV and messaging framework. A refined founder narrative - sharpened, structured, usable across videos, talks and marketing. You'll know exactly what you stand for and how to communicate it on camera and off.</p>
+      </div>
+
+      <div class="oc reveal rd2">
+        <span class="oc-icon">♾️</span>
+        <span class="oc-cat">Strategy</span>
+        <div class="oc-title">Content System + Video Idea Bank</div>
+        <p class="oc-desc">A repeatable Content Themes x Video Styles framework so you never run out of ideas. Plus a personalised video idea bank - a list of future videos generated during the programme. The system stays long after the weekend.</p>
+      </div>
+
+      <!-- Content assets -->
+      <div class="oc reveal rd3">
+        <span class="oc-icon">🎬</span>
+        <span class="oc-cat">Content Assets</span>
+        <div class="oc-title">Signature Founder Video Library</div>
+        <p class="oc-desc">15 - 20 videos across 5 setups - 7 - 9 core videos and 5 - 6 podcast clips. Structured to cover your story, expertise, POV and offer. Not random content - a complete, intentional founder video presence.</p>
+      </div>
+
+      <div class="oc reveal rd1">
+        <span class="oc-icon">✂️</span>
+        <span class="oc-cat">Content Assets</span>
+        <div class="oc-title">Fully Edited and Packaged</div>
+        <p class="oc-desc">Every video edited with thumbnails, titles and descriptions. Formatted per platform. Editing begins within 5 - 7 days, full delivery within 2 - 3 weeks of the event. Nothing left for you to figure out.</p>
+      </div>
+
+      <!-- Skill development -->
+      <div class="oc reveal rd2">
+        <span class="oc-icon">🎙️</span>
+        <span class="oc-cat">Skill Development</span>
+        <div class="oc-title">On-Camera Confidence and Presence</div>
+        <p class="oc-desc">Two full days of real-time coaching on presence, body language, eye contact, vocal tone and energy. You leave not just with videos but with the confidence to communicate publicly - on camera, on stage, or in any room.</p>
+      </div>
+
+      <div class="oc reveal rd3">
+        <span class="oc-icon">✍️</span>
+        <span class="oc-cat">Skill Development</span>
+        <div class="oc-title">Script and Delivery Capability</div>
+        <p class="oc-desc">Hands-on practice turning ideas into scripts with strong hooks, clear structure and confident delivery. Practical skills that go with you into every video you make after this weekend.</p>
+      </div>
+
+      <!-- Knowledge -->
+      <div class="oc reveal rd1">
+        <span class="oc-icon">📚</span>
+        <span class="oc-cat">Knowledge</span>
+        <div class="oc-title">End-to-End Video Process Understanding</div>
+        <p class="oc-desc">How editing works, how to package with thumbnails and titles, how algorithms decide what gets distributed - enough to brief a team, make smart decisions, and never feel lost in the process again. Plus a video publishing playbook to keep.</p>
+      </div>
+
+      <!-- Feedback -->
+      <div class="oc reveal rd2">
+        <span class="oc-icon">📋</span>
+        <span class="oc-cat">Feedback</span>
+        <div class="oc-title">Personalised Coach Feedback Report</div>
+        <p class="oc-desc">Written assessment from all three core coaches covering your presence, voice, and messaging - with specific, actionable improvement guidance you can act on immediately after the event.</p>
+      </div>
+
+      <!-- Experience -->
+      <div class="oc reveal rd3">
+        <span class="oc-icon">🎥</span>
+        <span class="oc-cat">Skill Development</span>
+        <div class="oc-title">Multi-Format Recording Experience</div>
+        <p class="oc-desc">Hands-on experience across podcast, talking head, desk conversation, whiteboard, walk and talk, and group discussion - so no format feels unfamiliar the next time you sit in front of a camera.</p>
+      </div>
+
+    </div>
+
+    <!-- Personalised experience note -->
+    <div class="personalised-note reveal">
+      <p>Interested in a more personalised, smaller-group experience? You can <a href="#apply">indicate that in the application form</a> and we'll be in touch with details.</p>
+    </div>
+
+    <!-- 1% compounding line -->
+    <div class="compound-line reveal">
+      <p>Consistent video presence compounds. <strong>One weekend builds the foundation.</strong> The habits, the system, and the confidence you develop here are the 1% improvements that separate founders who are known from those who aren't - yet.</p>
+    </div>
+
+    <!-- Beyond the weekend -->
+    <div class="beyond-header reveal">
+      <span class="eyebrow">What This Unlocks Beyond the Weekend</span>
+      <h2 class="section-h" style="font-size: clamp(22px, 2.8vw, 38px);">The compounding effect</h2>
+    </div>
+
+    <div class="beyond-grid">
+      <div class="bc reveal rd1">
+        <span class="bc-cluster">Business Impact</span>
+        <div class="bc-title">Customer Trust</div>
+        <p class="bc-desc">Video builds credibility with potential buyers before they ever speak to you.</p>
+      </div>
+      <div class="bc reveal rd2">
+        <span class="bc-cluster">Business Impact</span>
+        <div class="bc-title">Sales Enablement</div>
+        <p class="bc-desc">Videos that work in outbound, demos, follow-ups and customer education - content that sells while you sleep.</p>
+      </div>
+      <div class="bc reveal rd3">
+        <span class="bc-cluster">Brand Building</span>
+        <div class="bc-title">Thought Leadership</div>
+        <p class="bc-desc">You become known for specific ideas in your industry - not just your company name.</p>
+      </div>
+      <div class="bc reveal rd1">
+        <span class="bc-cluster">Business Impact</span>
+        <div class="bc-title">Investor Signalling</div>
+        <p class="bc-desc">A stronger, more visible founder presence when investors research you before a meeting or a round.</p>
+      </div>
+      <div class="bc reveal rd2">
+        <span class="bc-cluster">Brand Building</span>
+        <div class="bc-title">Ecosystem Visibility</div>
+        <p class="bc-desc">Increased recognition across the startup ecosystem - investors, peers, press and partners.</p>
+      </div>
+      <div class="bc reveal rd3">
+        <span class="bc-cluster">Talent Attraction</span>
+        <div class="bc-title">Talent Attraction</div>
+        <p class="bc-desc">Candidates understand who you are and what you're building before they apply - attracting people already bought in.</p>
+      </div>
+    </div>
+
+    <!-- Experts -->
+    <div class="reveal">
+      <span class="eyebrow">Your Expert Team</span>
+      <h2 class="section-h" style="font-size: clamp(22px, 2.8vw, 38px);">
+        Working <span class="acc">with</span> you, not presenting <span class="dim">at</span> you
+      </h2>
+    </div>
+
+    <div class="experts-grid">
+      <div class="ec reveal rd1">
+        <div class="ec-num">1</div>
+        <div>
+          <span class="ec-type">Core - Both Days</span>
+          <div class="ec-role">Founder Brand and Messaging Strategist</div>
+          <p class="ec-focus">Defines your positioning, POV, audience and key messages. Shapes the themes and ideas you should be communicating - the foundation everything else is built on.</p>
+          <div class="ec-days">Full day (heavier Day 1) - Group sessions + 1:1 message mapping</div>
+        </div>
+      </div>
+      <div class="ec reveal rd2">
+        <div class="ec-num">2</div>
+        <div>
+          <span class="ec-type">Core - Both Days</span>
+          <div class="ec-role">Script and Storytelling Coach</div>
+          <p class="ec-focus">Transforms your ideas and messages into compelling scripts and narratives. Story structure, hook writing, conversational flow - making complex ideas feel clear, human and worth watching.</p>
+          <div class="ec-days">Full day - Script sprints + on-set during shoots</div>
+        </div>
+      </div>
+      <div class="ec reveal rd1">
+        <div class="ec-num">3</div>
+        <div>
+          <span class="ec-type">Core - Both Days</span>
+          <div class="ec-role">On-Camera Performance and Voice Coach</div>
+          <p class="ec-focus">Presence, energy, body language, eye contact, vocal tone, pacing, filler words - everything about how you show up and sound on camera. The difference between watchable and forgettable.</p>
+          <div class="ec-days">Full day - Group sessions + 1:1 during shoot blocks</div>
+        </div>
+      </div>
+      <div class="ec reveal rd2">
+        <div class="ec-num">4</div>
+        <div>
+          <span class="ec-type">Core - Both Days</span>
+          <div class="ec-role">Recording Director</div>
+          <p class="ec-focus">Guides you through takes, maintains energy on set, directs framing and pacing. One director per room - Podcast Studio and Meeting Room - ensuring every session produces strong recordings.</p>
+          <div class="ec-days">Full day - On-set for every recording block</div>
+        </div>
+      </div>
+      <div class="ec reveal rd1">
+        <div class="ec-num">5</div>
+        <div>
+          <span class="ec-type">Guest - Day 2</span>
+          <div class="ec-role">Video Editing and Repurposing Expert</div>
+          <p class="ec-focus">How raw footage becomes polished content. How one recording session generates 15 - 20 pieces across platforms. Sets you up to brief editors and make smart post-production decisions.</p>
+          <div class="ec-days">30-min group overview, Day 2 morning</div>
+        </div>
+      </div>
+      <div class="ec reveal rd2">
+        <div class="ec-num">6</div>
+        <div>
+          <span class="ec-type">Guest - Day 2</span>
+          <div class="ec-role">Thumbnail and Visual Packaging Expert</div>
+          <p class="ec-focus">Thumbnail psychology, title writing, visual alignment with the hook. What makes someone click - and how to make your videos stand out in crowded feeds.</p>
+          <div class="ec-days">45-min group session, Day 2 morning</div>
+        </div>
+      </div>
+      <div class="ec reveal rd1">
+        <div class="ec-num">7</div>
+        <div>
+          <span class="ec-type">Guest - Day 2</span>
+          <div class="ec-role">Algorithm and Distribution Expert</div>
+          <p class="ec-focus">How platforms distribute your content, which formats win on LinkedIn, YouTube and Instagram - and how to publish strategically so your videos actually reach the right people.</p>
+          <div class="ec-days">60-min group session, Day 1 afternoon</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recording setups -->
+    <div style="margin-top: 80px;" class="reveal">
+      <span class="eyebrow">Hand-Selected Recording Formats</span>
+      <h2 class="section-h" style="font-size: clamp(22px, 2.8vw, 38px);">
+        Proven formats. <span class="acc">One weekend.</span>
+      </h2>
+    </div>
+
+    <div class="setups-grid">
+      <div class="sc reveal rd1">
+        <span class="sc-icon">🎙️</span>
+        <span class="sc-loc">Podcast Studio</span>
+        <div class="sc-style">Podcast Interview</div>
+        <div class="sc-qty">1 long-form + <strong>5 - 6 clips</strong></div>
+      </div>
+      <div class="sc reveal rd2">
+        <span class="sc-icon">📹</span>
+        <span class="sc-loc">Meeting Room</span>
+        <div class="sc-style">Talking Head + Desk + Whiteboard</div>
+        <div class="sc-qty"><strong>4 - 5 videos</strong></div>
+      </div>
+      <div class="sc reveal rd3">
+        <span class="sc-icon">🚶</span>
+        <span class="sc-loc">Walk and Talk Area</span>
+        <div class="sc-style">Walk and Talk</div>
+        <div class="sc-qty"><strong>2 - 3 videos</strong></div>
+      </div>
+      <div class="sc reveal rd4">
+        <span class="sc-icon">🪑</span>
+        <span class="sc-loc">Main Hall</span>
+        <div class="sc-style">Group Discussion + Reflection</div>
+        <div class="sc-qty"><strong>2 - 3 clips</strong></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════
+     FOLD 4 - PROGRAMME + FORM
+══════════════════════════ -->
+<section id="apply">
+  <div class="section-inner">
+
+    <div class="programme-intro reveal">
+      <span class="eyebrow">The Two Days</span>
+      <h2 class="section-h">
+        What each day<br><span class="acc">is built around</span>
+      </h2>
+      <p>The full schedule is shared exclusively with accepted founders. Here's what each day is designed to achieve - every coaching block, every recording setup, built backward from the deliverables.</p>
+    </div>
+
+    <div class="days-grid">
+      <div class="day-card reveal rd1">
+        <span class="day-label">Day One - Saturday</span>
+        <div class="day-title">3 Core Sessions, 1:1 Coaching and Your First Recordings</div>
+        <div class="day-items">
+          <div class="day-item"><div class="day-dot"></div><span>Founder Brand and Messaging session - defining your POV, positioning and the themes you'll consistently speak about</span></div>
+          <div class="day-item"><div class="day-dot"></div><span>On-Camera Performance and Voice session - presence, energy, body language and delivery coached live in a group setting</span></div>
+          <div class="day-item"><div class="day-dot"></div><span>Script development and talking point sprints - refining your ideas into camera-ready content</span></div>
+          <div class="day-item"><div class="day-dot"></div><span>Podcast Studio recordings - your long-form founder conversation</span></div>
+          <div class="day-item"><div class="day-dot"></div><span>Meeting Room recordings - talking head, desk and whiteboard videos</span></div>
+          <div class="day-item"><div class="day-dot"></div><span>1:1 coaching sessions running in parallel while others are recording</span></div>
+        </div>
+      </div>
+      <div class="day-card d2 reveal rd2">
+        <span class="day-label">Day Two - Sunday</span>
+        <div class="day-title">2 Guest Sessions, Walk and Talk and Your Final Videos</div>
+        <div class="day-items">
+          <div class="day-item"><div class="day-dot"></div><span>Editing techniques guest session - hook structure, pacing for retention, what keeps viewers watching and what makes them skip</span></div>
+          <div class="day-item"><div class="day-dot"></div><span>Thumbnail and packaging guest session - what makes people click and keep watching</span></div>
+          <div class="day-item"><div class="day-dot"></div><span>Algorithm and distribution guest session - what to make, where to post, how it gets seen</span></div>
+          <div class="day-item"><div class="day-dot"></div><span>Group discussion recording - panel-style clips for all founders</span></div>
+          <div class="day-item"><div class="day-dot"></div><span>Walk and Talk recordings - 2 - 3 short, natural, high-energy clips</span></div>
+          <div class="day-item"><div class="day-dot"></div><span>Personalised 1:1 feedback sessions with coaches reviewing your Day 1 footage</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exclusive banner - rephrased -->
+    <div class="exclusive-banner reveal">
+      <h3>
+        The full schedule and investment details are
+        <span class="acc">reserved for founders who express their genuine interest.</span>
+      </h3>
+      <p>We're curating a small, focused group of 10 founders. We want to understand who you are, where you are in your journey, and whether this is the right fit for both sides. Fill in the form and we'll be in touch within 24 hours.</p>
+    </div>
+
+    <!-- Form -->
+    <div class="form-wrap">
+      <div class="form-left reveal">
+        <span class="eyebrow">Limited to 10 Founders</span>
+        <h2>Request <span class="acc">programme</span> and <span class="acc">investment</span> details.</h2>
+        <p>Fill in the form and we'll send the complete programme plan, full two-day schedule, investment details and everything you need to decide if this is the right fit.</p>
+
+        <div class="wyg">
+          <div class="wyg-item">
+            <div class="wyg-check">✓</div>
+            <span>Full 2-day schedule and session-by-session breakdown</span>
+          </div>
+          <div class="wyg-item">
+            <div class="wyg-check">✓</div>
+            <span>Complete deliverables list and post-production timeline</span>
+          </div>
+          <div class="wyg-item">
+            <div class="wyg-check">✓</div>
+            <span>Investment details and what's included</span>
+          </div>
+          <div class="wyg-item">
+            <div class="wyg-check">✓</div>
+            <span>Venue details and pre-work to prepare before arrival</span>
+          </div>
+          <div class="wyg-item">
+            <div class="wyg-check">✓</div>
+            <span>FAQ - everything you're probably wondering</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card reveal rd2">
+        <h3>Apply for a Spot</h3>
+        <p class="form-card-sub">Takes 2 minutes. Strictly limited to 10 founders per cohort.</p>
+
+        <div id="formFields">
+          <div class="fg-row">
+            <div class="fg">
+              <label>First Name</label>
+              <input type="text" id="fName" placeholder="Arjun">
+            </div>
+            <div class="fg">
+              <label>Last Name</label>
+              <input type="text" id="lName" placeholder="Sharma">
+            </div>
+          </div>
+
+          <div class="fg">
+            <label>Email Address</label>
+            <input type="email" id="fEmail" placeholder="you@yourcompany.com">
+          </div>
+
+          <div class="fg">
+            <label>WhatsApp / Phone</label>
+            <input type="tel" id="fPhone" placeholder="+91 98765 43210">
+          </div>
+
+          <div class="fg">
+            <label>Your Company / Startup</label>
+            <input type="text" id="fCompany" placeholder="What are you building?">
+          </div>
+
+          <div class="fg">
+            <label>LinkedIn Profile</label>
+            <input type="url" id="fLinkedIn" placeholder="linkedin.com/in/yourprofile">
+          </div>
+
+          <div class="social-note">
+            The more we know about your current presence, the better we can assess fit. Adding your social profiles helps us understand where you are today.
+          </div>
+
+          <div class="fg-social">
+            <div class="fg">
+              <label>YouTube <span class="opt">(optional)</span></label>
+              <input type="url" id="fYouTube" placeholder="youtube.com/@yourchannel">
+            </div>
+            <div class="fg">
+              <label>Instagram <span class="opt">(optional)</span></label>
+              <input type="text" id="fInstagram" placeholder="@yourhandle">
+            </div>
+          </div>
+          <div class="fg">
+            <label>X / Twitter <span class="opt">(optional)</span></label>
+            <input type="text" id="fX" placeholder="@yourhandle">
+          </div>
+
+          <div class="fg">
+            <label>Your Current Video Presence</label>
+            <select id="fVideo">
+              <option value="" disabled selected>Select one</option>
+              <option>I've barely started</option>
+              <option>I post occasionally but inconsistently</option>
+              <option>I'm active but not getting results</option>
+              <option>I have an established presence and want to level up</option>
+            </select>
+          </div>
+
+          <div class="fg">
+            <label>What's your biggest challenge with video right now?</label>
+            <textarea id="fChallenge" placeholder="Be honest - this helps us understand if this is the right fit for you..."></textarea>
+          </div>
+
+          <div class="fg">
+            <label>What kind of experience are you looking for?</label>
+            <select id="fTier">
+              <option value="" disabled selected>Select one</option>
+              <option>The Weekend Edition cohort experience (up to 10 founders)</option>
+              <option>A more exclusive, high-touch experience with a smaller group</option>
+            </select>
+          </div>
+
+          <div class="fg">
+            <label>How did you hear about this?</label>
+            <select id="fSource">
+              <option value="" disabled selected>Select one</option>
+              <option>LinkedIn</option>
+              <option>Referred by someone</option>
+              <option>100Circles community</option>
+              <option>Instagram</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <button class="btn-submit" onclick="handleSubmit()">
+            Send Me the Programme Details
+          </button>
+
+          <p class="form-note">
+            By submitting, you agree to receive programme details from 100Circles. Your information is never shared with third parties. Submitting this form is not a commitment to join.
+          </p>
+        </div>
+
+        <div id="successState">
+          <span class="success-mark">✦</span>
+          <h3>You're on the list.</h3>
+          <p>We'll send the complete programme details and investment information to your inbox within 24 hours.<br><br>
+          <span class="acc">Welcome to something worth showing up for.</span></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">100<span>Circles</span></div>
+  <div class="footer-right">
+    Video Accelerator - Weekend Edition - Bengaluru - 2026<br>
+    <a href="https://100circles.com" target="_blank">100circles.com</a>
+  </div>
+</footer>
+
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form
+  function handleSubmit() {
+    const name    = document.getElementById('fName').value.trim();
+    const email   = document.getElementById('fEmail').value.trim();
+    const company = document.getElementById('fCompany').value.trim();
+    const linkedin= document.getElementById('fLinkedIn').value.trim();
+
+    if (!name)    { alert('Please enter your first name.'); return; }
+    if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+    if (!company) { alert('Please enter your company name.'); return; }
+    if (!linkedin){ alert('Please enter your LinkedIn profile URL.'); return; }
+
+    const payload = {
+      name: name + ' ' + document.getElementById('lName').value.trim(),
+      email, company, linkedin,
+      phone:    document.getElementById('fPhone').value.trim(),
+      youtube:  document.getElementById('fYouTube').value.trim(),
+      instagram:document.getElementById('fInstagram').value.trim(),
+      x:        document.getElementById('fX').value.trim(),
+      video:    document.getElementById('fVideo').value,
+      challenge:document.getElementById('fChallenge').value.trim(),
+      tier:     document.getElementById('fTier').value,
+      source:   document.getElementById('fSource').value,
+    };
+    console.log('Application:', payload);
+
+    document.getElementById('formFields').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+    document.getElementById('successState').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+
+</body>
+</html>
