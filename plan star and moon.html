@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100Circles · Content Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #130A02; --orange: #E8651A; --cream: #F4EEE4;
+  --muted: rgba(244,238,228,0.45); --faint: rgba(244,238,228,0.12);
+  --card: rgba(255,255,255,0.04); --border: rgba(232,101,26,0.18);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--cream); font-family: 'Outfit', sans-serif; font-size: 15px; line-height: 1.65; min-height: 100vh; }
+
+nav { display: flex; align-items: center; justify-content: space-between; padding: 24px 48px; border-bottom: 1px solid var(--faint); position: sticky; top: 0; background: rgba(19,10,2,0.92); backdrop-filter: blur(12px); z-index: 100; }
+.brand { font-family: 'Comfortaa', sans-serif; font-size: 18px; font-weight: 700; }
+.brand span { color: var(--orange); }
+.plan-tabs { display: flex; gap: 8px; }
+.tab-btn { padding: 8px 20px; border-radius: 2px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+.tab-btn.active { background: var(--orange); border-color: var(--orange); color: #130A02; }
+.tab-btn:hover:not(.active) { border-color: var(--orange); color: var(--cream); }
+
+.hero { padding: 72px 48px 56px; border-bottom: 1px solid var(--faint); position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%; border: 1px solid rgba(232,101,26,0.06); top: -200px; right: -200px; pointer-events: none; }
+.plan-label { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--orange); font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.plan-label::before { content: ''; width: 28px; height: 1px; background: var(--orange); display: inline-block; }
+.plan-title { font-family: 'Comfortaa', sans-serif; font-size: clamp(32px,4vw,52px); font-weight: 700; line-height: 1.1; margin-bottom: 20px; }
+.plan-title .hl { color: var(--orange); }
+.plan-desc { font-size: 16px; color: var(--muted); max-width: 640px; line-height: 1.7; margin-bottom: 36px; }
+.goal-chips { display: flex; gap: 12px; flex-wrap: wrap; }
+.goal-chip { display: flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid var(--border); border-radius: 2px; font-size: 13px; font-weight: 500; color: var(--cream); background: var(--card); }
+.goal-chip .plat { font-weight: 700; color: var(--orange); }
+
+.section-header { padding: 48px 48px 24px; display: flex; align-items: baseline; justify-content: space-between; }
+.section-title { font-family: 'Comfortaa', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); }
+.section-note { font-size: 12px; color: var(--muted); letter-spacing: .05em; }
+
+.video-grid { padding: 0 48px 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+
+.video-card { background: var(--card); border: 1px solid var(--faint); border-radius: 3px; padding: 28px; position: relative; transition: border-color .25s, transform .2s; }
+.video-card:hover { border-color: rgba(232,101,26,0.35); transform: translateY(-2px); }
+.video-card .card-num { font-size: 11px; font-weight: 700; letter-spacing: .2em; color: rgba(232,101,26,0.4); margin-bottom: 14px; }
+.video-card .card-title { font-family: 'Comfortaa', sans-serif; font-size: 16px; font-weight: 700; color: var(--cream); line-height: 1.35; margin-bottom: 12px; }
+.video-card .card-why { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+
+.card-platforms { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.plat-badge { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; border: 1px solid; }
+.plat-badge.li { color: #4d9ee8; border-color: rgba(77,158,232,0.25); background: rgba(77,158,232,0.06); }
+.plat-badge.ig { color: #f06292; border-color: rgba(240,98,146,0.25); background: rgba(240,98,146,0.06); }
+.plat-badge.yt { color: #ef5350; border-color: rgba(239,83,80,0.25); background: rgba(239,83,80,0.06); }
+.plat-badge.viral { color: var(--orange); border-color: rgba(232,101,26,0.25); background: rgba(232,101,26,0.06); }
+.plat-badge.tam-huge { color: #66bb6a; border-color: rgba(102,187,106,0.25); background: rgba(102,187,106,0.06); }
+.plat-badge.tam-large { color: #ffa726; border-color: rgba(255,167,38,0.25); background: rgba(255,167,38,0.06); }
+
+.hook-line { font-size: 12px; color: rgba(244,238,228,0.55); border-left: 2px solid var(--orange); padding-left: 10px; font-style: italic; line-height: 1.5; }
+
+.metrics-row { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--faint); display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.metric-cell { text-align: center; }
+.metric-val { font-family: 'Comfortaa', sans-serif; font-size: 15px; font-weight: 700; color: var(--orange); display: block; }
+.metric-lbl { font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: block; margin-top: 2px; }
+
+.freq-note { margin: 0 48px 48px; padding: 20px 28px; border: 1px solid var(--border); border-radius: 3px; background: rgba(232,101,26,0.04); display: flex; align-items: flex-start; gap: 16px; font-size: 13.5px; color: var(--cream); line-height: 1.6; }
+.freq-note .icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.freq-note strong { color: var(--orange); }
+
+.plan-section { display: none; }
+.plan-section.active { display: block; }
+
+.targets-bar { margin: 0 48px 40px; padding: 28px 32px; background: var(--card); border: 1px solid var(--border); border-radius: 3px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px; }
+.target-item { text-align: center; }
+.target-val { font-family: 'Comfortaa', sans-serif; font-size: 20px; font-weight: 700; color: var(--orange); display: block; margin-bottom: 4px; }
+.target-lbl { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); display: block; }
+
+.star-badge { position: absolute; top: 16px; right: 16px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); background: rgba(232,101,26,0.1); border: 1px solid rgba(232,101,26,0.25); padding: 4px 10px; border-radius: 2px; }
+
+.swap-note { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #66bb6a; background: rgba(102,187,106,0.08); border: 1px solid rgba(102,187,106,0.2); padding: 3px 8px; border-radius: 2px; margin-bottom: 10px; }
+
+/* ── GOAL MAP ── */
+.map-wrap { padding: 0 48px 80px; display: flex; flex-direction: column; gap: 32px; }
+
+.goal-block {
+  border: 1px solid var(--faint); border-radius: 3px; overflow: hidden;
+}
+.goal-block-header {
+  padding: 24px 28px; display: flex; align-items: center; gap: 16px;
+  border-bottom: 1px solid var(--faint);
+}
+.goal-icon { font-size: 24px; flex-shrink: 0; }
+.goal-name {
+  font-family: 'Comfortaa', sans-serif; font-size: 18px; font-weight: 700;
+  color: var(--cream); margin-bottom: 3px;
+}
+.goal-target { font-size: 13px; color: var(--orange); font-weight: 600; }
+.goal-verdict {
+  margin-left: auto; flex-shrink: 0;
+  font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 2px; border: 1px solid;
+}
+.verdict-strong { color: #66bb6a; border-color: rgba(102,187,106,0.3); background: rgba(102,187,106,0.08); }
+.verdict-partial { color: #ffa726; border-color: rgba(255,167,38,0.3); background: rgba(255,167,38,0.08); }
+.verdict-weak { color: #ef5350; border-color: rgba(239,83,80,0.3); background: rgba(239,83,80,0.08); }
+
+.goal-body { padding: 0 28px 24px; }
+
+.goal-note {
+  font-size: 13px; color: var(--muted); line-height: 1.7;
+  padding: 16px 0 20px; border-bottom: 1px solid var(--faint); margin-bottom: 20px;
+}
+.goal-note strong { color: var(--cream); }
+
+.vid-sequence { display: flex; flex-direction: column; gap: 10px; }
+.seq-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 4px;
+}
+
+.seq-row {
+  display: grid; grid-template-columns: 32px 1fr auto;
+  align-items: center; gap: 16px;
+  padding: 14px 16px; background: var(--card);
+  border: 1px solid var(--faint); border-radius: 2px;
+  transition: border-color .2s;
+}
+.seq-row:hover { border-color: rgba(232,101,26,0.3); }
+.seq-num {
+  font-family: 'Comfortaa', sans-serif; font-size: 15px; font-weight: 700;
+  color: var(--orange); text-align: center;
+}
+.seq-title { font-size: 13.5px; font-weight: 600; color: var(--cream); line-height: 1.4; }
+.seq-why { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.seq-tags { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+.seq-plan {
+  font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 2px; border: 1px solid;
+}
+.seq-plan.a { color: #E8651A; border-color: rgba(232,101,26,0.3); background: rgba(232,101,26,0.07); }
+.seq-plan.b { color: #9575cd; border-color: rgba(149,117,205,0.3); background: rgba(149,117,205,0.07); }
+.seq-plan.both { color: #4dd0e1; border-color: rgba(77,208,225,0.3); background: rgba(77,208,225,0.07); }
+
+.carrier-tag {
+  font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 2px; border: 1px solid;
+  color: #66bb6a; border-color: rgba(102,187,106,0.3); background: rgba(102,187,106,0.07);
+}
+
+.divider-row {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--muted); margin: 4px 0;
+}
+.divider-row::before, .divider-row::after {
+  content: ''; flex: 1; height: 1px; background: var(--faint);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">100<span>Circles</span></div>
+  <div class="plan-tabs">
+    <button class="tab-btn active" onclick="showPlan('a',this)">⭐ Plan A — Stars</button>
+    <button class="tab-btn" onclick="showPlan('b',this)">🌙 Plan B — Moon</button>
+    <button class="tab-btn" onclick="showPlan('map',this)">🗺 Goal Map</button>
+  </div>
+</nav>
+
+<!-- ═══ PLAN A ═══ -->
+<div class="plan-section active" id="plan-a">
+  <div class="hero">
+    <div class="plan-label">Plan A · Stars</div>
+    <div class="plan-title">Reach for <span class="hl">breakout numbers.</span><br>One video at a time.</div>
+    <div class="plan-desc">4 high-TAM search topics blended with 6 India-specific viral hooks. The TAM topics drive YouTube discovery and subscribers. The India hooks drive Instagram reach and LinkedIn engagement. Each topic is optimised for its primary platform win.</div>
+    <div class="goal-chips">
+      <div class="goal-chip"><span>📸</span><span class="plat">Instagram</span> 1M views on one — or 10K new followers</div>
+      <div class="goal-chip"><span>▶️</span><span class="plat">YouTube</span> 10K views on one — or 1K new subscribers</div>
+      <div class="goal-chip"><span>💼</span><span class="plat">LinkedIn</span> 5K+ views on one video</div>
+    </div>
+  </div>
+
+  <div class="freq-note">
+    <span class="icon">📅</span>
+    <div><strong>Recommended cadence: 2×/week, not 3×.</strong> Your marathon data showed a 51% view drop in week 2 on LinkedIn — algorithm fatigue from daily posting. 2× gives each video 3–4 days of distribution runway before the next one competes with it. One strong video beats three average ones every time.</div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-title">10 Videos · Plan A</div>
+    <div class="section-note">🟢 TAM-First swap &nbsp;|&nbsp; 🔥 Primary platform target</div>
+  </div>
+
+  <div class="video-grid">
+
+    <div class="video-card">
+      <div class="star-badge">🎯 Best Shot</div>
+      <div class="card-num">01 / 10</div>
+      <div class="card-title">Why Dhruv Rathee has more reach than most Indian news channels</div>
+      <div class="card-why">Creator economy vs. legacy media — a topic Indians argue about loudly online. Ties your founder-branding angle perfectly. High share + comment potential on IG Reels. The India-specific framing gives you an edge no global creator can replicate.</div>
+      <div class="card-platforms">
+        <span class="plat-badge ig">IG 🔥</span><span class="plat-badge yt">YT</span><span class="plat-badge li">LI</span><span class="plat-badge viral">Viral Window</span>
+      </div>
+      <div class="hook-line">"He has no studio. No team of 200. But more views than NDTV. Here's why."</div>
+    </div>
+
+    <div class="video-card">
+      <div class="swap-note">🟢 TAM-First</div>
+      <div class="card-num">02 / 10</div>
+      <div class="card-title">The LinkedIn Algorithm in 2026 — What Actually Works</div>
+      <div class="card-why">Huge TAM. "LinkedIn algorithm 2026" is one of the highest-intent queries your ICP types into YouTube. Massive discovery potential — people search this every time LinkedIn tweaks distribution. Will drive subscribers, not just views. Timely, evergreen, and searchable year-round.</div>
+      <div class="card-platforms">
+        <span class="plat-badge yt">YT 🔥</span><span class="plat-badge li">LI 🔥</span><span class="plat-badge ig">IG</span><span class="plat-badge tam-huge">🔴 Huge TAM</span>
+      </div>
+      <div class="hook-line">"LinkedIn changed how it distributes content 3 times in 2025. Most people are still using the 2023 playbook."</div>
+    </div>
+
+    <div class="video-card">
+      <div class="card-num">03 / 10</div>
+      <div class="card-title">This founder got 40 lakh views without spending a rupee on ads</div>
+      <div class="card-why">Organic reach + Indian founder + aspirational number = high IG shareability. The "0 spend" angle makes every bootstrapped founder stop scrolling. Feature someone like Nikhil Kamath or Varun Mayya for maximum credibility and cross-audience reach.</div>
+      <div class="card-platforms">
+        <span class="plat-badge ig">IG 🔥</span><span class="plat-badge yt">YT</span><span class="plat-badge li">LI</span><span class="plat-badge viral">Viral Window</span>
+      </div>
+      <div class="hook-line">"He's never run a paid ad. But 40 lakh people watched his last video."</div>
+    </div>
+
+    <div class="video-card">
+      <div class="swap-note">🟢 TAM-First</div>
+      <div class="card-num">04 / 10</div>
+      <div class="card-title">I Used AI to Create 30 Days of Content in 2 Hours</div>
+      <div class="card-why">Huge TAM. "AI content creation" is the fastest-growing search category on YouTube right now. The "2 hours" specificity triggers disbelief — which triggers clicks. Only you can make this credibly after the marathon. High IG save rate + high YT thumbnail CTR expected.</div>
+      <div class="card-platforms">
+        <span class="plat-badge yt">YT 🔥</span><span class="plat-badge ig">IG 🔥</span><span class="plat-badge li">LI</span><span class="plat-badge tam-huge">🔴 Huge TAM</span>
+      </div>
+      <div class="hook-line">"I just finished 30 days of daily videos manually. Then I asked AI to recreate the whole thing. It took 2 hours."</div>
+    </div>
+
+    <div class="video-card">
+      <div class="card-num">05 / 10</div>
+      <div class="card-title">I asked 50 Indian CEOs why they don't post on LinkedIn. Here's what they said.</div>
+      <div class="card-why">Interview-data format builds authority fast. CEOs share it ("that's me"), marketers share it ("send this to your CEO"). Positions you as the category expert on founder branding. The "50 CEOs" number signals research, not opinion — which earns saves on LinkedIn.</div>
+      <div class="card-platforms">
+        <span class="plat-badge li">LI 🔥</span><span class="plat-badge yt">YT 🔥</span><span class="plat-badge ig">IG</span>
+      </div>
+      <div class="hook-line">"Fear of judgment. Fear of time. Fear of nothing to say. I heard the same 3 fears 50 times."</div>
+    </div>
+
+    <div class="video-card">
+      <div class="card-num">06 / 10</div>
+      <div class="card-title">The Shark Tank India effect: 3 minutes on TV vs. 3 minutes on LinkedIn</div>
+      <div class="card-why">Shark Tank India is massive cultural currency in your market. Comparing TV vs. LinkedIn makes your core argument without stating it directly. Relatable to every founder who's imagined that pitch moment. High IG comment + share bait with a built-in argument people can't resist joining.</div>
+      <div class="card-platforms">
+        <span class="plat-badge ig">IG 🔥</span><span class="plat-badge li">LI</span><span class="plat-badge yt">YT</span><span class="plat-badge viral">Viral Window</span>
+      </div>
+      <div class="hook-line">"Shark Tank costs ₹50L to produce. A LinkedIn video costs ₹0. The reach difference will surprise you."</div>
+    </div>
+
+    <div class="video-card">
+      <div class="swap-note">🟢 TAM-First</div>
+      <div class="card-num">07 / 10</div>
+      <div class="card-title">The AI Tool Stack Every Founder Needs (Under ₹5000/month)</div>
+      <div class="card-why">Huge TAM. "AI tools for small business" has enormous search volume on YouTube globally. The Indian price framing (₹5000) localises a global topic and makes it immediately actionable for your ICP. List + tools format = people watch to the end to catch everything. High completion rate.</div>
+      <div class="card-platforms">
+        <span class="plat-badge yt">YT 🔥</span><span class="plat-badge ig">IG</span><span class="plat-badge li">LI</span><span class="plat-badge tam-huge">🔴 Huge TAM</span>
+      </div>
+      <div class="hook-line">"ChatGPT is just the beginning. Here's the full AI stack I'd build for a B2B company on a ₹5000/month budget."</div>
+    </div>
+
+    <div class="video-card">
+      <div class="card-num">08 / 10</div>
+      <div class="card-title">Why Indian founders are 3 years behind on the one marketing channel that actually converts</div>
+      <div class="card-why">Contrarian, nationally specific, urgency-driven. "3 years behind" provokes agreement and argument simultaneously — both fuel the algorithm. Perfect for IG comment wars and LinkedIn reposts. The reveal (video) is obvious, but the journey to it is the hook that earns the watch.</div>
+      <div class="card-platforms">
+        <span class="plat-badge ig">IG 🔥</span><span class="plat-badge li">LI 🔥</span><span class="plat-badge yt">YT</span><span class="plat-badge viral">Viral Window</span>
+      </div>
+      <div class="hook-line">"US SaaS founders cracked this in 2021. India is still running playbooks that stopped working two years ago."</div>
+    </div>
+
+    <div class="video-card">
+      <div class="swap-note">🟢 TAM-First</div>
+      <div class="card-num">09 / 10</div>
+      <div class="card-title">How to Get B2B Clients Using Only LinkedIn in 2026</div>
+      <div class="card-why">Huge TAM. "LinkedIn B2B marketing" is one of the most searched B2B topics on YouTube globally. The "2026" date gives it search freshness. Directly serves your ICP and doubles as proof-of-concept for 100Circles. Strongest combination of discovery reach + direct inbound of Plan A.</div>
+      <div class="card-platforms">
+        <span class="plat-badge yt">YT 🔥</span><span class="plat-badge li">LI 🔥</span><span class="plat-badge ig">IG</span><span class="plat-badge tam-huge">🔴 Huge TAM</span>
+      </div>
+      <div class="hook-line">"I closed 3 clients in 60 days using only LinkedIn. No cold email. No ads. Here's exactly what I did."</div>
+    </div>
+
+    <div class="video-card">
+      <div class="card-num">10 / 10</div>
+      <div class="card-title">The founder who grew from 0 to 50K LinkedIn followers in 6 months — without going viral once</div>
+      <div class="card-why">Anti-viral growth story — your core thesis made concrete. Highest save-rate format on LinkedIn. Feature a real founder or use your own marathon data. "Without going viral" is the counterintuitive hook that earns the click from anyone who's given up on consistency.</div>
+      <div class="card-platforms">
+        <span class="plat-badge li">LI 🔥</span><span class="plat-badge yt">YT 🔥</span><span class="plat-badge ig">IG</span>
+      </div>
+      <div class="hook-line">"He never had a video go viral. Not even close. He still gained 50K followers in 6 months. Here's the system."</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ PLAN B ═══ -->
+<div class="plan-section" id="plan-b">
+  <div class="hero">
+    <div class="plan-label">Plan B · Moon</div>
+    <div class="plan-title">Break every record<br><span class="hl">you've set so far.</span></div>
+    <div class="plan-desc">3 high-TAM topics swapped in where search intent amplifies your narrative edge. 7 original topics retained where authenticity and India-specific angles are your unfair advantage. Every target is 3–5× your marathon bests across all 6 metrics.</div>
+    <div class="goal-chips">
+      <div class="goal-chip"><span>📊</span>Targets are <span class="plat">3–5× your best individual marathon video</span></div>
+      <div class="goal-chip"><span>📅</span><strong>Cadence: 2×/week</strong></div>
+    </div>
+  </div>
+
+  <div class="freq-note">
+    <span class="icon">🎯</span>
+    <div><strong>How targets were set:</strong> Your best single video hit LI:285, IG:3,482, YT:1,205 views. Best retention: 60.9%. Best CTR: 6.3%. Moon targets are 3–5× those. The outliers — Video 06 (Virat/IG 20K) and Video 07 (your own data/CTA 12%) — reflect topics where cultural currency or personal authority provide extra fuel beyond what the algorithm alone can deliver.</div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-title">Overall Campaign Targets · 10 Videos</div>
+    <div class="section-note">Cumulative across all 10 videos</div>
+  </div>
+
+  <div class="targets-bar">
+    <div class="target-item"><span class="target-val">150K+</span><span class="target-lbl">Total Views</span></div>
+    <div class="target-item"><span class="target-val">8,500+</span><span class="target-lbl">Engagements</span></div>
+    <div class="target-item"><span class="target-val">85K+</span><span class="target-lbl">Reach / Accounts</span></div>
+    <div class="target-item"><span class="target-val">420h+</span><span class="target-lbl">Watch Hours</span></div>
+    <div class="target-item"><span class="target-val">65%+</span><span class="target-lbl">Avg Retention (YT)</span></div>
+    <div class="target-item"><span class="target-val">8%+</span><span class="target-lbl">CTA Click Rate</span></div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-title">10 Videos · Plan B · Per-Video Targets</div>
+    <div class="section-note">Views · Engagements · Retention · CTA%</div>
+  </div>
+
+  <div class="video-grid">
+
+    <div class="video-card">
+      <div class="star-badge">🌙 Moonshot</div>
+      <div class="card-num">01 / 10</div>
+      <div class="card-title">The CEO who is more famous than his own company — Part 2</div>
+      <div class="card-why">Your #1 marathon video (LI:285, IG:3,482, YT:1,164). A direct sequel with a fresh lens — Jensen Huang, Sam Altman, Ritesh Agarwal — rides the same algorithm momentum. "Part 2" re-activates everyone who watched Part 1 and signals continuity to new viewers.</div>
+      <div class="card-platforms">
+        <span class="plat-badge ig">IG 🔥</span><span class="plat-badge li">LI</span><span class="plat-badge yt">YT</span>
+      </div>
+      <div class="hook-line">"Last time I told you about one CEO. This time, three companies hired their CEO's face before the product was ready."</div>
+      <div class="metrics-row">
+        <div class="metric-cell"><span class="metric-val">LI 900</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">IG 15K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">YT 5K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">120+</span><span class="metric-lbl">Engagements</span></div>
+        <div class="metric-cell"><span class="metric-val">65%</span><span class="metric-lbl">YT Retention</span></div>
+        <div class="metric-cell"><span class="metric-val">9%</span><span class="metric-lbl">CTA Click</span></div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="swap-note">🟢 TAM-First</div>
+      <div class="card-num">02 / 10</div>
+      <div class="card-title">The LinkedIn Algorithm in 2026 — What Actually Works</div>
+      <div class="card-why">Huge TAM + Moon-level YT potential. "LinkedIn algorithm 2026" is your highest-probability subscriber driver of all 10 videos. Every LinkedIn creator links to the definitive version of this — be the one who owns it. Strong narrative format means you're not just searchable, you're watchable.</div>
+      <div class="card-platforms">
+        <span class="plat-badge yt">YT 🔥</span><span class="plat-badge li">LI 🔥</span><span class="plat-badge ig">IG</span><span class="plat-badge tam-huge">🔴 Huge TAM</span>
+      </div>
+      <div class="hook-line">"LinkedIn changed how it distributes content 3 times in 2025. Most people are still using the 2023 playbook."</div>
+      <div class="metrics-row">
+        <div class="metric-cell"><span class="metric-val">LI 1K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">IG 5K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">YT 10K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">130+</span><span class="metric-lbl">Engagements</span></div>
+        <div class="metric-cell"><span class="metric-val">70%</span><span class="metric-lbl">YT Retention</span></div>
+        <div class="metric-cell"><span class="metric-val">8%</span><span class="metric-lbl">CTA Click</span></div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="swap-note">🟢 TAM-First</div>
+      <div class="card-num">03 / 10</div>
+      <div class="card-title">I Used AI to Create 30 Days of Content in 2 Hours</div>
+      <div class="card-why">Huge TAM + authenticity only you have — nobody else can make this video credibly right now. "AI content creation" is the fastest-growing search category on YouTube. The "2 hours vs 30 days" contrast is the hook. Highest YT subscriber conversion of all 10. High IG save rate.</div>
+      <div class="card-platforms">
+        <span class="plat-badge yt">YT 🔥</span><span class="plat-badge ig">IG 🔥</span><span class="plat-badge li">LI</span><span class="plat-badge tam-huge">🔴 Huge TAM</span>
+      </div>
+      <div class="hook-line">"I just did 30 videos in 30 days manually. Then I asked AI to recreate the whole thing. It took 2 hours. Here's what it got right — and what it missed."</div>
+      <div class="metrics-row">
+        <div class="metric-cell"><span class="metric-val">LI 600</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">IG 8K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">YT 8K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">100+</span><span class="metric-lbl">Engagements</span></div>
+        <div class="metric-cell"><span class="metric-val">68%</span><span class="metric-lbl">YT Retention</span></div>
+        <div class="metric-cell"><span class="metric-val">9%</span><span class="metric-lbl">CTA Click</span></div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="swap-note">🟢 TAM-First</div>
+      <div class="card-num">04 / 10</div>
+      <div class="card-title">How to Turn One Sales Call Into 10 Pieces of Content</div>
+      <div class="card-why">Large TAM — "content repurposing" is constantly searched. Strong narrative format — you can demonstrate this live with a real 100Circles call for authenticity. Highest CTA-to-client-conversation potential of all 10 videos. LinkedIn saves will be disproportionately high for this format.</div>
+      <div class="card-platforms">
+        <span class="plat-badge li">LI 🔥</span><span class="plat-badge yt">YT 🔥</span><span class="plat-badge ig">IG</span><span class="plat-badge tam-large">🟡 Large TAM</span>
+      </div>
+      <div class="hook-line">"Every sales call has 10 pieces of content hiding inside it. Most founders throw them away. Here's the system to extract every one."</div>
+      <div class="metrics-row">
+        <div class="metric-cell"><span class="metric-val">LI 900</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">IG 4.5K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">YT 5K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">120+</span><span class="metric-lbl">Engagements</span></div>
+        <div class="metric-cell"><span class="metric-val">67%</span><span class="metric-lbl">YT Retention</span></div>
+        <div class="metric-cell"><span class="metric-val">13%</span><span class="metric-lbl">CTA Click</span></div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="card-num">05 / 10</div>
+      <div class="card-title">How Notion Built a $10B Company Without Salespeople</div>
+      <div class="card-why">Globally beloved brand, cult YouTube following. Medium TAM but very high audience quality — people who search this are exactly your ICP. "YouTube did the selling" is your thesis delivered through a brand your audience already trusts. Strong YT watch-time and saves on LI.</div>
+      <div class="card-platforms">
+        <span class="plat-badge yt">YT 🔥</span><span class="plat-badge li">LI</span><span class="plat-badge ig">IG</span>
+      </div>
+      <div class="hook-line">"Notion didn't hire enterprise salespeople until they hit $1B. YouTube did the selling for them. Here's how."</div>
+      <div class="metrics-row">
+        <div class="metric-cell"><span class="metric-val">LI 500</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">IG 5K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">YT 6K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">85+</span><span class="metric-lbl">Engagements</span></div>
+        <div class="metric-cell"><span class="metric-val">66%</span><span class="metric-lbl">YT Retention</span></div>
+        <div class="metric-cell"><span class="metric-val">8.5%</span><span class="metric-lbl">CTA Click</span></div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="card-num">06 / 10</div>
+      <div class="card-title">The marketing rule Virat Kohli broke that made him worth ₹1000 crore off the field</div>
+      <div class="card-why">Virat + money + rule-breaking = maximum India IG virality. Your Red Bull video was your surprise IG performer — same category. Cricket + personal brand is the India-specific crossover that can take your 62-follower IG account to a completely different level in a single video.</div>
+      <div class="card-platforms">
+        <span class="plat-badge ig">IG 🔥</span><span class="plat-badge li">LI</span><span class="plat-badge yt">YT</span><span class="plat-badge viral">Viral Window</span>
+      </div>
+      <div class="hook-line">"Every brand told Virat to stay in his lane. He ignored them all. That decision made him worth more than most IPL teams."</div>
+      <div class="metrics-row">
+        <div class="metric-cell"><span class="metric-val">LI 400</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">IG 20K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">YT 2K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">300+</span><span class="metric-lbl">Engagements</span></div>
+        <div class="metric-cell"><span class="metric-val">58%</span><span class="metric-lbl">YT Retention</span></div>
+        <div class="metric-cell"><span class="metric-val">6%</span><span class="metric-lbl">CTA Click</span></div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="card-num">07 / 10</div>
+      <div class="card-title">What 30 days of daily videos taught me about the LinkedIn algorithm (the data surprised me)</div>
+      <div class="card-why">Only you can make this. Your marathon data is your unfair advantage — no one else has it. The audience who watched the marathon is primed for the debrief. First-person data reveal is your most authentic format. Highest expected LinkedIn engagement and CTA conversion of all 10.</div>
+      <div class="card-platforms">
+        <span class="plat-badge li">LI 🔥</span><span class="plat-badge yt">YT 🔥</span><span class="plat-badge ig">IG</span>
+      </div>
+      <div class="hook-line">"I expected YouTube to be the hardest. LinkedIn surprised me the most. The data showed something I didn't expect."</div>
+      <div class="metrics-row">
+        <div class="metric-cell"><span class="metric-val">LI 1.2K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">IG 4K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">YT 4.5K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">150+</span><span class="metric-lbl">Engagements</span></div>
+        <div class="metric-cell"><span class="metric-val">72%</span><span class="metric-lbl">YT Retention</span></div>
+        <div class="metric-cell"><span class="metric-val">12%</span><span class="metric-lbl">CTA Click</span></div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="card-num">08 / 10</div>
+      <div class="card-title">How Clay went from $0 to $1.25B without a single billboard</div>
+      <div class="card-why">Hottest PLG SaaS story right now, beloved by your exact ICP. "No billboard" = content-led growth thesis through a brand your audience already respects. You already referenced Clay in the marathon — this doubles down on a proven winner with more depth and a stronger narrative arc.</div>
+      <div class="card-platforms">
+        <span class="plat-badge yt">YT 🔥</span><span class="plat-badge li">LI</span><span class="plat-badge ig">IG</span>
+      </div>
+      <div class="hook-line">"Clay spent nothing on paid media. Their customers became their marketing team. Here's the system that made it work."</div>
+      <div class="metrics-row">
+        <div class="metric-cell"><span class="metric-val">LI 550</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">IG 5K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">YT 7K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">90+</span><span class="metric-lbl">Engagements</span></div>
+        <div class="metric-cell"><span class="metric-val">68%</span><span class="metric-lbl">YT Retention</span></div>
+        <div class="metric-cell"><span class="metric-val">9%</span><span class="metric-lbl">CTA Click</span></div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="card-num">09 / 10</div>
+      <div class="card-title">The 60-second video format that closes enterprise deals faster than a demo</div>
+      <div class="card-why">Hyper-specific and outcome-driven. "Enterprise deals" signals high purchase intent from your ICP (₹1M+ revenue companies). This is the video that generates the most direct inbound to 100Circles. Highest CTA-to-paid-conversation rate of all 10 — designed to sell without selling.</div>
+      <div class="card-platforms">
+        <span class="plat-badge li">LI 🔥</span><span class="plat-badge yt">YT</span><span class="plat-badge ig">IG</span>
+      </div>
+      <div class="hook-line">"Your prospect watched a 60-second video. Then replied: 'when can we start?' No deck. No call. Just the video."</div>
+      <div class="metrics-row">
+        <div class="metric-cell"><span class="metric-val">LI 700</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">IG 3.5K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">YT 2.5K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">80+</span><span class="metric-lbl">Engagements</span></div>
+        <div class="metric-cell"><span class="metric-val">65%</span><span class="metric-lbl">YT Retention</span></div>
+        <div class="metric-cell"><span class="metric-val">15%</span><span class="metric-lbl">CTA Click</span></div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <div class="card-num">10 / 10</div>
+      <div class="card-title">Why the best Indian SaaS companies are quietly building YouTube channels right now</div>
+      <div class="card-why">Category-defining claim with urgency. "Quietly" implies insider knowledge — irresistible to founders. Proof points: Zoho, Freshworks, Chargebee. Strongest positioning alignment with your core service. The video that makes people think: "I need to talk to 100Circles before my competitors do."</div>
+      <div class="card-platforms">
+        <span class="plat-badge li">LI 🔥</span><span class="plat-badge yt">YT 🔥</span><span class="plat-badge ig">IG</span>
+      </div>
+      <div class="hook-line">"Zoho doesn't talk about it. Freshworks just started. The smartest Indian SaaS founders figured out something the rest haven't."</div>
+      <div class="metrics-row">
+        <div class="metric-cell"><span class="metric-val">LI 650</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">IG 4.5K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">YT 5.5K</span><span class="metric-lbl">Views</span></div>
+        <div class="metric-cell"><span class="metric-val">95+</span><span class="metric-lbl">Engagements</span></div>
+        <div class="metric-cell"><span class="metric-val">66%</span><span class="metric-lbl">YT Retention</span></div>
+        <div class="metric-cell"><span class="metric-val">10%</span><span class="metric-lbl">CTA Click</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ GOAL MAP ═══ -->
+<div class="plan-section" id="plan-map">
+  <div class="hero">
+    <div class="plan-label">Goal Map</div>
+    <div class="plan-title">Which video<br><span class="hl">carries which goal.</span></div>
+    <div class="plan-desc">Each goal is driven by different videos. This tells you which ones to make first depending on which number you're most hungry to move — and how confident you should be that each video will actually deliver it.</div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-title">5 Goals · Sequenced by Impact</div>
+    <div class="section-note">Make the top-ranked video first for each goal you prioritise</div>
+  </div>
+
+  <div class="map-wrap">
+
+    <!-- GOAL 1: YT 10K / 1K subs -->
+    <div class="goal-block">
+      <div class="goal-block-header">
+        <div class="goal-icon">▶️</div>
+        <div>
+          <div class="goal-name">YouTube — 10K views on one video or 1K new subscribers</div>
+          <div class="goal-target">Confidence level on TAM-First: ✅ Strong</div>
+        </div>
+        <div class="goal-verdict verdict-strong">TAM carries this</div>
+      </div>
+      <div class="goal-body">
+        <div class="goal-note">TAM-First topics are your primary engine here. YouTube is a search engine — people find you because they typed something. Your marathon audience can't get you to 10K; strangers searching for answers can. The India-viral topics are <strong>not your YT bet</strong> — they're IG bets that happen to also post to YouTube.</div>
+        <div class="seq-label">Make these first — in this order</div>
+        <div class="vid-sequence">
+          <div class="seq-row">
+            <div class="seq-num">1</div>
+            <div>
+              <div class="seq-title">The LinkedIn Algorithm in 2026 — What Actually Works</div>
+              <div class="seq-why">Highest search volume of all 10. People type this exact query every time LinkedIn shifts. Own this topic and it compounds — older videos stay discoverable for 12+ months.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan both">A + B</span><span class="carrier-tag">Primary carrier</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">2</div>
+            <div>
+              <div class="seq-title">How to Get B2B Clients Using Only LinkedIn in 2026</div>
+              <div class="seq-why">Second-highest search intent. "LinkedIn B2B marketing" has global search volume — not just India. The 2026 date makes it fresh. Strong subscriber magnet because people bookmark it to re-watch.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan a">A only</span><span class="carrier-tag">Primary carrier</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">3</div>
+            <div>
+              <div class="seq-title">I Used AI to Create 30 Days of Content in 2 Hours</div>
+              <div class="seq-why">"AI content creation" search volume is massive and growing. The unique angle (you actually did the 30 days) differentiates it from the 1,000 other AI content videos. High CTR expected from thumbnail alone.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan both">A + B</span><span class="carrier-tag">Primary carrier</span></div>
+          </div>
+          <div class="divider-row">also contributes</div>
+          <div class="seq-row">
+            <div class="seq-num">4</div>
+            <div>
+              <div class="seq-title">How Clay went from $0 to $1.25B without a single billboard</div>
+              <div class="seq-why">Strong YT watch time (B2B founders binge brand case studies). Doesn't drive discovery as strongly — relies on being recommended after the TAM videos above.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan b">B only</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">5</div>
+            <div>
+              <div class="seq-title">How Notion Built a $10B Company Without Salespeople</div>
+              <div class="seq-why">Medium TAM but high-quality audience. Works best as a recommended video after the LinkedIn Algorithm video — watch-through rate should be strong.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan b">B only</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOAL 2: IG 1M views / 10K followers -->
+    <div class="goal-block">
+      <div class="goal-block-header">
+        <div class="goal-icon">📸</div>
+        <div>
+          <div class="goal-name">Instagram — 1M views on one video or 10K new followers</div>
+          <div class="goal-target">Confidence level on TAM-First: ❌ Weak — India-viral topics carry this entirely</div>
+        </div>
+        <div class="goal-verdict verdict-weak">Viral topics carry this</div>
+      </div>
+      <div class="goal-body">
+        <div class="goal-note">Instagram's algorithm rewards <strong>cultural heat and emotional identity</strong>, not search intent. "LinkedIn Algorithm 2026" will get saves from 40 people. Virat Kohli, Dhruv Rathee, and Shark Tank India will get shared in WhatsApp groups. Those are completely different distribution paths. TAM-First topics are the <strong>wrong tool</strong> for this goal.</div>
+        <div class="seq-label">Make these first — in this order</div>
+        <div class="vid-sequence">
+          <div class="seq-row">
+            <div class="seq-num">1</div>
+            <div>
+              <div class="seq-title">The marketing rule Virat Kohli broke that made him worth ₹1000 crore off the field</div>
+              <div class="seq-why">Cricket is India's shared language. This will travel into WhatsApp groups, cricket communities, and finance communities — far beyond your existing followers. Highest single-video IG upside of all 10. Your Red Bull surprise performer was the proof of concept for this category.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan b">B only</span><span class="carrier-tag">Primary carrier</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">2</div>
+            <div>
+              <div class="seq-title">Why Dhruv Rathee has more reach than most Indian news channels</div>
+              <div class="seq-why">Dhruv Rathee has a passionate fanbase who already argue about him online. Both sides share this video — supporters to prove a point, critics to debunk it. Controversy without being controversial.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan a">A only</span><span class="carrier-tag">Primary carrier</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">3</div>
+            <div>
+              <div class="seq-title">The Shark Tank India effect: 3 minutes on TV vs. 3 minutes on LinkedIn</div>
+              <div class="seq-why">Every founder in India has a Shark Tank opinion. This triggers identity — "that could be me." High comment and share bait because founders tag each other in it.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan a">A only</span><span class="carrier-tag">Primary carrier</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">4</div>
+            <div>
+              <div class="seq-title">The CEO who is more famous than his own company — Part 2</div>
+              <div class="seq-why">Your proven #1 IG video format. A sequel with Jensen Huang / Sam Altman framing gives it global shareability beyond India. The Part 1 audience is your warm re-activation list.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan b">B only</span><span class="carrier-tag">Primary carrier</span></div>
+          </div>
+          <div class="divider-row">secondary contribution</div>
+          <div class="seq-row">
+            <div class="seq-num">5</div>
+            <div>
+              <div class="seq-title">This founder got 40 lakh views without spending a rupee on ads</div>
+              <div class="seq-why">Aspirational + Indian + specific number. Will travel in founder communities. Secondary because it's a "someone else's story" format — lower identity attachment than Virat/Shark Tank.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan a">A only</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOAL 3: LI 5K views -->
+    <div class="goal-block">
+      <div class="goal-block-header">
+        <div class="goal-icon">💼</div>
+        <div>
+          <div class="goal-name">LinkedIn — 5,000+ views on one video</div>
+          <div class="goal-target">Confidence level: ✅ Strong — both TAM and first-person data formats work here</div>
+        </div>
+        <div class="goal-verdict verdict-strong">Both types work</div>
+      </div>
+      <div class="goal-body">
+        <div class="goal-note">LinkedIn is the one platform where <strong>both TAM-First and narrative topics</strong> perform. Search plays a smaller role than on YouTube, but high-save topics get distributed by the algorithm to non-followers. Your 19× engagement rate in the marathon proves your LI audience is primed — you just need a bigger initial push to crack 5K.</div>
+        <div class="seq-label">Make these first — in this order</div>
+        <div class="vid-sequence">
+          <div class="seq-row">
+            <div class="seq-num">1</div>
+            <div>
+              <div class="seq-title">What 30 days of daily videos taught me (the data surprised me)</div>
+              <div class="seq-why">Your data, your story, your credibility. LinkedIn rewards first-person vulnerability + data. The marathon audience is already warm — this is the highest-probability 5K video on LinkedIn. Only you can make it.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan b">B only</span><span class="carrier-tag">Primary carrier</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">2</div>
+            <div>
+              <div class="seq-title">The LinkedIn Algorithm in 2026 — What Actually Works</div>
+              <div class="seq-why">LinkedIn users will save and reshare a definitive algorithm breakdown more than almost any other content type. Gets distributed to people outside your network when LI sees the save rate.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan both">A + B</span><span class="carrier-tag">Primary carrier</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">3</div>
+            <div>
+              <div class="seq-title">How to Turn One Sales Call Into 10 Pieces of Content</div>
+              <div class="seq-why">Hyper-actionable. LinkedIn's algorithm rewards saves, and this is the most save-worthy format — people bookmark "how-to systems" to revisit. Will also generate the most direct DMs and inbound for 100Circles.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan b">B only</span><span class="carrier-tag">Primary carrier</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">4</div>
+            <div>
+              <div class="seq-title">I asked 50 Indian CEOs why they don't post on LinkedIn</div>
+              <div class="seq-why">CEOs tag each other. Marketers share it with their leadership. Strong secondary engine — lower discovery reach than the top 3 but higher comment volume and conversation depth.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan both">A + B</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOAL 4: CTA clicks -->
+    <div class="goal-block">
+      <div class="goal-block-header">
+        <div class="goal-icon">🔗</div>
+        <div>
+          <div class="goal-name">CTA Click Rate — 8%+ average (Plan B target)</div>
+          <div class="goal-target">Your best marathon CTR: 6.3% · Target: 8–15% on specific videos</div>
+        </div>
+        <div class="goal-verdict verdict-strong">Outcome-specific topics win</div>
+      </div>
+      <div class="goal-body">
+        <div class="goal-note">CTA clicks require the viewer to feel the gap between where they are and where they want to be. <strong>Outcome-specific titles</strong> ("closes enterprise deals", "get B2B clients", "turn sales calls into content") create that gap more acutely than brand case studies. Viral topics get views — outcome topics get clicks.</div>
+        <div class="seq-label">Highest CTA potential — in order</div>
+        <div class="vid-sequence">
+          <div class="seq-row">
+            <div class="seq-num">1</div>
+            <div>
+              <div class="seq-title">The 60-second video format that closes enterprise deals faster than a demo</div>
+              <div class="seq-why">Most direct path from video to "I want this for my company." The viewer self-qualifies — if they watch to the end, they're a warm lead. 15% CTA target is achievable. Every view is a potential 100Circles conversation.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan b">B only</span><span class="carrier-tag">Highest CTA</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">2</div>
+            <div>
+              <div class="seq-title">How to Turn One Sales Call Into 10 Pieces of Content</div>
+              <div class="seq-why">Immediately actionable for any founder. CTA naturally leads to: "want us to do this for you?" — a frictionless transition to 100Circles. 13% target. Your highest-volume CTA-driver.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan b">B only</span><span class="carrier-tag">High CTA</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">3</div>
+            <div>
+              <div class="seq-title">How to Get B2B Clients Using Only LinkedIn in 2026</div>
+              <div class="seq-why">The viewer watching this is actively looking for a solution. High intent = higher CTA conversion. The 100Circles CTA is a natural next step: "want me to do this with your company?"</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan a">A only</span><span class="carrier-tag">High CTA</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">4</div>
+            <div>
+              <div class="seq-title">What 30 days of daily videos taught me</div>
+              <div class="seq-why">Personal credibility + data = the highest-trust CTA setup. Viewers who watch your own marathon debrief are the warmest possible audience for a 100Circles offer. 12% CTA target.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan b">B only</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOAL 5: Watch Hours / Retention -->
+    <div class="goal-block">
+      <div class="goal-block-header">
+        <div class="goal-icon">⏱</div>
+        <div>
+          <div class="goal-name">Watch Hours &amp; Retention — 65%+ AVD, 420h+ total (Plan B)</div>
+          <div class="goal-target">Your best: 60.9% retention (Bajaj Finance) · Target: 65–72%</div>
+        </div>
+        <div class="goal-verdict verdict-partial">List + systems formats win</div>
+      </div>
+      <div class="goal-body">
+        <div class="goal-note">Retention is won by <strong>format, not topic</strong>. The highest-retention formats are: lists with a clear end point (people watch to catch everything), experiment reveals (people watch to find out what happened), and systems breakdowns (people watch to learn something replicable). Pure brand case studies retain less because there's no personal stake.</div>
+        <div class="seq-label">Highest retention format — in order</div>
+        <div class="vid-sequence">
+          <div class="seq-row">
+            <div class="seq-num">1</div>
+            <div>
+              <div class="seq-title">The LinkedIn Algorithm in 2026 — What Actually Works</div>
+              <div class="seq-why">People watch algorithm breakdowns to the very end — they're afraid of missing the one tip that changes everything. 70% retention target. The list format forces completion.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan both">A + B</span><span class="carrier-tag">Highest retention</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">2</div>
+            <div>
+              <div class="seq-title">What 30 days of daily videos taught me (the data surprised me)</div>
+              <div class="seq-why">Experiment reveals have exceptional retention — viewers stay to find out what the data showed. "Surprised me" in the title creates a curiosity loop that keeps them watching. 72% target.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan b">B only</span><span class="carrier-tag">Highest retention</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">3</div>
+            <div>
+              <div class="seq-title">The AI Tool Stack Every Founder Needs (Under ₹5000/month)</div>
+              <div class="seq-why">Tool lists drive end-to-end watch time — viewers stay to catch every tool. "Under ₹5000" creates a constraint that makes every item feel curated and worth staying for.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan a">A only</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num">4</div>
+            <div>
+              <div class="seq-title">I Used AI to Create 30 Days of Content in 2 Hours</div>
+              <div class="seq-why">Before/after experiment format. Viewers want to see how the AI version compares — that curiosity gap sustains high retention through the middle of the video where most people drop off.</div>
+            </div>
+            <div class="seq-tags"><span class="seq-plan both">A + B</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MASTER SEQUENCE -->
+    <div class="goal-block" style="border-color: rgba(232,101,26,0.3);">
+      <div class="goal-block-header" style="background: rgba(232,101,26,0.04);">
+        <div class="goal-icon">🗓</div>
+        <div>
+          <div class="goal-name">Recommended shoot sequence — if you want to chase all goals at once</div>
+          <div class="goal-target">2× per week · 5-week sprint for all 10 videos</div>
+        </div>
+      </div>
+      <div class="goal-body">
+        <div class="goal-note">Sequenced so that each video primes the audience for the next one. TAM videos early = builds YouTube subscribers before the India-viral videos launch. Marathon debrief video early = maximum LinkedIn warmth while the 30-day memory is still fresh.</div>
+        <div class="vid-sequence" style="margin-top: 16px;">
+          <div class="seq-row">
+            <div class="seq-num" style="color:var(--muted); font-size:11px;">Wk 1</div>
+            <div><div class="seq-title">① LinkedIn Algorithm 2026 &nbsp;→&nbsp; ② What 30 days taught me</div><div class="seq-why">YT discovery engine on + marathon debrief while it's still fresh. Best 1-2 punch to open.</div></div>
+            <div class="seq-tags"><span class="seq-plan both">YT + LI</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num" style="color:var(--muted); font-size:11px;">Wk 2</div>
+            <div><div class="seq-title">③ Virat Kohli &nbsp;→&nbsp; ④ AI Content in 2 Hours</div><div class="seq-why">IG viral shot + YT subscriber magnet. Best week for cross-platform spike.</div></div>
+            <div class="seq-tags"><span class="seq-plan both">IG + YT</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num" style="color:var(--muted); font-size:11px;">Wk 3</div>
+            <div><div class="seq-title">⑤ CEO Part 2 &nbsp;→&nbsp; ⑥ Sales Call → 10 Content Pieces</div><div class="seq-why">Proven format sequel + highest CTA video. Mid-sprint CTA push when audience is warmed up.</div></div>
+            <div class="seq-tags"><span class="seq-plan both">IG + LI</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num" style="color:var(--muted); font-size:11px;">Wk 4</div>
+            <div><div class="seq-title">⑦ Dhruv Rathee / Shark Tank &nbsp;→&nbsp; ⑧ B2B Clients on LinkedIn 2026</div><div class="seq-why">IG cultural hook + YT discovery. Two different audiences, same week.</div></div>
+            <div class="seq-tags"><span class="seq-plan both">IG + YT</span></div>
+          </div>
+          <div class="seq-row">
+            <div class="seq-num" style="color:var(--muted); font-size:11px;">Wk 5</div>
+            <div><div class="seq-title">⑨ 60-second closes enterprise deals &nbsp;→&nbsp; ⑩ Indian SaaS quietly building YouTube</div><div class="seq-why">Close with your two highest-inbound videos. Audience is warmed up, CTA converts at peak.</div></div>
+            <div class="seq-tags"><span class="seq-plan both">LI + YT</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showPlan(p, btn) {
+  document.querySelectorAll('.plan-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('plan-' + p).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
