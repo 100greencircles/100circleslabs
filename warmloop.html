@@ -1027,7 +1027,7 @@
     <a href="#how-it-works">How it works</a>
     <a href="#tiers">Your circle</a>
     <a href="#channels">Channels</a>
-    <a href="#waitlist" class="nav-cta">Join waitlist</a>
+    <a href="#waitlist" class="nav-cta">Claim early access</a>
   </div>
 </nav>
 
@@ -1047,7 +1047,7 @@
   </p>
 
   <div class="hero-actions">
-    <a href="#waitlist" class="btn-primary">Join the waitlist</a>
+    <a href="#waitlist" class="btn-primary">Claim your free month</a>
     <a href="#how-it-works" class="btn-ghost">
       See how it works
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1411,7 +1411,7 @@
 
       <!-- CTA -->
       <button class="slider-cta" id="slider-cta-btn" onclick="openSliderModal()">
-        Pre-order at $24/mo
+        Claim your free month at $24/mo
       </button>
       <p class="slider-fine">No payment now · We'll reach out personally at launch · Cancel anytime</p>
 
@@ -1430,7 +1430,7 @@
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-badge" id="modal-badge">100 contacts — $24/mo at launch</div>
-    <h3 class="modal-title">Reserve your spot</h3>
+    <h3 class="modal-title">Reserve your free month</h3>
     <p class="modal-sub" id="modal-sub">Lock in 50% off. First month free for 100-contact plan.</p>
     <div id="modal-form-wrap" class="modal-form">
       <input class="modal-input" id="m-name" type="text" placeholder="Your name" />
@@ -1505,7 +1505,7 @@
     wasPrice.textContent = '$' + p.full + '/mo';
     nowPrice.textContent = '$' + p.pre;
     savingTag.textContent = 'You save ' + p.saving;
-    ctaBtn.textContent = 'Pre-order at $' + p.pre + '/mo';
+    ctaBtn.textContent = 'Claim your free month at $' + p.pre + '/mo';
     document.getElementById('modal-badge').textContent = p.contacts + ' contacts — $' + p.pre + '/mo at launch';
     document.getElementById('modal-sub').textContent = p.saving.includes('first month') ? 'Lock in 50% off + your first month free.' : 'Lock in 50% off for your first 12 months.';
   }
