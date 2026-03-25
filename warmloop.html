@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,12 +146,12 @@
 
   .hero h1 {
     font-family: 'Fraunces', serif;
-    font-size: clamp(48px, 7vw, 88px);
+    font-size: clamp(32px, 4.2vw, 56px);
     font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -2px;
+    line-height: 1.1;
+    letter-spacing: -1px;
     color: var(--warm-white);
-    max-width: 780px;
+    max-width: 640px;
     animation: fadeUp .9s .1s ease both;
   }
   .hero h1 em {
@@ -159,12 +160,12 @@
   }
 
   .hero-sub {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 300;
     color: var(--warm-gray-light);
-    max-width: 520px;
-    margin: 24px auto 0;
-    line-height: 1.7;
+    max-width: 480px;
+    margin: 20px auto 0;
+    line-height: 1.75;
     animation: fadeUp .9s .2s ease both;
   }
 
@@ -210,66 +211,66 @@
 
   /* ── ORBITING CONTACTS ── */
   .contacts-orbit {
-    position: relative;
     width: 100%;
-    max-width: 680px;
-    height: 220px;
-    margin: 60px auto 0;
+    max-width: 720px;
+    margin: 48px auto 0;
     animation: fadeUp .9s .45s ease both;
+    position: relative;
   }
   .orbit-track {
     position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 560px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--border), var(--border-warm), var(--border), transparent);
+    top: 50%; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-warm), transparent);
+    pointer-events: none;
+  }
+  .orbit-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 20px 0;
   }
   .contact-card {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     background: var(--bg3);
     border: 1px solid var(--border);
     border-radius: 50px;
-    padding: 10px 18px 10px 12px;
+    padding: 10px 14px 10px 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 9px;
     white-space: nowrap;
+    flex-shrink: 0;
     transition: border-color .3s;
     animation: floatCard linear infinite;
   }
   .contact-card:hover { border-color: var(--border-warm); }
+  .c1 { animation-duration: 6s;   animation-delay: 0s; }
+  .c2 { animation-duration: 7s;   animation-delay: -2s; }
+  .c3 { animation-duration: 5.5s; animation-delay: -1s; }
+  .c4 { animation-duration: 8s;   animation-delay: -3s; }
+  .c5 { animation-duration: 6.5s; animation-delay: -0.5s; }
   .contact-avatar {
-    width: 32px; height: 32px;
+    width: 30px; height: 30px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     flex-shrink: 0;
   }
   .contact-info { display: flex; flex-direction: column; }
-  .contact-name { font-size: 13px; font-weight: 500; color: var(--warm-white); line-height: 1.2; }
-  .contact-tier { font-size: 10px; font-weight: 400; color: var(--warm-gray); letter-spacing: .03em; }
+  .contact-name { font-size: 12px; font-weight: 500; color: var(--warm-white); line-height: 1.2; }
+  .contact-tier { font-size: 10px; font-weight: 400; color: var(--warm-gray); letter-spacing: .02em; }
   .tier-dot {
-    width: 7px; height: 7px;
+    width: 6px; height: 6px;
     border-radius: 50%;
     flex-shrink: 0;
-    margin-left: 4px;
+    margin-left: 2px;
   }
-
-  .c1 { left: 0; animation-duration: 6s; animation-delay: 0s; }
-  .c2 { left: 18%; animation-duration: 7s; animation-delay: -2s; }
-  .c3 { left: 38%; animation-duration: 5.5s; animation-delay: -1s; }
-  .c4 { left: 58%; animation-duration: 8s; animation-delay: -3s; }
-  .c5 { left: 74%; animation-duration: 6.5s; animation-delay: -0.5s; }
-
   @keyframes floatCard {
-    0%, 100% { transform: translateY(calc(-50% - 8px)); }
-    50% { transform: translateY(calc(-50% + 8px)); }
+    0%, 100% { transform: translateY(-7px); }
+    50%       { transform: translateY(7px); }
   }
 
   /* ── SECTION BASE ── */
@@ -766,6 +767,239 @@
     color: var(--warm-gray-light);
   }
 
+  /* ── PRICING SLIDER ── */
+  .slider-card {
+    background: var(--bg3);
+    border: 1px solid var(--border-warm);
+    border-radius: var(--radius-lg);
+    padding: 44px 48px;
+    margin-top: 56px;
+  }
+  .slider-features-note {
+    font-size: 12px;
+    color: var(--warm-gray);
+    text-align: center;
+    padding: 10px 16px;
+    background: rgba(240,234,226,0.04);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 36px;
+    line-height: 1.7;
+  }
+  .slider-section { margin-bottom: 36px; }
+  .slider-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .slider-label-text { font-size: 14px; color: var(--warm-gray-light); }
+  .slider-contact-val {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--amber);
+    font-weight: 400;
+  }
+  .slider-track-wrap { position: relative; }
+  .contact-range {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--amber) 0%, var(--amber) 0%, var(--border) 0%);
+    outline: none;
+    cursor: pointer;
+  }
+  .contact-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--amber);
+    box-shadow: 0 0 16px rgba(232,150,58,0.5);
+    cursor: pointer;
+    transition: box-shadow .2s;
+  }
+  .contact-range::-webkit-slider-thumb:hover { box-shadow: 0 0 24px rgba(232,150,58,0.7); }
+  .contact-range::-moz-range-thumb {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--amber);
+    border: none;
+    cursor: pointer;
+  }
+  .slider-stops {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  .slider-stops span {
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: .02em;
+  }
+  .slider-price-block {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 0;
+    margin-bottom: 28px;
+  }
+  .slider-price-row { display: flex; justify-content: space-between; align-items: center; }
+  .slider-was-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .slider-was-label { font-size: 12px; color: var(--warm-gray); text-transform: uppercase; letter-spacing: .06em; }
+  .slider-was-price { font-size: 16px; color: var(--warm-gray); text-decoration: line-through; }
+  .slider-now-row { display: flex; align-items: baseline; gap: 6px; }
+  .slider-now-price {
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    font-weight: 400;
+    color: var(--amber-light);
+    line-height: 1;
+    transition: all .25s ease;
+  }
+  .slider-now-mo { font-size: 16px; color: var(--warm-gray-light); }
+  .slider-saving-tag {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--amber);
+    font-weight: 500;
+  }
+  .slider-discount-badge {
+    background: var(--amber);
+    color: #1A1714;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 50px;
+    letter-spacing: .02em;
+  }
+  .slider-cta {
+    width: 100%;
+    background: var(--amber);
+    color: #1A1714;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 17px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: background .2s, transform .15s, box-shadow .2s;
+    box-shadow: 0 0 40px rgba(232,150,58,0.25);
+  }
+  .slider-cta:hover { background: var(--amber-light); transform: translateY(-2px); box-shadow: 0 0 56px rgba(232,150,58,0.4); }
+  .slider-fine {
+    text-align: center;
+    font-size: 12px;
+    color: var(--warm-gray);
+    margin-top: 14px;
+  }
+  .enterprise-note {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 14px;
+    color: var(--warm-gray);
+  }
+  .enterprise-note a { color: var(--amber); text-decoration: none; }
+  .enterprise-note a:hover { text-decoration: underline; }
+
+  /* ── MODAL ── */
+  .modal-box {
+    background: var(--bg2);
+    border: 1px solid var(--border-warm);
+    border-radius: var(--radius-lg);
+    padding: 44px 40px;
+    width: 100%;
+    max-width: 440px;
+    position: relative;
+    animation: fadeUp .3s ease both;
+  }
+  .modal-close {
+    position: absolute;
+    top: 18px; right: 20px;
+    background: none;
+    border: none;
+    color: var(--warm-gray);
+    font-size: 16px;
+    cursor: pointer;
+    transition: color .2s;
+  }
+  .modal-close:hover { color: var(--warm-white); }
+  .modal-badge {
+    display: inline-block;
+    background: var(--amber-dim);
+    border: 1px solid var(--border-warm);
+    color: var(--amber);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .modal-title {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--warm-white);
+    margin-bottom: 6px;
+    letter-spacing: -.4px;
+  }
+  .modal-sub {
+    font-size: 14px;
+    color: var(--warm-gray-light);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .modal-form { display: flex; flex-direction: column; gap: 12px; }
+  .modal-input {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    color: var(--warm-white);
+    outline: none;
+    transition: border-color .2s;
+  }
+  .modal-input:focus { border-color: var(--border-warm); }
+  .modal-input::placeholder { color: var(--warm-gray); }
+  .modal-success {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .modal-success-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .modal-success h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--warm-white);
+    margin-bottom: 8px;
+  }
+  .modal-success p {
+    font-size: 14px;
+    color: var(--warm-gray-light);
+    line-height: 1.6;
+  }
+
+  /* ── ROTATING WORD ── */
+  #rotating-word {
+    display: inline-block;
+    color: var(--amber);
+    font-style: italic;
+    min-width: 4.8ch;
+    text-align: left;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  #rotating-word.fade-out { opacity: 0; transform: translateY(-10px); }
+  #rotating-word.fade-in  { opacity: 1; transform: translateY(0); }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 800px) {
     nav { padding: 16px 20px; }
@@ -773,9 +1007,14 @@
     .problem-grid, .channels-grid { grid-template-columns: 1fr; }
     .loop-visual { grid-template-columns: 1fr; }
     .tiers-grid { flex-direction: column; }
+    .pricing-grid { grid-template-columns: 1fr 1fr; }
     footer { flex-direction: column; gap: 12px; text-align: center; }
     .cta-actions { flex-direction: column; align-items: center; }
     .input-email { width: 100%; max-width: 320px; }
+    .modal-box { margin: 16px; padding: 32px 24px; }
+  }
+  @media (max-width: 540px) {
+    .pricing-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -801,10 +1040,10 @@
     AI-powered relationship loops
   </div>
 
-  <h1>Your next deal is already<br>in your <em>contacts</em></h1>
+  <h1>Your next <span id="rotating-word">customer</span><br>is already in your <em>contacts</em></h1>
 
   <p class="hero-sub">
-    WarmLoop keeps your professional circle alive — with monthly conversations that feel genuine, not mass-sent. For founders, freelancers, and builders who grow through people.
+    WarmLoop keeps your professional circle alive — with monthly conversations that feel genuine, not mass-sent.<br>For founders, freelancers, and builders who value their network.
   </p>
 
   <div class="hero-actions">
@@ -840,6 +1079,7 @@
   <!-- FLOATING CONTACT CARDS -->
   <div class="contacts-orbit">
     <div class="orbit-track"></div>
+    <div class="orbit-row">
 
     <div class="contact-card c1">
       <div class="contact-avatar" style="background:#2A2420;color:#E8963A;">RS</div>
@@ -884,6 +1124,8 @@
         <span class="contact-tier">Know them</span>
       </div>
       <span class="tier-dot" style="background:#7A7068;"></span>
+    </div>
+
     </div>
   </div>
 </section>
@@ -1098,8 +1340,8 @@
 <!-- QUOTE -->
 <div class="quote-banner">
   <p class="quote-text reveal">
-    "Your next collab, client, or hire isn't on a cold list somewhere.<br>
-    <strong>They're already in your contacts. You just haven't talked in 6 months.</strong>"
+    "Your next customer, hire, partner, or collab isn't on a cold list somewhere.<br>
+    <strong>They're already in your contacts or their circle. You just haven't talked in 6 months.</strong>"
   </p>
 </div>
 
@@ -1121,93 +1363,219 @@
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section" id="waitlist">
-  <div class="container">
-    <span class="section-label reveal">Early access</span>
-    <h2 class="section-title reveal">Be first when the<br>loop <em>opens</em></h2>
-    <p class="section-body reveal">WarmLoop is in private beta. Join the waitlist and we'll reach out — personally, not via mass email. You'll understand why.</p>
-    <div class="cta-actions reveal">
-      <input class="input-email" type="email" placeholder="your@email.com" />
-      <button class="btn-primary" onclick="handleSignup()">Join waitlist</button>
+<!-- PRICING -->
+<section id="waitlist" style="padding: 100px 24px;">
+  <div class="container" style="max-width:720px;">
+    <span class="section-label reveal">Pre-order — early access</span>
+    <h2 class="section-title reveal">Lock in <em>50% off</em><br>before we launch</h2>
+    <p class="section-body reveal">No payment now. Choose how many contacts you want to manage — we'll honour the pre-order price when WarmLoop launches.</p>
+
+    <div class="slider-card reveal">
+
+      <!-- ALL FEATURES NOTE -->
+      <div class="slider-features-note">
+        Every plan includes — WhatsApp, LinkedIn & Email · 5 relationship tiers · AI message drafting · Monthly loop automation · Contact context memory
+      </div>
+
+      <!-- SLIDER -->
+      <div class="slider-section">
+        <div class="slider-label-row">
+          <span class="slider-label-text">How many contacts do you want to manage?</span>
+          <span class="slider-contact-val" id="contact-display">100 contacts</span>
+        </div>
+        <div class="slider-track-wrap">
+          <input type="range" id="contact-slider" min="0" max="5" step="1" value="0" class="contact-range" />
+          <div class="slider-stops">
+            <span>100</span><span>250</span><span>500</span><span>1,000</span><span>2,500</span><span>5,000+</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRICE DISPLAY -->
+      <div class="slider-price-block">
+        <div class="slider-price-row">
+          <div>
+            <div class="slider-was-row">
+              <span class="slider-was-label">Was</span>
+              <span class="slider-was-price" id="was-price">$49/mo</span>
+            </div>
+            <div class="slider-now-row">
+              <span class="slider-now-price" id="now-price">$24</span>
+              <span class="slider-now-mo">/mo at launch</span>
+            </div>
+            <div class="slider-saving-tag" id="saving-tag">You save $25/mo · first month free</div>
+          </div>
+          <div class="slider-discount-badge">50% off</div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <button class="slider-cta" id="slider-cta-btn" onclick="openSliderModal()">
+        Pre-order at $24/mo
+      </button>
+      <p class="slider-fine">No payment now · We'll reach out personally at launch · Cancel anytime</p>
+
     </div>
 
-    <div class="benefits-ticker reveal">
-      <div class="benefits-track" id="benefitsTrack">
-        <div class="benefit-chip"><span class="benefit-num">2×</span><span class="benefit-label">increase in inbound referrals</span></div>
-        <div class="benefit-chip"><span class="benefit-num">40+</span><span class="benefit-label">warm conversations a month</span></div>
-        <div class="benefit-chip"><span class="benefit-num">3×</span><span class="benefit-label">more collabs from your circle</span></div>
-        <div class="benefit-chip"><span class="benefit-num">30%</span><span class="benefit-label">less cold outreach</span></div>
-        <div class="benefit-chip"><span class="benefit-num">5×</span><span class="benefit-label">faster deal pipeline</span></div>
-        <div class="benefit-chip"><span class="benefit-num">100%</span><span class="benefit-label">channel-appropriate messages</span></div>
-        <div class="benefit-chip"><span class="benefit-num">2wk</span><span class="benefit-label">to close your monthly loop</span></div>
-        <div class="benefit-chip"><span class="benefit-num">∞</span><span class="benefit-label">warmer with every cycle</span></div>
-        <!-- duplicate for seamless loop -->
-        <div class="benefit-chip"><span class="benefit-num">2×</span><span class="benefit-label">increase in inbound referrals</span></div>
-        <div class="benefit-chip"><span class="benefit-num">40+</span><span class="benefit-label">warm conversations a month</span></div>
-        <div class="benefit-chip"><span class="benefit-num">3×</span><span class="benefit-label">more collabs from your circle</span></div>
-        <div class="benefit-chip"><span class="benefit-num">30%</span><span class="benefit-label">less cold outreach</span></div>
-        <div class="benefit-chip"><span class="benefit-num">5×</span><span class="benefit-label">faster deal pipeline</span></div>
-        <div class="benefit-chip"><span class="benefit-num">100%</span><span class="benefit-label">channel-appropriate messages</span></div>
-        <div class="benefit-chip"><span class="benefit-num">2wk</span><span class="benefit-label">to close your monthly loop</span></div>
-        <div class="benefit-chip"><span class="benefit-num">∞</span><span class="benefit-label">warmer with every cycle</span></div>
-      </div>
+    <div class="enterprise-note reveal">
+      Managing more than 5,000 contacts?
+      <a href="#" onclick="openModal('enterprise');return false;">Get in touch for a custom early-partner rate →</a>
     </div>
+
   </div>
 </section>
+
+<!-- PRE-ORDER MODAL -->
+<div id="preorder-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-badge" id="modal-badge">100 contacts — $24/mo at launch</div>
+    <h3 class="modal-title">Reserve your spot</h3>
+    <p class="modal-sub" id="modal-sub">Lock in 50% off. First month free for 100-contact plan.</p>
+    <div id="modal-form-wrap" class="modal-form">
+      <input class="modal-input" id="m-name" type="text" placeholder="Your name" />
+      <input class="modal-input" id="m-email" type="email" placeholder="Work email" />
+      <input class="modal-input" id="m-company" type="text" placeholder="Company name" />
+      <button class="btn-primary" style="width:100%;justify-content:center;margin-top:4px;" onclick="submitPreorder()">Reserve my spot</button>
+    </div>
+    <p style="font-size:12px;color:var(--warm-gray);margin-top:16px;text-align:center;">No payment now. We'll reach out personally when we launch.</p>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">🙌 Warm<span>Loop</span></div>
-  <p>© 2025 WarmLoop. All rights reserved.</p>
+  <p>© 2026 WarmLoop. All rights reserved.</p>
 </footer>
 
 <script>
   // Nav scroll
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  });
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
 
   // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), 80);
-        observer.unobserve(entry.target);
-      }
-    });
+    entries.forEach(e => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), 80); observer.unobserve(e.target); }});
   }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   // Loop steps hover
-  const steps = document.querySelectorAll('.loop-step');
-  steps.forEach(step => {
+  document.querySelectorAll('.loop-step').forEach(step => {
     step.addEventListener('mouseenter', () => {
-      steps.forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.loop-step').forEach(s => s.classList.remove('active'));
       step.classList.add('active');
     });
   });
 
-  // Signup
-  function handleSignup() {
-    const input = document.querySelector('.input-email');
-    const btn = document.querySelector('.cta-actions .btn-primary');
-    if (input.value && input.value.includes('@')) {
-      btn.textContent = '✓ You\'re on the list';
-      btn.style.background = '#4CAF7D';
-      btn.style.boxShadow = '0 0 40px rgba(76,175,125,0.3)';
-      input.disabled = true;
-    } else {
-      input.style.borderColor = 'rgba(217,107,82,0.6)';
-      setTimeout(() => input.style.borderColor = '', 1500);
-    }
+  // Rotating word
+  const words = ['customer', 'hire', 'partner', 'collab'];
+  let wordIndex = 0;
+  const rotatingEl = document.getElementById('rotating-word');
+  setInterval(() => {
+    rotatingEl.classList.add('fade-out');
+    setTimeout(() => {
+      wordIndex = (wordIndex + 1) % words.length;
+      rotatingEl.textContent = words[wordIndex];
+      rotatingEl.classList.remove('fade-out');
+    }, 260);
+  }, 2200);
+
+  // Pricing slider
+  const plans = [
+    { contacts: '100',   full: 49,  pre: 24,  saving: '$25/mo · first month free' },
+    { contacts: '250',   full: 79,  pre: 39,  saving: '$40/mo · first month free' },
+    { contacts: '500',   full: 99,  pre: 49,  saving: '$50/mo · 50% off for 12 months' },
+    { contacts: '1,000', full: 149, pre: 74,  saving: '$75/mo · 50% off for 12 months' },
+    { contacts: '2,500', full: 299, pre: 149, saving: '$150/mo · 50% off for 12 months' },
+    { contacts: '5,000', full: 449, pre: 224, saving: '$225/mo · 50% off for 12 months' },
+  ];
+
+  const slider = document.getElementById('contact-slider');
+  const contactDisplay = document.getElementById('contact-display');
+  const wasPrice = document.getElementById('was-price');
+  const nowPrice = document.getElementById('now-price');
+  const savingTag = document.getElementById('saving-tag');
+  const ctaBtn = document.getElementById('slider-cta-btn');
+
+  function updateSlider(idx) {
+    const p = plans[idx];
+    const pct = (idx / 5) * 100;
+    slider.style.background = `linear-gradient(90deg, var(--amber) ${pct}%, var(--border) ${pct}%)`;
+    contactDisplay.textContent = p.contacts + ' contacts';
+    wasPrice.textContent = '$' + p.full + '/mo';
+    nowPrice.textContent = '$' + p.pre;
+    savingTag.textContent = 'You save ' + p.saving;
+    ctaBtn.textContent = 'Pre-order at $' + p.pre + '/mo';
+    document.getElementById('modal-badge').textContent = p.contacts + ' contacts — $' + p.pre + '/mo at launch';
+    document.getElementById('modal-sub').textContent = p.saving.includes('first month') ? 'Lock in 50% off + your first month free.' : 'Lock in 50% off for your first 12 months.';
   }
 
-  document.querySelector('.input-email').addEventListener('keydown', e => {
-    if (e.key === 'Enter') handleSignup();
-  });
+  slider.addEventListener('input', () => updateSlider(parseInt(slider.value)));
+  updateSlider(0);
+
+  // Modal
+  let currentPlanLabel = '';
+  function openSliderModal() {
+    const idx = parseInt(slider.value);
+    const p = plans[idx];
+    document.getElementById('modal-badge').textContent = p.contacts + ' contacts — $' + p.pre + '/mo at launch';
+    document.getElementById('modal-sub').textContent = p.saving.includes('first month') ? 'Lock in 50% off + your first month free.' : 'Lock in 50% off for your first 12 months.';
+    currentPlanLabel = p.contacts + ' contacts @ $' + p.pre + '/mo';
+    showModal();
+  }
+
+  function openModal(type) {
+    document.getElementById('modal-badge').textContent = type === 'enterprise' ? 'Enterprise — 5,000+ contacts' : '';
+    document.getElementById('modal-sub').textContent = type === 'enterprise' ? "We'll reach out to discuss a custom early-partner rate." : '';
+    currentPlanLabel = 'Enterprise';
+    showModal();
+  }
+
+  function showModal() {
+    const wrap = document.getElementById('modal-form-wrap');
+    wrap.style.display = 'flex';
+    document.getElementById('m-name').value = '';
+    document.getElementById('m-email').value = '';
+    document.getElementById('m-company').value = '';
+    const modal = document.getElementById('preorder-modal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    // restore title/sub visibility
+    document.querySelector('.modal-title').style.display = '';
+    document.querySelector('.modal-sub').style.display = '';
+    document.querySelector('.modal-badge').style.display = '';
+  }
+
+  function closeModal() {
+    document.getElementById('preorder-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('preorder-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+
+  function submitPreorder() {
+    const name = document.getElementById('m-name').value.trim();
+    const email = document.getElementById('m-email').value.trim();
+    const company = document.getElementById('m-company').value.trim();
+    if (!name || !email.includes('@') || !company) {
+      [['m-name', name], ['m-email', email], ['m-company', company]].forEach(([id, val]) => {
+        if (!val || (id === 'm-email' && !val.includes('@'))) {
+          const el = document.getElementById(id);
+          el.style.borderColor = 'rgba(217,107,82,0.6)';
+          setTimeout(() => el.style.borderColor = '', 1800);
+        }
+      });
+      return;
+    }
+    const box = document.querySelector('.modal-box');
+    box.innerHTML = `
+      <div class="modal-success">
+        <span class="modal-success-icon">🙌</span>
+        <h3>You're on the list, ${name.split(' ')[0]}!</h3>
+        <p>We'll reach out to you at <strong style="color:var(--amber)">${email}</strong> personally when WarmLoop launches.<br><br>No mass emails. You'll understand why.</p>
+      </div>`;
+    setTimeout(closeModal, 3400);
+  }
 </script>
 </body>
 </html>
