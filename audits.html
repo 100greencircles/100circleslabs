@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit Reports · 100Circles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;background:#0d0d0d;color:#ffffff;padding-top:64px}
+
+/* ── NAV — matches Navbar.tsx exactly ── */
+.site-nav{position:fixed;top:0;width:100%;z-index:50;backdrop-filter:blur(12px);background:rgba(255,255,255,0.92);border-bottom:1px solid #e5e7eb}
+.site-nav-inner{max-width:80rem;margin:0 auto;padding:0 1rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+@media(min-width:640px){.site-nav-inner{padding:0 1.5rem}}
+@media(min-width:1024px){.site-nav-inner{padding:0 2rem}}
+.nav-logo{font-family:'Comfortaa',cursive;font-weight:700;font-size:1.25rem;color:#111111;text-decoration:none}
+.nav-logo:hover{color:#111111}
+/* Desktop links */
+.nav-desktop{display:none;align-items:center;gap:4px}
+@media(min-width:768px){.nav-desktop{display:flex}}
+.nav-dd{position:relative}
+.nav-dd-btn{display:flex;align-items:center;gap:4px;padding:8px 12px;border-radius:8px;font-size:14px;font-weight:500;color:#111111;background:transparent;border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:color 0.15s}
+.nav-dd-btn:hover{color:#f97316}
+.nav-dd-btn svg{width:16px;height:16px;opacity:0.6;transition:transform 0.2s}
+.nav-dd:hover .nav-dd-btn svg{transform:rotate(180deg)}
+.nav-dd-content{display:none;position:absolute;top:calc(100% + 4px);left:0;min-width:260px;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.12);padding:6px;z-index:100}
+.nav-dd:hover .nav-dd-content{display:block}
+.nav-dd-item{display:block;padding:10px 12px;font-size:14px;font-weight:500;color:#111111;text-decoration:none;border-radius:8px;font-family:'Outfit',sans-serif;transition:background 0.15s}
+.nav-dd-item:hover{background:rgba(249,115,22,0.08)}
+.nav-dd-item.active-item{color:#f97316}
+/* Mobile hamburger */
+.nav-hamburger{display:flex;align-items:center;justify-content:center;padding:8px;border-radius:8px;background:transparent;border:none;cursor:pointer;color:#111111}
+@media(min-width:768px){.nav-hamburger{display:none}}
+.nav-hamburger svg{width:20px;height:20px}
+/* Mobile menu */
+.nav-mobile{display:none;padding:16px 0;border-top:1px solid #e5e7eb}
+.nav-mobile.open{display:block}
+.nav-mobile-section{margin-bottom:4px}
+.nav-mobile-trigger{display:flex;align-items:center;width:100%;padding:8px 12px;border-radius:8px;font-size:14px;font-weight:500;color:#111111;background:transparent;border:none;cursor:pointer;font-family:'Outfit',sans-serif}
+.nav-mobile-trigger svg{margin-left:auto;width:16px;height:16px;transition:transform 0.2s}
+.nav-mobile-trigger.open svg{transform:rotate(180deg)}
+.nav-mobile-sub{display:none;padding-left:16px;margin-top:4px}
+.nav-mobile-sub.open{display:flex;flex-direction:column;gap:4px}
+.nav-mobile-sub a{display:block;padding:8px 12px;font-size:14px;color:#6b7280;text-decoration:none;border-radius:8px;font-family:'Outfit',sans-serif}
+.nav-mobile-sub a:hover{color:#111111}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── SHARED SECTION BASE ── */
+.dark-section{background:#0d0d0d;padding:96px 24px;border-top:1px solid rgba(255,255,255,0.06)}
+.section-inner{max-width:960px;margin:0 auto}
+.section-label-d{font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#f97316;margin-bottom:14px;font-family:'Outfit',sans-serif}
+.orange{color:#f97316}
+
+/* ══════════════════════════════════
+   HERO — dark
+══════════════════════════════════ */
+.hero-section{background:#0d0d0d;padding:80px 24px 64px;text-align:center;position:relative;overflow:hidden}
+.hero-section::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:30px 30px;pointer-events:none}
+.hero-section::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(180,60,0,0.1) 0%,#0d0d0d 70%);pointer-events:none}
+.hero-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:9999px;padding:6px 16px;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:24px;font-family:'Outfit',sans-serif}
+.hero-eyebrow svg{width:12px;height:12px;fill:#f97316;flex-shrink:0}
+.hero-h1{font-family:'Comfortaa',cursive;font-size:clamp(2rem,5vw,3.8rem);font-weight:700;line-height:1.15;color:#ffffff;margin-bottom:20px}
+.hero-h1 .orange{color:#f97316}
+.hero-sub{font-size:1.05rem;color:#d1d5db;max-width:580px;margin:0 auto 36px;line-height:1.7}
+.audit-pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.audit-pill{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:9999px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);font-size:13px;font-weight:500;color:rgba(255,255,255,0.7);text-decoration:none;transition:border-color 0.2s,color 0.2s,background 0.2s;font-family:'Outfit',sans-serif}
+.audit-pill:hover{border-color:#f97316;color:#f97316;background:rgba(249,115,22,0.06)}
+.pill-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* ══════════════════════════════════
+   HOW IT WORKS — white only
+══════════════════════════════════ */
+.how-section{background:#ffffff;padding:96px 24px}
+.section-label-l{font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#f97316;margin-bottom:14px;font-family:'Outfit',sans-serif;text-align:center}
+.section-h2-l{font-family:'Comfortaa',cursive;font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;line-height:1.2;color:#111111;text-align:center;margin-bottom:12px}
+.section-sub-l{font-size:0.95rem;color:#6b7280;text-align:center;max-width:480px;margin:0 auto 48px;line-height:1.7}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.how-step{background:#fafafa;border:1px solid rgba(0,0,0,0.08);border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+.how-step-num{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#f97316;margin-bottom:12px;font-family:'Outfit',sans-serif}
+.how-step h3{font-family:'Comfortaa',cursive;font-size:1rem;font-weight:700;color:#111111;margin-bottom:8px}
+.how-step p{font-size:0.875rem;color:#6b7280;line-height:1.65}
+.how-step-meta{display:inline-block;margin-top:14px;background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.2);border-radius:9999px;padding:4px 12px;font-size:0.75rem;font-weight:600;color:#f97316;font-family:'Outfit',sans-serif}
+
+/* ══════════════════════════════════
+   AUDIT LAYOUT
+══════════════════════════════════ */
+.audit-layout{display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:start;margin-top:36px}
+.audit-left{min-width:0}
+.audit-h2{font-family:'Comfortaa',cursive;font-size:clamp(1.5rem,2.8vw,2rem);font-weight:700;line-height:1.2;color:#ffffff;margin-bottom:12px}
+.audit-h2 em{font-style:normal;color:#f97316}
+.audit-desc{font-size:0.95rem;color:#9ca3af;line-height:1.75;margin-bottom:22px;max-width:520px}
+.audit-stats{display:flex;gap:28px;margin-bottom:36px}
+.stat-num{font-family:'Comfortaa',cursive;font-size:2rem;font-weight:700;color:#f97316;line-height:1}
+.stat-lbl{font-size:0.75rem;color:#6b7280;margin-top:2px}
+
+/* Tier labels */
+.tier-head{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6b7280;margin:24px 0 10px;display:flex;align-items:center;gap:8px;font-family:'Outfit',sans-serif}
+.tier-head::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.08)}
+.tier-sub{font-style:italic;font-weight:400;letter-spacing:0;text-transform:none;font-size:0.68rem;color:rgba(255,255,255,0.2);margin-left:2px}
+
+/* Factor chips */
+.factors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:8px}
+.factor-chip{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 14px;display:flex;align-items:flex-start;gap:10px;transition:border-color 0.2s,background 0.2s}
+.factor-chip:hover{border-color:rgba(249,115,22,0.4);background:rgba(249,115,22,0.04)}
+.factor-n{font-size:0.68rem;font-weight:700;color:#f97316;min-width:18px;margin-top:1px;font-family:'Outfit',sans-serif}
+.factor-lbl{font-size:13px;font-weight:500;color:#d1d5db;line-height:1.35}
+.factor-opt{font-size:11px;font-weight:400;color:#6b7280;font-style:italic;display:block}
+
+/* Testimonials inside audit section */
+.testi-wrap{margin-top:32px}
+.testi-label{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6b7280;margin-bottom:12px;font-family:'Outfit',sans-serif}
+.testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.testi-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px;transition:border-color 0.2s}
+.testi-card:hover{border-color:rgba(249,115,22,0.2)}
+.testi-stars{color:#f97316;font-size:0.8rem;letter-spacing:2px}
+.testi-quote{font-size:0.84rem;color:#d1d5db;line-height:1.7;font-style:italic;flex:1}
+.testi-footer{display:flex;align-items:center;gap:10px}
+.testi-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#f97316,#fb923c);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:#000;flex-shrink:0;font-family:'Outfit',sans-serif}
+.testi-name{font-size:0.84rem;font-weight:600;color:#ffffff}
+.testi-co{font-size:0.72rem;color:#6b7280}
+
+/* Pricing card — dark */
+.price-card-d{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px;position:sticky;top:80px}
+.price-label-d{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6b7280;margin-bottom:10px;font-family:'Outfit',sans-serif}
+.price-usd-d{font-family:'Comfortaa',cursive;font-size:2.5rem;font-weight:700;color:#ffffff;line-height:1;margin-bottom:4px}
+.price-usd-d sup{font-size:1.2rem;vertical-align:top;margin-top:5px;display:inline-block}
+.price-inr-d{font-size:13px;color:#6b7280;margin-bottom:20px}
+.btn-pay{display:block;width:100%;padding:13px;background:#f97316;color:#000000;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:background 0.2s}
+.btn-pay:hover{background:#ea6c0a}
+.price-note-d{font-size:11.5px;color:#6b7280;text-align:center;margin-top:8px}
+.price-div{height:1px;background:rgba(255,255,255,0.08);margin:16px 0}
+.price-inc{list-style:none;display:flex;flex-direction:column;gap:7px}
+.price-inc li{font-size:13px;color:#9ca3af;display:flex;align-items:flex-start;gap:8px}
+.price-inc li::before{content:'✓';color:#f97316;font-weight:700;flex-shrink:0}
+
+/* ══════════════════════════════════
+   ECOSYSTEM — dark with glow
+══════════════════════════════════ */
+.eco-section{background:#0d0d0d;padding:96px 24px;border-top:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden}
+.eco-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 75% 40%,rgba(249,115,22,0.12) 0%,transparent 55%),radial-gradient(ellipse at 20% 80%,rgba(30,144,255,0.07) 0%,transparent 45%);pointer-events:none}
+.eco-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.eco-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.25);border-radius:9999px;padding:5px 16px;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#f97316;margin-bottom:20px;font-family:'Outfit',sans-serif}
+.eco-h2{font-family:'Comfortaa',cursive;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;line-height:1.2;color:#ffffff;margin-bottom:14px}
+.eco-desc{font-size:0.95rem;color:#9ca3af;line-height:1.75;max-width:560px;margin-bottom:40px}
+.eco-grid{display:grid;grid-template-columns:1fr 1fr 280px;gap:20px;align-items:start}
+.eco-factors-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px}
+.eco-factors-label{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#f97316;margin-bottom:16px;font-family:'Outfit',sans-serif}
+.eco-factor-list{list-style:none;display:flex;flex-direction:column}
+.eco-factor-list li{font-size:13px;color:rgba(255,255,255,0.65);display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+.eco-factor-list li:last-child{border-bottom:none}
+.eco-factor-list li::before{content:'→';color:#f97316;font-size:11px;flex-shrink:0;margin-top:2px}
+.eco-price-card{background:rgba(255,255,255,0.05);border:1px solid rgba(249,115,22,0.25);border-radius:16px;padding:28px}
+.eco-price-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:10px;font-family:'Outfit',sans-serif}
+.eco-savings{display:inline-block;background:rgba(249,115,22,0.15);border:1px solid rgba(249,115,22,0.3);border-radius:9999px;padding:3px 12px;font-size:11px;font-weight:700;color:#f97316;margin-bottom:10px}
+.eco-was{font-size:13px;color:rgba(255,255,255,0.28);text-decoration:line-through;margin-bottom:4px}
+.eco-price-now{font-family:'Comfortaa',cursive;font-size:2.5rem;font-weight:700;color:#ffffff;line-height:1;margin-bottom:4px}
+.eco-price-now sup{font-size:1.2rem;vertical-align:top;margin-top:5px;display:inline-block}
+.eco-price-inr{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+.eco-price-inr .was{text-decoration:line-through;color:rgba(255,255,255,0.22)}
+.btn-pay-eco{display:block;width:100%;padding:13px;background:#f97316;color:#000000;border:none;border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;transition:background 0.2s}
+.btn-pay-eco:hover{background:#ea6c0a}
+.eco-price-note{font-size:11.5px;color:rgba(255,255,255,0.28);text-align:center;margin-top:8px}
+.eco-price-div{height:1px;background:rgba(255,255,255,0.08);margin:16px 0}
+.eco-inc{list-style:none;display:flex;flex-direction:column;gap:7px}
+.eco-inc li{font-size:13px;color:rgba(255,255,255,0.5);display:flex;align-items:flex-start;gap:8px}
+.eco-inc li::before{content:'✓';color:#f97316;font-weight:700;flex-shrink:0}
+.eco-testi{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:32px}
+.eco-stats{display:flex;gap:40px;margin-top:40px;padding-top:36px;border-top:1px solid rgba(255,255,255,0.08)}
+.eco-stat-num{font-family:'Comfortaa',cursive;font-size:2rem;font-weight:700;color:#f97316;line-height:1;margin-bottom:4px}
+.eco-stat-lbl{font-size:0.75rem;color:rgba(255,255,255,0.4);font-family:'Outfit',sans-serif}
+
+/* ══════════════════════════════════
+   HELP CARD — end of page
+══════════════════════════════════ */
+.help-section{background:#0d0d0d;padding:96px 24px;border-top:1px solid rgba(255,255,255,0.06)}
+.help-card{background:rgba(249,115,22,0.04);border:1px solid rgba(249,115,22,0.2);border-radius:16px;padding:40px;text-align:center;max-width:640px;margin:0 auto}
+.help-card h3{font-family:'Comfortaa',cursive;font-size:1.4rem;font-weight:700;color:#ffffff;margin-bottom:10px}
+.help-card p{font-size:0.95rem;color:#9ca3af;margin-bottom:28px;line-height:1.7}
+.help-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-wa{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;background:#25D366;color:#fff;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;font-family:'Outfit',sans-serif;transition:opacity 0.2s}
+.btn-wa:hover{opacity:0.88}
+.btn-cal{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;background:transparent;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;font-family:'Outfit',sans-serif;transition:border-color 0.2s,color 0.2s}
+.btn-cal:hover{border-color:rgba(255,255,255,0.45);color:#fff}
+
+/* ── WhatsApp FAB ── */
+.wa-fab-wrap{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;align-items:center;gap:10px}
+.wa-fab-label{background:#ffffff;color:#000000;font-size:0.78rem;font-weight:600;font-family:'Outfit',sans-serif;padding:7px 14px;border-radius:9999px;box-shadow:0 2px 12px rgba(0,0,0,0.25);white-space:nowrap}
+.wa-fab{width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 6px 18px rgba(37,211,102,0.35);transition:transform 0.2s}
+.wa-fab:hover{transform:scale(1.08)}
+
+/* ── FOOTER ── */
+.audit-footer{background:#0d0d0d;border-top:1px solid rgba(255,255,255,0.08);padding:28px 24px}
+.footer-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-p{font-size:0.82rem;color:#6b7280}
+.footer-p a{color:#6b7280;text-decoration:none}
+.footer-p a:hover{color:#ffffff}
+
+/* ── Responsive ── */
+@media(max-width:860px){
+  .how-grid{grid-template-columns:1fr}
+  .audit-layout{grid-template-columns:1fr}
+  .price-card-d{position:static}
+  .eco-grid{grid-template-columns:1fr}
+  .testi-grid,.eco-testi{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .dark-section,.how-section,.eco-section,.help-section{padding:72px 20px}
+  .hero-section{padding:60px 20px 48px}
+  .wa-fab-label{display:none}
+  .help-btns{flex-direction:column;align-items:center}
+}
+/* ── Price display ── */
+.price-block{margin-bottom:20px}
+.price-main{font-family:'Comfortaa',cursive;font-size:2.5rem;font-weight:700;color:#ffffff;line-height:1}
+.price-main sup{font-size:1.2rem;vertical-align:top;margin-top:5px;display:inline-block}
+.price-sub{font-size:12.5px;color:#6b7280;margin-top:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.price-sub .was{text-decoration:line-through;color:#4b5563}
+.price-sub .sep{color:#4b5563}
+/* Eco price display */
+.eco-price-block{margin-bottom:20px}
+.eco-price-main{font-family:'Comfortaa',cursive;font-size:2.5rem;font-weight:700;color:#ffffff;line-height:1}
+.eco-price-main sup{font-size:1.2rem;vertical-align:top;margin-top:5px;display:inline-block}
+.eco-price-sub{font-size:12.5px;color:rgba(255,255,255,0.4);margin-top:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.eco-price-sub .was{text-decoration:line-through;color:rgba(255,255,255,0.22)}
+</style>
+</head>
+<body>
+
+<!-- NAV — matches Navbar.tsx -->
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a href="/" class="nav-logo">1OOCircles</a>
+
+    <!-- Desktop -->
+    <div class="nav-desktop">
+      <!-- Programs -->
+      <div class="nav-dd">
+        <button class="nav-dd-btn">Programs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-dd-content">
+          <a href="/?tab=guided" class="nav-dd-item">Video Accelerator - Guided</a>
+          <a href="/?tab=dfy" class="nav-dd-item">Video Accelerator - Done For You</a>
+          <a href="/?tab=dfy&scroll=e2e" class="nav-dd-item">Video Accelerator - End to End</a>
+          <a href="/videoaccelerator/weekend" class="nav-dd-item">Video Accelerator - Weekend</a>
+        </div>
+      </div>
+      <!-- Services -->
+      <div class="nav-dd">
+        <button class="nav-dd-btn">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-dd-content">
+          <a href="/youtube-for-companies" class="nav-dd-item">YFC - YouTube For Companies</a>
+          <a href="/audits" class="nav-dd-item active-item">Audit Reports</a>
+          <a href="/audits#podcast" class="nav-dd-item" style="padding-left:24px;font-size:13px;color:#6b7280">Video Podcast Audit</a>
+          <a href="/audits#youtube" class="nav-dd-item" style="padding-left:24px;font-size:13px;color:#6b7280">YouTube Channel Audit</a>
+          <a href="/audits#videoecosystem" class="nav-dd-item" style="padding-left:24px;font-size:13px;color:#6b7280">Video Ecosystem Audit</a>
+          <a href="/audits#founderbrand" class="nav-dd-item" style="padding-left:24px;font-size:13px;color:#6b7280">Founder &amp; Leadership Branding Audit</a>
+        </div>
+      </div>
+      <!-- Resources -->
+      <div class="nav-dd">
+        <button class="nav-dd-btn">Resources <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-dd-content">
+          <a href="/videoskills" class="nav-dd-item">Video Skills for Founders &amp; Leaders</a>
+          <a href="/founder-branding-first-10-videos" class="nav-dd-item">Founder Branding Playbook: First 10 Videos</a>
+          <a href="/videomarathon" class="nav-dd-item">30-Days Video Marathon: Insights</a>
+          <a href="https://dhanyal.substack.com" class="nav-dd-item" target="_blank" rel="noopener noreferrer">Newsletter on Outlier Marketing</a>
+        </div>
+      </div>
+      <!-- About Us -->
+      <div class="nav-dd">
+        <button class="nav-dd-btn">About Us <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-dd-content">
+          <a href="/1-percent-rule" class="nav-dd-item">1% Rule</a>
+          <a href="/dna" class="nav-dd-item">Our DNA</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="mobile-menu">
+    <div style="padding:0 1rem">
+      <div class="nav-mobile-section">
+        <button class="nav-mobile-trigger" onclick="toggleMobile(this)">Programs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-mobile-sub">
+          <a href="/?tab=guided">Video Accelerator - Guided</a>
+          <a href="/?tab=dfy">Video Accelerator - Done For You</a>
+          <a href="/?tab=dfy&scroll=e2e">Video Accelerator - End to End</a>
+          <a href="/videoaccelerator/weekend">Video Accelerator - Weekend</a>
+        </div>
+      </div>
+      <div class="nav-mobile-section">
+        <button class="nav-mobile-trigger" onclick="toggleMobile(this)">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-mobile-sub">
+          <a href="/youtube-for-companies">YFC - YouTube For Companies</a>
+          <a href="/audits">Audit Reports</a>
+          <a href="/audits#podcast" style="padding-left:24px;font-size:13px">Video Podcast Audit</a>
+          <a href="/audits#youtube" style="padding-left:24px;font-size:13px">YouTube Channel Audit</a>
+          <a href="/audits#videoecosystem" style="padding-left:24px;font-size:13px">Video Ecosystem Audit</a>
+          <a href="/audits#founderbrand" style="padding-left:24px;font-size:13px">Founder &amp; Leadership Branding Audit</a>
+        </div>
+      </div>
+      <div class="nav-mobile-section">
+        <button class="nav-mobile-trigger" onclick="toggleMobile(this)">Resources <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-mobile-sub">
+          <a href="/videoskills">Video Skills for Founders &amp; Leaders</a>
+          <a href="/founder-branding-first-10-videos">Founder Branding Playbook: First 10 Videos</a>
+          <a href="/videomarathon">30-Days Video Marathon: Insights</a>
+          <a href="https://dhanyal.substack.com" target="_blank" rel="noopener noreferrer">Newsletter on Outlier Marketing</a>
+        </div>
+      </div>
+      <div class="nav-mobile-section">
+        <button class="nav-mobile-trigger" onclick="toggleMobile(this)">About Us <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-mobile-sub">
+          <a href="/1-percent-rule">1% Rule</a>
+          <a href="/dna">Our DNA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section">
+  <div class="hero-inner">
+    <div class="hero-eyebrow reveal">
+      <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Services : Audits
+    </div>
+    <h1 class="hero-h1 reveal" style="transition-delay:.08s">Find out what's missing in your<br><span class="orange">video initiatives</span></h1>
+    <p class="hero-sub reveal" style="transition-delay:.14s">We start by understanding your objectives. Then we audit your work against two benchmarks — industry standards and your own goals.</p>
+    <div class="audit-pills reveal" style="transition-delay:.2s">
+      <a href="#podcast" class="audit-pill"><span class="pill-dot" style="background:#ffffff"></span>Video Podcast Audit</a>
+      <a href="#youtube" class="audit-pill"><span class="pill-dot" style="background:#f97316"></span>YouTube Channel Audit</a>
+      <a href="#videoecosystem" class="audit-pill"><span class="pill-dot" style="background:#f97316"></span>Video Ecosystem Audit ✦</a>
+      <a href="#founderbrand" class="audit-pill"><span class="pill-dot" style="background:#1e90ff"></span>Founder &amp; Leadership Branding Audit</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS — white -->
+<section class="how-section">
+  <div class="section-inner">
+    <div class="section-label-l reveal">Every Audit</div>
+    <h2 class="section-h2-l reveal" style="transition-delay:.08s">A 3-touchpoint engagement —<br>not just a report.</h2>
+    <p class="section-sub-l reveal" style="transition-delay:.14s">Each audit starts with understanding your goals and ends with a live walkthrough — measured against your own objectives, not just a generic checklist.</p>
+    <div class="how-grid">
+      <div class="how-step reveal" style="transition-delay:.1s">
+        <div class="how-step-num">Step 01 · Intake</div>
+        <h3>We start with your goals</h3>
+        <p>A focused call to collect your video assets, initiatives, and objectives. Your audit is measured against your own stated goals — not just industry benchmarks.</p>
+        <span class="how-step-meta">30 min call</span>
+      </div>
+      <div class="how-step reveal" style="transition-delay:.18s">
+        <div class="how-step-num">Step 02 · Audit</div>
+        <h3>Detailed report delivered</h3>
+        <p>We go through every factor and checkpoint. You get a full written report — what's working, what's missing, and why it matters for your specific goals.</p>
+        <span class="how-step-meta">3 working days</span>
+      </div>
+      <div class="how-step reveal" style="transition-delay:.26s">
+        <div class="how-step-num">Step 03 · Walkthrough</div>
+        <h3>We walk through it together</h3>
+        <p>A dedicated call to go through findings, answer your questions, and identify the highest-priority actions to take right away.</p>
+        <span class="how-step-meta">30–60 min call</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+     AUDIT 1 — VIDEO PODCAST AUDIT
+════════════════════════════ -->
+<section id="podcast" class="dark-section">
+  <div class="section-inner">
+    <div class="section-label-d reveal">Video Podcast Audit</div>
+    <div class="audit-layout">
+      <div class="audit-left">
+        <h2 class="audit-h2 reveal" style="transition-delay:.06s">Is your podcast built <em>to grow?</em></h2>
+        <p class="audit-desc reveal" style="transition-delay:.1s">50 checkpoints across 10 factors — from thumbnail strategy and episode production to platform presence and marketing. Measured against industry standards and your own stated objectives.</p>
+        <div class="audit-stats reveal" style="transition-delay:.14s">
+          <div><div class="stat-num">50</div><div class="stat-lbl">checkpoints</div></div>
+          <div><div class="stat-num">10</div><div class="stat-lbl">factors</div></div>
+          <div><div class="stat-num">3</div><div class="stat-lbl">touchpoints</div></div>
+        </div>
+
+        <div class="tier-head reveal" style="transition-delay:.16s">Presence <span class="tier-sub">(Hygiene)</span></div>
+        <div class="factors-grid reveal" style="transition-delay:.2s">
+          <div class="factor-chip"><div class="factor-n">01</div><div class="factor-lbl">Thumbnail</div></div>
+          <div class="factor-chip"><div class="factor-n">02</div><div class="factor-lbl">Title</div></div>
+          <div class="factor-chip"><div class="factor-n">03</div><div class="factor-lbl">Episode Video &amp; Audio</div></div>
+          <div class="factor-chip"><div class="factor-n">04</div><div class="factor-lbl">YouTube Description</div></div>
+        </div>
+        <div class="tier-head reveal" style="transition-delay:.22s">Performance <span class="tier-sub">(Tactical)</span></div>
+        <div class="factors-grid reveal" style="transition-delay:.26s">
+          <div class="factor-chip"><div class="factor-n">05</div><div class="factor-lbl">YouTube Shorts / Reels</div></div>
+          <div class="factor-chip"><div class="factor-n">06</div><div class="factor-lbl">YouTube Channel Management</div></div>
+          <div class="factor-chip"><div class="factor-n">07</div><div class="factor-lbl">Lights, Camera, Sound</div></div>
+          <div class="factor-chip"><div class="factor-n">08</div><div class="factor-lbl">Podcast Platforms</div></div>
+          <div class="factor-chip"><div class="factor-n">09</div><div class="factor-lbl">Podcast Marketing</div></div>
+        </div>
+        <div class="tier-head reveal" style="transition-delay:.28s">Positioning <span class="tier-sub">(Strategic)</span></div>
+        <div class="factors-grid reveal" style="transition-delay:.32s">
+          <div class="factor-chip"><div class="factor-n">10</div><div class="factor-lbl">Branding</div></div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testi-wrap reveal" style="transition-delay:.36s">
+          <div class="testi-label">What podcast founders say</div>
+          <div class="testi-grid">
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <p class="testi-quote">"I have met very few people who understand the business of making podcasts in India as deeply as Dhanyal does. He's full of insights on how to build and scale a podcast — especially on YouTube — and at the same time he is humble and forthcoming. A deadly combo."</p>
+              <div class="testi-footer">
+                <div class="testi-avatar">A</div>
+                <div><div class="testi-name">Akshay</div><div class="testi-co">Founder Thesis</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <p class="testi-quote">"Dhanyal's understanding of podcast growth on YouTube is genuinely rare. He spotted gaps in our show that we'd completely missed — and his recommendations moved the needle within the first month of making changes."</p>
+              <div class="testi-footer">
+                <div class="testi-avatar">R</div>
+                <div><div class="testi-name">Rahul</div><div class="testi-co">UVC Media</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing -->
+      <div class="price-card-d reveal" style="transition-delay:.2s">
+        <div class="price-label-d">Video Podcast Audit</div>
+        <div class="price-block">
+          <div class="price-main"><sup>$</sup>299 <span style="font-size:1.1rem;color:#9ca3af;font-weight:400">/ <span style="text-decoration:line-through;font-size:0.9rem;color:#4b5563">$399</span></span></div>
+          <div class="price-sub">₹24,999 <span class="sep">·</span> <span class="was">₹34,999</span></div>
+        </div>
+        <a href="#payment-podcast" class="btn-pay">Grow your Podcast →</a> class="btn-pay">Grow your Podcast →</a>
+        <div class="price-div"></div>
+        <ul class="price-inc">
+          <li>30-min intake call</li>
+          <li>Full 50-point audit report</li>
+          <li>30–60 min walkthrough call</li>
+          <li>Delivered in 3 working days</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+     AUDIT 2 — YOUTUBE CHANNEL AUDIT
+════════════════════════════ -->
+<section id="youtube" class="dark-section">
+  <div class="section-inner">
+    <div class="section-label-d reveal">YouTube Channel Audit</div>
+    <div class="audit-layout">
+      <div class="audit-left">
+        <h2 class="audit-h2 reveal" style="transition-delay:.06s">Is your channel converting viewers<br>into <em>subscribers?</em></h2>
+        <p class="audit-desc reveal" style="transition-delay:.1s">40 checkpoints across 10 factors — from channel hygiene and packaging to content strategy and discoverability. Know exactly where your channel is leaking growth and what to fix first.</p>
+        <div class="audit-stats reveal" style="transition-delay:.14s">
+          <div><div class="stat-num">40</div><div class="stat-lbl">checkpoints</div></div>
+          <div><div class="stat-num">10</div><div class="stat-lbl">factors</div></div>
+          <div><div class="stat-num">3</div><div class="stat-lbl">touchpoints</div></div>
+        </div>
+
+        <div class="tier-head reveal" style="transition-delay:.16s">Presence <span class="tier-sub">(Hygiene)</span></div>
+        <div class="factors-grid reveal" style="transition-delay:.2s">
+          <div class="factor-chip"><div class="factor-n">01</div><div class="factor-lbl">Channel Hygiene</div></div>
+        </div>
+        <div class="tier-head reveal" style="transition-delay:.22s">Performance <span class="tier-sub">(Tactical)</span></div>
+        <div class="factors-grid reveal" style="transition-delay:.26s">
+          <div class="factor-chip"><div class="factor-n">02</div><div class="factor-lbl">Thumbnails</div></div>
+          <div class="factor-chip"><div class="factor-n">03</div><div class="factor-lbl">Titles &amp; SEO</div></div>
+          <div class="factor-chip"><div class="factor-n">04</div><div class="factor-lbl">Descriptions &amp; Chapters</div></div>
+          <div class="factor-chip"><div class="factor-n">05</div><div class="factor-lbl">Video Production Quality</div></div>
+          <div class="factor-chip"><div class="factor-n">08</div><div class="factor-lbl">Community &amp; Engagement</div></div>
+          <div class="factor-chip"><div class="factor-n">09</div><div class="factor-lbl">Publishing Cadence &amp; Consistency</div></div>
+        </div>
+        <div class="tier-head reveal" style="transition-delay:.28s">Positioning <span class="tier-sub">(Strategic)</span></div>
+        <div class="factors-grid reveal" style="transition-delay:.32s">
+          <div class="factor-chip"><div class="factor-n">06</div><div class="factor-lbl">Shorts Strategy</div></div>
+          <div class="factor-chip"><div class="factor-n">07</div><div class="factor-lbl">Content Quality &amp; Strategy</div></div>
+          <div class="factor-chip"><div class="factor-n">10</div><div class="factor-lbl">Discoverability &amp; Growth</div></div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testi-wrap reveal" style="transition-delay:.36s">
+          <div class="testi-label">What channel owners say</div>
+          <div class="testi-grid">
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <p class="testi-quote">"I'd avoided video for years because I hated being on camera. Dhanyal's coaching completely changed that. He helped me find my on-screen presence, and now our videos are one of our strongest business development tools."</p>
+              <div class="testi-footer">
+                <div class="testi-avatar">G</div>
+                <div><div class="testi-name">Gayatri</div><div class="testi-co">Amanaska</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <p class="testi-quote">"We'd been putting out videos for months without seeing results. The channel audit was eye-opening — Dhanyal identified exactly where we were losing viewers and what to fix. Our watch time improved significantly within weeks."</p>
+              <div class="testi-footer">
+                <div class="testi-avatar">D</div>
+                <div><div class="testi-name">Digvijay</div><div class="testi-co">Sales Intel</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing -->
+      <div class="price-card-d reveal" style="transition-delay:.2s">
+        <div class="price-label-d">YouTube Channel Audit</div>
+        <div class="price-block">
+          <div class="price-main"><sup>$</sup>249 <span style="font-size:1.1rem;color:#9ca3af;font-weight:400">/ <span style="text-decoration:line-through;font-size:0.9rem;color:#4b5563">$349</span></span></div>
+          <div class="price-sub">₹24,999 <span class="sep">·</span> <span class="was">₹34,999</span></div>
+        </div>
+        <a href="#payment-youtube" class="btn-pay">Grow your Channel →</a>
+        <div class="price-div"></div>
+        <ul class="price-inc">
+          <li>30-min intake call</li>
+          <li>Full 40-point audit report</li>
+          <li>30–60 min walkthrough call</li>
+          <li>Delivered in 3 working days</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+     AUDIT 3 — VIDEO ECOSYSTEM AUDIT
+════════════════════════════ -->
+<section id="videoecosystem" class="eco-section">
+  <div class="eco-inner">
+    <div class="eco-badge reveal">✦ Combo Package</div>
+    <h2 class="eco-h2 reveal" style="transition-delay:.08s">Video Ecosystem Audit —<br><span class="orange">Podcast + YouTube,</span> together.</h2>
+    <p class="eco-desc reveal" style="transition-delay:.14s">Running both a podcast and a YouTube channel? This audit covers both in one engagement — plus a cross-channel synthesis layer: are your two properties telling a consistent story, or pulling in different directions?</p>
+
+    <div class="eco-grid reveal" style="transition-delay:.2s">
+      <div class="eco-factors-card">
+        <div class="eco-factors-label">Video Podcast Audit — 10 factors</div>
+        <ul class="eco-factor-list">
+          <li>Thumbnail</li><li>Title</li><li>Episode Video &amp; Audio</li>
+          <li>YouTube Description</li><li>YouTube Shorts / Reels</li>
+          <li>YouTube Channel Management</li><li>Lights, Camera, Sound</li>
+          <li>Podcast Platforms</li><li>Podcast Marketing</li><li>Branding</li>
+        </ul>
+      </div>
+      <div class="eco-factors-card">
+        <div class="eco-factors-label">YouTube Channel Audit — 10 factors</div>
+        <ul class="eco-factor-list">
+          <li>Channel Hygiene</li><li>Thumbnails</li><li>Titles &amp; SEO</li>
+          <li>Descriptions &amp; Chapters</li><li>Video Production Quality</li>
+          <li>Shorts Strategy</li><li>Content Quality &amp; Strategy</li>
+          <li>Community &amp; Engagement</li><li>Publishing Cadence &amp; Consistency</li>
+          <li>Discoverability &amp; Growth</li>
+        </ul>
+      </div>
+      <div class="eco-price-card">
+        <div class="eco-price-label">Video Ecosystem Audit</div>
+        <div class="eco-savings">Save ₹9,999 — combo pricing</div>
+        <div class="eco-was">₹49,998 if bought individually</div>
+        <div class="eco-price-block">
+          <div class="eco-price-main"><sup>$</sup>449 <span style="font-size:1.1rem;color:rgba(255,255,255,0.4);font-weight:400">/ <span style="text-decoration:line-through;font-size:0.9rem;color:rgba(255,255,255,0.22)">$548</span></span></div>
+          <div class="eco-price-sub">₹39,999 <span style="color:rgba(255,255,255,0.22)">·</span> <span class="was">₹49,998</span></div>
+        </div>
+        <a href="#payment-ecosystem" class="btn-pay-eco">Grow your Video Ecosystem →</a>
+        <div class="eco-price-div"></div>
+        <ul class="eco-inc">
+          <li>30-min intake call</li>
+          <li>Full 90-point audit report</li>
+          <li>Cross-channel synthesis section</li>
+          <li>60–90 min walkthrough call</li>
+          <li>Delivered in 5 working days</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Ecosystem testimonials -->
+    <div class="eco-testi reveal" style="transition-delay:.28s">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"We were running a podcast and a YouTube channel as two completely separate things. The ecosystem audit showed us how to connect them — and suddenly the whole content operation started making sense. The cross-channel synthesis section alone was worth the investment."</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">P</div>
+          <div><div class="testi-name">Priya</div><div class="testi-co">B2B SaaS Founder</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"What impressed me most was how Dhanyal looked at both channels together. He flagged blind spots we didn't know we had and gave us a clear priority list across both properties. Probably the highest-ROI thing we've done for our content this year."</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">K</div>
+          <div><div class="testi-name">Karan</div><div class="testi-co">Tech Startup Founder</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="eco-stats reveal" style="transition-delay:.34s">
+      <div><div class="eco-stat-num">20</div><div class="eco-stat-lbl">factors audited</div></div>
+      <div><div class="eco-stat-num">90</div><div class="eco-stat-lbl">checkpoints covered</div></div>
+      <div><div class="eco-stat-num">2</div><div class="eco-stat-lbl">channels, one clear view</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+     AUDIT 4 — FOUNDER BRAND AUDIT
+════════════════════════════ -->
+<section id="founderbrand" class="dark-section">
+  <div class="section-inner">
+    <div class="section-label-d reveal">Founder &amp; Leadership Branding Audit</div>
+    <div class="audit-layout">
+      <div class="audit-left">
+        <h2 class="audit-h2 reveal" style="transition-delay:.06s">Find out what's the missing piece,<br>if any, in your <em>founder brand presence.</em></h2>
+        <p class="audit-desc reveal" style="transition-delay:.1s">40 checkpoints across 10 factors — covering every channel where your brand shows up, with a video readiness section that maps where video fits your growth. For founders at any stage of their content journey.</p>
+        <div class="audit-stats reveal" style="transition-delay:.14s">
+          <div><div class="stat-num">40</div><div class="stat-lbl">checkpoints</div></div>
+          <div><div class="stat-num">10</div><div class="stat-lbl">factors</div></div>
+          <div><div class="stat-num">3</div><div class="stat-lbl">touchpoints</div></div>
+        </div>
+
+        <div class="tier-head reveal" style="transition-delay:.16s">Presence <span class="tier-sub">(Hygiene)</span></div>
+        <div class="factors-grid reveal" style="transition-delay:.2s">
+          <div class="factor-chip"><div class="factor-n">01</div><div class="factor-lbl">LinkedIn</div></div>
+          <div class="factor-chip"><div class="factor-n">02</div><div class="factor-lbl">YouTube</div></div>
+          <div class="factor-chip"><div class="factor-n">03</div><div class="factor-lbl">Newsletter</div></div>
+          <div class="factor-chip"><div class="factor-n">04</div><div class="factor-lbl">Instagram <span class="factor-opt">optional</span></div></div>
+          <div class="factor-chip"><div class="factor-n">05</div><div class="factor-lbl">X / Twitter <span class="factor-opt">optional</span></div></div>
+          <div class="factor-chip"><div class="factor-n">07</div><div class="factor-lbl">Speaking &amp; PR</div></div>
+        </div>
+        <div class="tier-head reveal" style="transition-delay:.22s">Positioning <span class="tier-sub">(Strategic)</span></div>
+        <div class="factors-grid reveal" style="transition-delay:.26s">
+          <div class="factor-chip"><div class="factor-n">08</div><div class="factor-lbl">Brand Messaging &amp; Positioning</div></div>
+          <div class="factor-chip"><div class="factor-n">09</div><div class="factor-lbl">Visual Identity &amp; Cross-Channel Consistency</div></div>
+          <div class="factor-chip"><div class="factor-n">10</div><div class="factor-lbl">Video Readiness</div></div>
+        </div>
+        <div class="tier-head reveal" style="transition-delay:.28s">Standalone</div>
+        <div class="factors-grid reveal" style="transition-delay:.32s">
+          <div class="factor-chip"><div class="factor-n">06</div><div class="factor-lbl">Personal Website &amp; Online Presence <span class="factor-opt">optional</span></div></div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testi-wrap reveal" style="transition-delay:.36s">
+          <div class="testi-label">What founders say</div>
+          <div class="testi-grid">
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <p class="testi-quote">"Dhanyal went out of his way to help curate and explain the best plan to market my dad's clinic. Extremely knowledgeable and trustworthy — he is my default recommendation for business owners trying to put themselves on the map."</p>
+              <div class="testi-footer">
+                <div class="testi-avatar">A</div>
+                <div><div class="testi-name">Ashok</div><div class="testi-co">Dental Clinic</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <p class="testi-quote">"Three months with 100Circles and our LinkedIn reach tripled. More importantly, the right people started noticing — partners, investors, potential hires. Founder brand is real, and 100Circles makes it actually achievable."</p>
+              <div class="testi-footer">
+                <div class="testi-avatar">S</div>
+                <div><div class="testi-name">Sobin</div><div class="testi-co">ArkOne</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <p class="testi-quote">"The founder brand audit gave me a complete view of where I stood across every channel. The video readiness section was particularly valuable — it showed me exactly what I needed to do before investing in video content."</p>
+              <div class="testi-footer">
+                <div class="testi-avatar">J</div>
+                <div><div class="testi-name">Jerome</div><div class="testi-co">Vadizen</div></div>
+              </div>
+            </div>
+            <div class="testi-card">
+              <div class="testi-stars">★★★★★</div>
+              <p class="testi-quote">"As someone who coaches founders, I found the audit incredibly thorough. Dhanyal's framework for thinking about personal brand across channels is unlike anything I'd come across. The recommendations were specific, actionable, and grounded in real platform knowledge."</p>
+              <div class="testi-footer">
+                <div class="testi-avatar">R</div>
+                <div><div class="testi-name">Riti</div><div class="testi-co">Founders Nest</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing -->
+      <div class="price-card-d reveal" style="transition-delay:.2s">
+        <div class="price-label-d">Founder &amp; Leadership Branding Audit</div>
+        <div class="price-block">
+          <div class="price-main"><sup>$</sup>299 <span style="font-size:1.1rem;color:#9ca3af;font-weight:400">/ <span style="text-decoration:line-through;font-size:0.9rem;color:#4b5563">$399</span></span></div>
+          <div class="price-sub">₹24,999 <span class="sep">·</span> <span class="was">₹34,999</span></div>
+        </div>
+        <a href="#payment-founderbrand" class="btn-pay">Grow your Brand →</a>
+        <div class="price-div"></div>
+        <ul class="price-inc">
+          <li>30-min intake call</li>
+          <li>Full 40-point audit report</li>
+          <li>30–60 min walkthrough call</li>
+          <li>Video readiness map included</li>
+          <li>Delivered in 3 working days</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════
+     HELP CARD — end of page
+════════════════════════════ -->
+<section class="help-section">
+  <div class="section-inner">
+    <div class="help-card reveal">
+      <h3>Not sure which audit you need?</h3>
+      <p>Tell us where you are — your podcast, your channel, your brand presence — and we'll point you to the right one. Or book a quick 15-min call and we'll figure it out together.</p>
+      <div class="help-btns">
+        <a href="https://wa.me/919987824834?text=Hi%20Dhanyal%2C%20I%27d%20like%20to%20know%20more%20about%20the%20100Circles%20Audit%20Reports." class="btn-wa" target="_blank">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </a>
+        <a href="https://calendly.com/dhanyal" class="btn-cal" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book a Discovery Call
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP FAB -->
+<div class="wa-fab-wrap">
+  <span class="wa-fab-label">Chat with Dhanyal</span>
+  <a href="https://wa.me/919987824834?text=Hi%20Dhanyal%2C%20I%27d%20like%20to%20know%20more%20about%20the%20100Circles%20Audit%20Reports." class="wa-fab" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" width="26" height="26"><path fill="#fff" d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.78 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.722.888.817 0 2.15-.515 2.45-1.318.13-.358.187-.73.187-1.103 0-.46-2.65-1.51-3.038-1.59zm-2.94 9.16h-.058a11.7 11.7 0 0 1-5.95-1.62l-.43-.258-4.39 1.144 1.176-4.275-.272-.43c-1.156-1.84-1.78-3.97-1.78-6.165 0-6.36 5.21-11.572 11.586-11.572a11.493 11.493 0 0 1 8.18 3.395 11.483 11.483 0 0 1 3.39 8.184c0 6.376-5.21 11.587-11.587 11.587zM27.13 5.014a14.18 14.18 0 0 0-10.16-4.197C9.13.817 2.748 7.2 2.748 15c0 2.498.654 4.95 1.91 7.106L2.628 30.184l8.302-2.18a14.16 14.16 0 0 0 6.825 1.747h.06c7.84 0 14.234-6.385 14.234-14.18 0-3.787-1.474-7.346-4.158-10.03z"/></svg>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer class="audit-footer">
+  <div class="footer-inner">
+    <a href="/" style="font-family:'Comfortaa',cursive;font-weight:700;font-size:1rem;color:#9ca3af;text-decoration:none">1OOCircles</a>
+    <p class="footer-p">Your partner for video-led founder &amp; leadership branding</p>
+    <p class="footer-p">© 2026 1OOCircles. All rights reserved. · <a href="/privacy">Privacy Policy</a></p>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(
+    entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)} }),
+    {threshold:0.08}
+  );
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Mobile nav
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+  function toggleMobile(btn) {
+    btn.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
