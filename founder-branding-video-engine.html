@@ -1,172 +1,420 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    body {background-color: #fcf4ea}
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Helvetica Neue'; color: #0e0e0e; -webkit-text-stroke: #0e0e0e}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Helvetica Neue'; color: #1b79ff; -webkit-text-stroke: #1b79ff}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 22.0px 'Helvetica Neue'; color: #f55d14; -webkit-text-stroke: #f55d14}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 9.0px 'Helvetica Neue'; color: #343434; -webkit-text-stroke: #343434}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 11.0px 'Helvetica Neue'; color: #f55d14; -webkit-text-stroke: #f55d14; background-color: #f55d14; min-height: 13.0px}
-    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 11.0px 'Helvetica Neue'; color: #f55d14; -webkit-text-stroke: #f55d14}
-    p.p11 {margin: 0.0px 60.0px 0.0px 60.0px; text-align: center; text-indent: -60.0px; font: 15.5px 'Helvetica Neue'; color: #585858; -webkit-text-stroke: #585858}
-    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 11.0px 'Helvetica Neue'; color: #f55d14; -webkit-text-stroke: #f55d14; background-color: #0d0c0b}
-    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 14.0px 'Helvetica Neue'; color: #757575; -webkit-text-stroke: #757575}
-    p.p15 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #0e0e0e; -webkit-text-stroke: #0e0e0e; min-height: 15.0px}
-    p.p16 {margin: 0.0px 0.0px 0.0px 0.0px; font: 9.5px 'Helvetica Neue'; color: #ffffff; color: rgba(255, 255, 255, 0.3); -webkit-text-stroke: rgba(255, 255, 255, 0.3)}
-    p.p17 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 9.5px 'Helvetica Neue'; color: #ffffff; color: rgba(255, 255, 255, 0.28); -webkit-text-stroke: rgba(255, 255, 255, 0.28)}
-    p.p18 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 9.5px 'Helvetica Neue'; color: #1b79ff; color: rgba(27, 121, 255, 0.45); -webkit-text-stroke: rgba(27, 121, 255, 0.45)}
-    p.p19 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 9.0px 'Helvetica Neue'; color: #ffffff; color: rgba(255, 255, 255, 0.9); -webkit-text-stroke: rgba(255, 255, 255, 0.9); background-color: #ffffff; background-color: rgba(255, 255, 255, 0.2)}
-    p.p20 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 13.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p21 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 10.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p22 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 14.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p23 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 16.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p24 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 22.0px '.Apple Color Emoji UI'; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p25 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 16.0px '.Apple Color Emoji UI'; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p26 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 11.5px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p27 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 9.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff; background-color: #000000; background-color: rgba(0, 0, 0, 0.18)}
-    p.p28 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 20.0px Menlo; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p29 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p30 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p31 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.5px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p33 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 12.5px 'Helvetica Neue'; color: #757575; -webkit-text-stroke: #757575}
-    p.p34 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #757575; -webkit-text-stroke: #757575; background-color: #f55d14; background-color: rgba(245, 93, 20, 0.5); min-height: 15.0px}
-    p.p35 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #757575; -webkit-text-stroke: #757575; min-height: 15.0px}
-    p.p36 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #757575; -webkit-text-stroke: #757575; background-color: #0d0c0b}
-    p.p37 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #757575; -webkit-text-stroke: #757575; background-color: #1b79ff; background-color: rgba(27, 121, 255, 0.4); min-height: 15.0px}
-    p.p38 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #757575; -webkit-text-stroke: #757575; background-color: #ffffff; background-color: rgba(255, 255, 255, 0.2); min-height: 15.0px}
-    p.p39 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px 'Helvetica Neue'; color: #ffffff; color: rgba(255, 255, 255, 0.45); -webkit-text-stroke: rgba(255, 255, 255, 0.45)}
-    p.p40 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.5px 'Helvetica Neue'; color: #757575; -webkit-text-stroke: #757575}
-    p.p41 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px 'Helvetica Neue'; color: #1b79ff; -webkit-text-stroke: #1b79ff}
-    p.p42 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #e04f16; -webkit-text-stroke: #e04f16}
-    p.p44 {margin: 0.0px 0.0px 40.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #8a929f; -webkit-text-stroke: #8a929f}
-    p.p45 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px 'Helvetica Neue'; color: #e04f16; -webkit-text-stroke: #e04f16}
-    p.p46 {margin: 0.0px 0.0px 0.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #f1eade; -webkit-text-stroke: #f1eade}
-    p.p47 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #585e6d; -webkit-text-stroke: #585e6d}
-    p.p48 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #585e6d; -webkit-text-stroke: #585e6d}
-    p.p49 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #0d0c0b; -webkit-text-stroke: #0d0c0b; background-color: #e04f16}
-    p.p50 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #c7cbd3; -webkit-text-stroke: #c7cbd3}
-    li.li5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.5px 'Helvetica Neue'; color: #585858; -webkit-text-stroke: #585858}
-    li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.5px 'Helvetica Neue'; color: #f55d14; -webkit-text-stroke: #f55d14}
-    li.li7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
-    span.s1 {font-kerning: none; background-color: rgba(252, 244, 234, 0.96)}
-    span.s2 {font-kerning: none}
-    span.s3 {font-kerning: none; color: #1b79ff; -webkit-text-stroke: 0px #1b79ff}
-    span.s4 {font-kerning: none; color: #f55d14; -webkit-text-stroke: 0px #f55d14}
-    span.s5 {font: 9.0px 'Helvetica Neue'; font-kerning: none; color: #343434; -webkit-text-stroke: 0px #343434}
-    span.s6 {background-color: rgba(252, 244, 234, 0.96); -webkit-text-stroke: 0px #000000}
-    span.s7 {background-color: #f55d14; -webkit-text-stroke: 0px #000000}
-    span.s8 {font-kerning: none; color: #0e0e0e; -webkit-text-stroke: 0px #0e0e0e}
-    span.s9 {font-kerning: none; background-color: #0d0c0b}
-    span.s10 {font-kerning: none; background-color: #f55d14}
-    span.s11 {font-kerning: none; background-color: #0e4fb5}
-    span.s12 {font-kerning: none; background-color: #fb0007}
-    span.s13 {font-kerning: none; background-color: #21af43}
-    span.s14 {font-kerning: none; background-color: #1b79ff}
-    span.s15 {font: 14.0px Menlo; font-kerning: none; background-color: #1b79ff}
-    span.s16 {font: 12.0px 'Helvetica Neue'; font-kerning: none; color: #0e0e0e; background-color: #0d0c0b; -webkit-text-stroke: 0px #0e0e0e}
-    span.s17 {font: 10.5px 'Helvetica Neue'; font-kerning: none; background-color: #f55d14}
-    span.s18 {font-kerning: none; background-color: rgba(255, 255, 255, 0.039)}
-    span.s19 {font-kerning: none; background-color: rgba(255, 255, 255, 0.031)}
-    span.s20 {font-kerning: none; color: #e04f16; background-color: rgba(255, 255, 255, 0.031); -webkit-text-stroke: 0px #e04f16}
-    span.s21 {font-kerning: none; color: #c7cbd3; background-color: rgba(255, 255, 255, 0.031); -webkit-text-stroke: 0px #c7cbd3}
-    span.s22 {font: 13.0px 'Helvetica Neue'; font-kerning: none; color: #0d0c0b; background-color: #e04f16; -webkit-text-stroke: 0px #0d0c0b}
-    span.s23 {font: 13.0px 'Helvetica Neue'; font-kerning: none; color: #c7cbd3; -webkit-text-stroke: 0px #c7cbd3}
-    ul.ul1 {list-style-type: none}
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Founder Branding Video Engine — 100Circles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+:root{
+  --bg:#FDF6EE;--orange:#f97316;--blue:#1e90ff;
+  --black:#111;--muted:#6b6b6b;--border:#e0d6cc;
+  --dk:#0f0d0b;--dk-muted:#888;--r:12px;
+  --oc:#E8651A;--oc-lgt:#F07D38;--cream:#F4EEE4;
+  --bdr-orange:rgba(232,101,26,0.18);--bdr-soft:rgba(214,228,240,0.08);
+  --text-dim:#9ca3af;--text-muted2:#6b7280;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--black);overflow-x:hidden;}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(253,246,238,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{text-decoration:none;display:flex;flex-direction:column;line-height:1;gap:2px;}
+.nli{font-family:'Comfortaa',sans-serif;font-weight:700;font-size:22px;letter-spacing:.05em;display:flex;}
+.nli .ci{color:#111;}.nli .co1{color:var(--blue);}.nli .co2{color:var(--orange);}
+.nlc{font-size:9px;font-weight:500;letter-spacing:.28em;color:#444;text-transform:uppercase;}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
+.nav-links a{font-size:13.5px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.act{color:var(--orange);}
+.nav-cta a{background:var(--orange)!important;color:#fff!important;padding:7px 20px;border-radius:100px;font-weight:600;font-size:13px!important;}
+
+/* HERO */
+.hero{max-width:860px;margin:0 auto;padding:72px 40px 40px;text-align:center;}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);border:1px solid rgba(249,115,22,.35);padding:6px 14px;border-radius:100px;margin-bottom:22px;}
+.chip-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);}
+.hero h1{font-family:'Comfortaa',sans-serif;font-size:clamp(26px,4vw,46px);font-weight:700;line-height:1.25;color:var(--black);margin-bottom:16px;}
+.hero p{font-size:15.5px;color:var(--muted);max-width:600px;margin:0 auto;line-height:1.75;}
+
+/* DIAGRAM SECTION */
+.diag-section{
+  background:radial-gradient(ellipse at 100% 0%,rgba(140,45,0,.38) 0%,transparent 52%),
+              radial-gradient(ellipse at 0% 100%,rgba(140,45,0,.2) 0%,transparent 48%),var(--dk);
+  padding:72px 40px 80px;overflow-x:auto;margin-top:48px;
+}
+.diag-head{text-align:center;margin-bottom:60px;}
+.dk-label{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);justify-content:center;margin-bottom:12px;}
+.dk-dash{width:28px;height:1.5px;background:var(--orange);flex-shrink:0;}
+.diag-head h2{font-family:'Comfortaa',sans-serif;font-size:22px;font-weight:700;color:#fff;}
+.diag-head p{font-size:14px;color:var(--dk-muted);margin-top:8px;}
+
+/* Main layout: diagram left, ICP right */
+.diagram-outer{display:flex;gap:52px;align-items:flex-start;justify-content:center;min-width:920px;}
+
+/* ENGINE */
+.engine-wrapper{position:relative;width:780px;height:560px;flex-shrink:0;overflow:visible;}
+.conn-svg{position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0;}
+
+/* NODES */
+.node{position:absolute;border-radius:var(--r);padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:default;z-index:1;transition:transform .2s ease,box-shadow .2s ease;opacity:0;animation:nodeIn .5s ease forwards;}
+.node:hover{transform:translateY(-3px)!important;z-index:10;}
+.nt{font-family:'Comfortaa',sans-serif;font-size:13px;font-weight:700;line-height:1.35;}
+.ns{font-size:10px;opacity:.7;margin-top:4px;line-height:1.4;}
+.ni{font-size:22px;margin-bottom:6px;line-height:1;}
+.fk{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 9px;border-radius:100px;margin-bottom:7px;background:rgba(255,255,255,.2);color:rgba(255,255,255,.9);}
+.row-label{position:absolute;font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);left:0;white-space:nowrap;font-family:'Outfit',sans-serif;}
+
+@keyframes nodeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* SVG paths */
+.cp{fill:none;stroke-width:1.5;}
+.cflow{stroke:rgba(255,255,255,.2);stroke-dasharray:4 9;animation:flowDown 1.6s linear infinite;}
+.cconv{stroke:rgba(30,144,255,.28);stroke-dasharray:4 9;animation:flowDown 2s linear infinite;}
+.crep{stroke:rgba(249,115,22,.45);stroke-dasharray:4 6;animation:flowDown 1.8s linear infinite;}
+.cpod{stroke:rgba(29,185,84,.45);stroke-dasharray:4 6;animation:flowDown 1.8s linear infinite;}
+@keyframes flowDown{to{stroke-dashoffset:-26;}}
+
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:48px;}
+.leg-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dk-muted);}
+.leg-dash{width:22px;border-top:1.5px dashed;}
+
+/* AUDIENCE NOTES — inside the dark section, below legend */
+.aud-notes{
+  max-width:820px;margin:40px auto 0;
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+.aud-note{
+  border-radius:10px;padding:20px 22px;
+  background:rgba(255,255,255,.04);
+}
+.aud-note-rented{border:1px solid rgba(255,255,255,.1);}
+.aud-note-owned{border:1px solid rgba(30,144,255,.25);}
+.aud-note-label{
+  font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  margin-bottom:8px;font-family:'Outfit',sans-serif;
+}
+.aud-note-rented .aud-note-label{color:rgba(255,255,255,.45);}
+.aud-note-owned  .aud-note-label{color:var(--blue);}
+.aud-note p{font-size:12.5px;color:var(--dk-muted);line-height:1.7;}
+
+/* ICP column */
+.icp-col{
+  width:290px;flex-shrink:0;
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:40px;
+}
+.icp-heading{font-family:'Comfortaa',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:22px;}
+.icp-ring{position:relative;width:248px;height:248px;}
+.icp-outer{position:absolute;inset:0;border:1.5px solid rgba(249,115,22,.3);border-radius:50%;animation:ringPulse 3.5s ease-in-out infinite;}
+.icp-inner{position:absolute;inset:32px;border:1px solid rgba(249,115,22,.1);border-radius:50%;}
+@keyframes ringPulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.03);opacity:.5;}}
+.icp-bub{position:absolute;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;text-align:center;line-height:1.3;box-shadow:0 4px 16px rgba(249,115,22,.35);cursor:default;transition:transform .3s;width:72px;height:72px;}
+.icp-bub:hover{transform:scale(1.12)!important;}
+.bu1{top:10px;left:50%;transform:translateX(-50%);animation:floatT 4s ease-in-out infinite;}
+.bu2{bottom:10px;left:10px;animation:floatB 4s ease-in-out infinite .6s;}
+.bu3{bottom:10px;right:10px;font-size:10.5px;animation:floatB 4s ease-in-out infinite 1.2s;}
+@keyframes floatT{0%,100%{top:10px;transform:translateX(-50%);}50%{top:4px;transform:translateX(-50%);}}
+@keyframes floatB{0%,100%{bottom:10px;}50%{bottom:4px;}}
+.icp-cap{text-align:center;margin-top:20px;}
+.icp-cap h3{font-family:'Comfortaa',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;}
+.icp-cap p{font-size:12.5px;color:var(--dk-muted);line-height:1.65;max-width:240px;}
+
+/* VCA CTA */
+.vca-cta{background:var(--dk);padding:0 24px 96px;}
+.vca-inner{max-width:1100px;margin:0 auto;}
+.cta-block{background:rgba(255,255,255,.03);border:1px solid var(--bdr-orange);border-radius:4px;padding:56px 52px;position:relative;overflow:hidden;}
+.cta-block::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;border:1px solid rgba(232,101,26,.06);pointer-events:none;}
+.cta-eyebrow{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--oc);margin-bottom:16px;display:block;}
+.cta-heading{font-family:'Comfortaa',sans-serif;font-size:clamp(20px,2.5vw,34px);font-weight:700;color:var(--cream);line-height:1.2;margin-bottom:10px;}
+.cta-heading .hl{color:var(--oc);}
+.cta-sub{font-size:14px;color:var(--text-dim);max-width:520px;line-height:1.8;margin-bottom:40px;}
+.cta-programs{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:40px;}
+.cta-prog{background:rgba(255,255,255,.03);border:1px solid var(--bdr-soft);padding:26px 22px;transition:background .3s,border-color .3s;}
+.cta-prog:hover{background:rgba(232,101,26,.05);border-color:var(--bdr-orange);}
+.cta-prog-tag{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--oc);margin-bottom:10px;display:block;}
+.cta-prog-name{font-family:'Comfortaa',sans-serif;font-size:15px;font-weight:700;color:var(--cream);margin-bottom:8px;}
+.cta-prog-desc{font-size:12px;color:var(--text-muted2);line-height:1.65;margin-bottom:12px;}
+.cta-prog-detail{font-size:11px;color:var(--text-muted2);}
+.cta-prog-detail strong{color:#d1d5db;}
+.cta-actions{display:flex;gap:16px;align-items:center;justify-content:flex-end;}
+.btn-main{background:var(--oc);color:var(--dk);font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:16px 40px;border-radius:2px;text-decoration:none;transition:background .3s,transform .2s,box-shadow .2s;display:inline-block;}
+.btn-main:hover{background:var(--oc-lgt);transform:translateY(-2px);box-shadow:0 12px 40px rgba(232,101,26,.35);}
+.btn-ghost{background:transparent;border:1px solid rgba(214,228,240,.2);color:#d1d5db;font-size:13px;font-weight:400;letter-spacing:.06em;padding:16px 32px;border-radius:2px;text-decoration:none;transition:border-color .3s,color .3s;display:inline-block;}
+.btn-ghost:hover{border-color:var(--oc);color:var(--oc);}
+
+@media(max-width:760px){
+  .nav{padding:0 20px;}.nav-links{display:none;}
+  .hero{padding:48px 20px 32px;}
+  .diag-section{padding:48px 0 64px;margin-top:0;}
+  .diagram-outer{flex-direction:column;align-items:center;}
+  .engine-wrapper{transform:scale(.44);transform-origin:top left;height:265px;}
+  .icp-col{padding-top:32px;width:100%;}
+  .aud-notes{grid-template-columns:1fr;padding:0 20px;}
+  .cta-programs{grid-template-columns:1fr;}
+  .cta-block{padding:36px 24px;}
+  .cta-actions{flex-direction:column;align-items:flex-start;}
+}
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1"><a href="file:///">I<span class="s2"></span></a></span></p>
-<p class="p2"><span class="s1"><a href="file:///">O<span class="s3"></span></a></span></p>
-<p class="p3"><span class="s1"><a href="file:///">O<span class="s4"></span></a></span></p>
-<p class="p4"><span class="s1"><a href="file:///">CIRCLES<span class="s5"></span></a></span></p>
-<ul class="ul1">
-  <li class="li5"><span class="s6"><a href="file:///about"><span class="s2">About Us</span></a></span></li>
-  <li class="li5"><span class="s6"><a href="file:///dna"><span class="s2">Our DNA</span></a></span></li>
-  <li class="li6"><span class="s6"></span><span class="s1">Resources</span></li>
-  <li class="li5"><span class="s6"><a href="file:///videoaccelerator"><span class="s2">Video Accelerator</span></a></span></li>
-  <li class="li7"><span class="s7"><a href="file:///videoaccelerator"><span class="s2">Let's Talk</span></a></span></li>
-</ul>
-<p class="p8"><span class="s2"></span><br></p>
-<p class="p9"><span class="s2">RESOURCES: VIDEO FRAMEWORK</span></p>
-<h1 style="margin: 0.0px 0.0px 16.0px 0.0px; text-align: center; font: 32.0px 'Helvetica Neue'; color: #0e0e0e; -webkit-text-stroke: #0e0e0e"><span class="s2">Founder &amp; Leadership<br>
-Branding Video Engine</span></h1>
-<p class="p11"><span class="s2">Three Video Formats, to grow your founder brand across<br>
-</span><span class="s8">LinkedIn, YouTube &amp; Instagram. Win With Video!</span></p>
-<p class="p8"><span class="s2"></span><br></p>
-<p class="p12"><span class="s2">100CIRCLES FOUNDER &amp; LEADERSHIP BRANDING VIDEO ENGINE</span></p>
-<p class="p8"><span class="s2"></span><br></p>
-<h2 style="margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 22.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff"><span class="s9">How the Engine Works</span></h2>
-<p class="p14"><span class="s9">Content flows top to bottom. Long-form also generates short-form clips.</span></p>
-<p class="p15"><span class="s2"></span><br></p>
-<p class="p16"><span class="s9">CONTENT FORMATS</span></p>
-<p class="p16"><span class="s9">DISTRIBUTION CHANNELS</span></p>
-<p class="p17"><span class="s9">— RENTED AUDIENCE —</span></p>
-<p class="p18"><span class="s9">— OWNED AUDIENCE —</span></p>
-<p class="p19"><span class="s2">SHORT FORM</span></p>
-<p class="p20"><span class="s10">Shorts &amp; Reels</span></p>
-<p class="p21"><span class="s10">Under 1 minute</span></p>
-<p class="p19"><span class="s2">LONG FORM</span></p>
-<p class="p20"><span class="s10">Talking Head</span></p>
-<p class="p21"><span class="s10">5 – 10 minutes</span></p>
-<p class="p19"><span class="s2">LONG FORM</span></p>
-<p class="p20"><span class="s10">Video Podcast</span></p>
-<p class="p21"><span class="s10">15 – 30 minutes</span></p>
-<p class="p22"><span class="s11">in</span></p>
-<p class="p20"><span class="s11">LinkedIn</span></p>
-<p class="p23"><span class="s12">▶</span></p>
-<p class="p20"><span class="s12">YouTube</span></p>
-<p class="p24"><span class="s9">📸</span></p>
-<p class="p20"><span class="s9">Instagram</span></p>
-<p class="p25"><span class="s13">🎙️</span></p>
-<p class="p26"><span class="s13">Spotify &amp; Apple Podcasts</span></p>
-<p class="p27"><span class="s2">Podcast only</span></p>
-<p class="p28"><span class="s14">✉</span></p>
-<p class="p20"><span class="s14">Email Newsletter</span></p>
-<p class="p22"><span class="s14">in </span><span class="s15">✉</span></p>
-<p class="p20"><span class="s14">LinkedIn Newsletter</span></p>
-<p class="p29"><span class="s9">Your ICP</span></p>
-<p class="p15"><span class="s2"></span><br></p>
-<p class="p15"><span class="s2"></span><br></p>
-<p class="p30"><span class="s10">User</span><span class="s16"> </span><span class="s10">Influencer</span><span class="s16"> </span><span class="s17">Decision</span></p>
-<p class="p31"><span class="s10">Maker</span></p>
-<h3 style="margin: 0.0px 0.0px 6.0px 0.0px; text-align: center; font: 14.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff"><span class="s9">Ideal Customer Profile</span></h3>
-<p class="p33"><span class="s9">Your engine reaches all three buyer personas — building trust at every level of the decision.</span></p>
-<p class="p34"><span class="s2"></span><br></p>
-<p class="p35"><span class="s2"></span><br></p>
-<p class="p36"><span class="s2">Repurposed as clips (long → short form)</span></p>
-<p class="p37"><span class="s2"></span><br></p>
-<p class="p35"><span class="s2"></span><br></p>
-<p class="p36"><span class="s2">Platform content flowing into owned audience</span></p>
-<p class="p38"><span class="s2"></span><br></p>
-<p class="p35"><span class="s2"></span><br></p>
-<p class="p36"><span class="s2">Formats distributing to each platform</span></p>
-<p class="p39"><span class="s18">RENTED AUDIENCE</span></p>
-<p class="p40"><span class="s18">LinkedIn, YouTube, Instagram, Spotify and Apple are leased land — powerful for discovery, but the platform controls the relationship. Consistent presence here builds reach and authority.</span></p>
-<p class="p41"><span class="s18">OWNED AUDIENCE</span></p>
-<p class="p40"><span class="s18">Your email list and LinkedIn Newsletter are channels you truly own — no algorithm, no platform risk. The engine converts the best of your rented content into a direct, lasting connection.</span></p>
-<p class="p42"><span class="s19">VIDEO CREATION ACCELERATOR · 100CIRCLES</span></p>
-<h2 style="margin: 0.0px 0.0px 10.0px 0.0px; font: 20.0px 'Helvetica Neue'; color: #f1eade; -webkit-text-stroke: #f1eade"><span class="s19">Have you been thinking about videos,</span><span class="s2"><br>
-</span><span class="s19">but </span><span class="s20">couldn't get started</span><span class="s19"> — or accelerate?</span></h2>
-<p class="p44"><span class="s19">Most founders know video works. The bottleneck isn't belief — it's getting from zero to consistent, without the guesswork. VCA is built exactly for that. Three paths, one outcome: a founder people can't ignore.</span></p>
-<p class="p45"><span class="s19">SELF-LED + SUPPORT</span></p>
-<p class="p46"><span class="s19">VCA Guided</span></p>
-<p class="p47"><span class="s19">Publish your first talking-head videos in as little as one week. Guided end-to-end — topics, scripting, recording, editing, publishing.</span></p>
-<p class="p48"><span class="s21">2–8 Shorts</span><span class="s19"> · 1, 2 or 4-week plans</span></p>
-<p class="p45"><span class="s19">FULLY MANAGED</span></p>
-<p class="p46"><span class="s19">VCA Done For You</span></p>
-<p class="p47"><span class="s19">You record once. We handle everything else — scripting, editing, publishing. A consistent flow of Shorts and podcast-format videos, every month.</span></p>
-<p class="p48"><span class="s21">4–16 videos/month</span><span class="s19"> · Ongoing service</span></p>
-<p class="p45"><span class="s19">EXCLUSIVE &amp; INTENSIVE</span></p>
-<p class="p46"><span class="s19">VCA Weekend Edition</span></p>
-<p class="p47"><span class="s19">One weekend. 15–20 fully edited videos across 5 formats. 3 specialists. You show up — we handle direction, setup and post-production.</span></p>
-<p class="p48"><span class="s21">15–20 videos</span><span class="s19"> · 2 days · Max 10 founders</span></p>
-<p class="p49"><span class="s2"><a href="https://100circles.com/videoaccelerator">APPLY NOW<span class="s22"></span></a></span></p>
-<p class="p50"><span class="s19"><a href="https://100circles.com/videoaccelerator">See What's Included<span class="s23"></span></a></span></p>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-logo">
+    <div class="nli"><span class="ci">I</span><span class="co1">O</span><span class="co2">O</span></div>
+    <div class="nlc">CIRCLES</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/about">About Us</a></li>
+    <li><a href="/dna">Our DNA</a></li>
+    <li><a href="#" class="act">Resources</a></li>
+    <li><a href="/videoaccelerator">Video Accelerator</a></li>
+    <li class="nav-cta"><a href="/videoaccelerator">Let's Talk</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-chip"><div class="chip-dot"></div>Framework</div>
+  <h1>Founder &amp; Leadership<br>Branding Video Engine</h1>
+  <p>Three Video Formats, to grow your founder brand across<br><strong style="color:var(--black);">LinkedIn, YouTube &amp; Instagram. Win With Video!</strong></p>
+</section>
+
+<!-- DIAGRAM SECTION (entire dark area) -->
+<section class="diag-section">
+  <div class="diag-head">
+    <div class="dk-label"><div class="dk-dash"></div>100Circles Founder &amp; Leadership Branding Video Engine<div class="dk-dash"></div></div>
+    <h2>How the Engine Works</h2>
+    <p>Content flows top to bottom. Long-form also generates short-form clips.</p>
+  </div>
+
+  <!-- Engine + ICP side by side -->
+  <div class="diagram-outer">
+
+    <!-- ENGINE -->
+    <div class="engine-wrapper" id="ew">
+
+      <svg class="conn-svg" id="csvg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ar"  viewBox="0 0 8 6" markerWidth="6" markerHeight="5" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="rgba(255,255,255,.28)"/></marker>
+          <marker id="arb" viewBox="0 0 8 6" markerWidth="6" markerHeight="5" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="rgba(30,144,255,.4)"/></marker>
+          <marker id="aro" viewBox="0 0 8 6" markerWidth="6" markerHeight="5" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="rgba(249,115,22,.6)"/></marker>
+          <marker id="arg" viewBox="0 0 8 6" markerWidth="6" markerHeight="5" refX="6" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="rgba(29,185,84,.5)"/></marker>
+        </defs>
+      </svg>
+
+      <!-- ROW LABELS -->
+      <div class="row-label" style="top:22px;">CONTENT FORMATS</div>
+      <div class="row-label" style="top:210px;">DISTRIBUTION CHANNELS</div>
+      <div class="row-label" style="top:392px;">OWNED AUDIENCE</div>
+
+      <!-- RENTED AUDIENCE label — centred below YouTube + Instagram -->
+      <div style="position:absolute;top:342px;left:196px;width:312px;text-align:center;font-family:'Outfit',sans-serif;font-size:9.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.28);">— Rented Audience —</div>
+
+      <!-- OWNED AUDIENCE label — centred below Email + LinkedIn Newsletter -->
+      <div style="position:absolute;top:530px;left:185px;width:405px;text-align:center;font-family:'Outfit',sans-serif;font-size:9.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:rgba(30,144,255,.45);">— Owned Audience —</div>
+
+      <!-- ── ROW 1: Format nodes (all orange) ── -->
+      <div class="node" id="n-sf" style="background:var(--orange);color:#fff;box-shadow:0 4px 18px rgba(249,115,22,.38);top:44px;left:48px;width:168px;height:100px;animation-delay:.08s;">
+        <div class="fk">Short Form</div>
+        <div class="nt">Shorts &amp; Reels</div>
+        <div class="ns">Under 1 minute</div>
+      </div>
+      <div class="node" id="n-th" style="background:var(--orange);color:#fff;box-shadow:0 4px 18px rgba(249,115,22,.38);top:44px;left:306px;width:168px;height:100px;animation-delay:.18s;">
+        <div class="fk">Long Form</div>
+        <div class="nt">Talking Head</div>
+        <div class="ns">5 – 10 minutes</div>
+      </div>
+      <div class="node" id="n-vp" style="background:var(--orange);color:#fff;box-shadow:0 4px 18px rgba(249,115,22,.38);top:44px;left:564px;width:168px;height:100px;animation-delay:.28s;">
+        <div class="fk">Long Form</div>
+        <div class="nt">Video Podcast</div>
+        <div class="ns">15 – 30 minutes</div>
+      </div>
+
+      <!-- ── ROW 2: Platform channels ── -->
+      <div class="node" id="n-li" style="background:#0A66C2;color:#fff;box-shadow:0 4px 16px rgba(10,102,194,.4);top:232px;left:22px;width:138px;height:96px;animation-delay:.4s;">
+        <div class="ni" style="font-size:14px;font-weight:700;letter-spacing:.04em;">in</div>
+        <div class="nt">LinkedIn</div>
+      </div>
+      <div class="node" id="n-yt" style="background:#FF0000;color:#fff;box-shadow:0 4px 16px rgba(255,0,0,.4);top:232px;left:196px;width:138px;height:96px;animation-delay:.46s;">
+        <div class="ni" style="font-size:16px;">▶</div>
+        <div class="nt">YouTube</div>
+      </div>
+      <div class="node" id="n-ig" style="background:linear-gradient(135deg,#f58529 0%,#dd2a7b 50%,#8134af 100%);color:#fff;box-shadow:0 4px 16px rgba(221,42,123,.38);top:232px;left:370px;width:138px;height:96px;animation-delay:.52s;">
+        <div class="ni">📸</div>
+        <div class="nt">Instagram</div>
+      </div>
+      <div class="node" id="n-sa" style="background:#1DB954;color:#fff;box-shadow:0 4px 16px rgba(29,185,84,.38);top:232px;left:540px;width:210px;height:96px;animation-delay:.58s;">
+        <div class="ni" style="font-size:16px;">🎙️</div>
+        <div class="nt" style="font-size:11.5px;">Spotify &amp; Apple Podcasts</div>
+        <div style="font-size:9px;background:rgba(0,0,0,.18);padding:2px 8px;border-radius:20px;margin-top:5px;font-family:'Outfit',sans-serif;font-weight:600;letter-spacing:.06em;">Podcast only</div>
+      </div>
+
+      <!-- ── ROW 3: Owned audience channels ── -->
+      <div class="node" id="n-em" style="background:#1e90ff;color:#fff;box-shadow:0 4px 18px rgba(30,144,255,.38);top:412px;left:185px;width:178px;height:105px;animation-delay:.68s;">
+        <div class="ni" style="font-size:20px;">✉</div>
+        <div class="nt">Email Newsletter</div>
+      </div>
+      <div class="node" id="n-ln" style="background:#1e90ff;color:#fff;box-shadow:0 4px 18px rgba(30,144,255,.38);top:412px;left:412px;width:178px;height:105px;animation-delay:.76s;">
+        <div class="ni" style="font-size:14px;font-weight:700;letter-spacing:.04em;">in ✉</div>
+        <div class="nt">LinkedIn Newsletter</div>
+      </div>
+
+    </div><!-- /engine-wrapper -->
+
+    <!-- ICP column -->
+    <div class="icp-col">
+      <div class="icp-heading">Your ICP</div>
+      <div class="icp-ring">
+        <div class="icp-outer"></div>
+        <div class="icp-inner"></div>
+        <div class="icp-bub bu1">User</div>
+        <div class="icp-bub bu2">Influencer</div>
+        <div class="icp-bub bu3">Decision<br>Maker</div>
+      </div>
+      <div class="icp-cap">
+        <h3>Ideal Customer Profile</h3>
+        <p>Your engine reaches all three buyer personas — building trust at every level of the decision.</p>
+      </div>
+    </div>
+
+  </div><!-- /diagram-outer -->
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="leg-item">
+      <div style="width:10px;height:10px;border-radius:50%;background:rgba(249,115,22,.5);"></div>
+      <div class="leg-dash" style="border-color:rgba(249,115,22,.5);"></div>
+      Repurposed as clips (long → short form)
+    </div>
+    <div class="leg-item">
+      <div style="width:10px;height:10px;border-radius:50%;background:rgba(30,144,255,.4);"></div>
+      <div class="leg-dash" style="border-color:rgba(30,144,255,.4);"></div>
+      Platform content flowing into owned audience
+    </div>
+    <div class="leg-item">
+      <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);"></div>
+      <div class="leg-dash" style="border-color:rgba(255,255,255,.25);"></div>
+      Formats distributing to each platform
+    </div>
+  </div>
+
+  <!-- AUDIENCE NOTES — inside dark section -->
+  <div class="aud-notes">
+    <div class="aud-note aud-note-rented">
+      <div class="aud-note-label">Rented Audience</div>
+      <p>LinkedIn, YouTube, Instagram, Spotify and Apple are leased land — powerful for discovery, but the platform controls the relationship. Consistent presence here builds reach and authority.</p>
+    </div>
+    <div class="aud-note aud-note-owned">
+      <div class="aud-note-label">Owned Audience</div>
+      <p>Your email list and LinkedIn Newsletter are channels you truly own — no algorithm, no platform risk. The engine converts the best of your rented content into a direct, lasting connection.</p>
+    </div>
+  </div>
+
+</section><!-- /diag-section -->
+
+<!-- VCA CTA -->
+<section class="vca-cta" id="apply">
+  <div class="vca-inner">
+    <div class="cta-block">
+      <span class="cta-eyebrow">Video Creation Accelerator · 100Circles</span>
+      <h2 class="cta-heading">Have you been thinking about videos,<br>but <span class="hl">couldn't get started</span> — or accelerate?</h2>
+      <p class="cta-sub">Most founders know video works. The bottleneck isn't belief — it's getting from zero to consistent, without the guesswork. VCA is built exactly for that. Three paths, one outcome: a founder people can't ignore.</p>
+      <div class="cta-programs">
+        <div class="cta-prog">
+          <span class="cta-prog-tag">Self-Led + Support</span>
+          <div class="cta-prog-name">VCA Guided</div>
+          <p class="cta-prog-desc">Publish your first talking-head videos in as little as one week. Guided end-to-end — topics, scripting, recording, editing, publishing.</p>
+          <div class="cta-prog-detail"><strong>2–8 Shorts</strong> · 1, 2 or 4-week plans</div>
+        </div>
+        <div class="cta-prog">
+          <span class="cta-prog-tag">Fully Managed</span>
+          <div class="cta-prog-name">VCA Done For You</div>
+          <p class="cta-prog-desc">You record once. We handle everything else — scripting, editing, publishing. A consistent flow of Shorts and podcast-format videos, every month.</p>
+          <div class="cta-prog-detail"><strong>4–16 videos/month</strong> · Ongoing service</div>
+        </div>
+        <div class="cta-prog">
+          <span class="cta-prog-tag">Exclusive &amp; Intensive</span>
+          <div class="cta-prog-name">VCA Weekend Edition</div>
+          <p class="cta-prog-desc">One weekend. 15–20 fully edited videos across 5 formats. 3 specialists. You show up — we handle direction, setup and post-production.</p>
+          <div class="cta-prog-detail"><strong>15–20 videos</strong> · 2 days · Max 10 founders</div>
+        </div>
+      </div>
+      <div class="cta-actions">
+        <a href="https://100circles.com/videoaccelerator" target="_blank" rel="noopener noreferrer" class="btn-main">Apply Now</a>
+        <a href="https://100circles.com/videoaccelerator" target="_blank" rel="noopener noreferrer" class="btn-ghost">See What's Included</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const ew=document.getElementById('ew'),svg=document.getElementById('csvg');
+  function nr(id){
+    const el=document.getElementById(id);if(!el)return null;
+    const W=ew.getBoundingClientRect(),r=el.getBoundingClientRect();
+    const t=r.top-W.top,l=r.left-W.left;
+    return{t,l,b:t+r.height,r:l+r.width,cx:l+r.width/2,cy:t+r.height/2,w:r.width,h:r.height};
+  }
+  function path(d,cls,marker){
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d',d);p.setAttribute('class','cp '+cls);
+    if(marker)p.setAttribute('marker-end','url(#'+marker+')');
+    svg.appendChild(p);
+  }
+  function vbez(sx,sy,ex,ey){const my=(sy+ey)/2;return`M ${sx} ${sy} C ${sx} ${my} ${ex} ${my} ${ex} ${ey}`;}
+
+  function draw(){
+    svg.querySelectorAll('path').forEach(e=>e.remove());
+    const sf=nr('n-sf'),th=nr('n-th'),vp=nr('n-vp');
+    const li=nr('n-li'),yt=nr('n-yt'),ig=nr('n-ig'),sa=nr('n-sa');
+    const em=nr('n-em'),ln=nr('n-ln');
+    if(!sf||!em||!ln)return;
+
+    // Repurposing arcs above Row 1
+    const ay1=sf.t-18,ay2=sf.t-36;
+    path(`M ${th.cx} ${th.t} C ${th.cx} ${ay1} ${sf.cx} ${ay1} ${sf.cx} ${sf.t}`,'crep','aro');
+    path(`M ${vp.cx} ${vp.t} C ${vp.cx} ${ay2} ${sf.cx} ${ay2} ${sf.cx} ${sf.t}`,'crep','aro');
+
+    // Row 1 → Row 2 (9 lines — 3 formats × 3 channels)
+    const liX={l:li.l+li.w*.22,c:li.cx,r:li.l+li.w*.78};
+    const ytX={l:yt.l+yt.w*.22,c:yt.cx,r:yt.l+yt.w*.78};
+    const igX={l:ig.l+ig.w*.22,c:ig.cx,r:ig.l+ig.w*.78};
+
+    path(vbez(sf.l+sf.w*.22,sf.b,liX.l,li.t),'cflow','ar');
+    path(vbez(sf.cx,sf.b,ytX.l,yt.t),'cflow','ar');
+    path(vbez(sf.l+sf.w*.78,sf.b,igX.l,ig.t),'cflow','ar');
+
+    path(vbez(th.l+th.w*.22,th.b,liX.c,li.t),'cflow','ar');
+    path(vbez(th.cx,th.b,ytX.c,yt.t),'cflow','ar');
+    path(vbez(th.l+th.w*.78,th.b,igX.c,ig.t),'cflow','ar');
+
+    path(vbez(vp.l+vp.w*.22,vp.b,liX.r,li.t),'cflow','ar');
+    path(vbez(vp.cx,vp.b,ytX.r,yt.t),'cflow','ar');
+    path(vbez(vp.l+vp.w*.78,vp.b,igX.r,ig.t),'cflow','ar');
+
+    // Video Podcast → Spotify/Apple (podcast only)
+    path(vbez(vp.l+vp.w*.65,vp.b,sa.cx,sa.t),'cpod','arg');
+
+    // Row 2 → Row 3 (channels → both owned nodes, fanned entry)
+    path(vbez(li.cx,li.b,em.l+em.w*.2, em.t),'cconv','arb');
+    path(vbez(yt.cx,yt.b,em.l+em.w*.45,em.t),'cconv','arb');
+    path(vbez(ig.cx,ig.b,em.l+em.w*.7, em.t),'cconv','arb');
+    path(vbez(sa.cx,sa.b,em.l+em.w*.9, em.t),'cconv','arb');
+
+    path(vbez(li.cx,li.b,ln.l+ln.w*.1, ln.t),'cconv','arb');
+    path(vbez(yt.cx,yt.b,ln.l+ln.w*.35,ln.t),'cconv','arb');
+    path(vbez(ig.cx,ig.b,ln.l+ln.w*.6, ln.t),'cconv','arb');
+    path(vbez(sa.cx,sa.b,ln.l+ln.w*.85,ln.t),'cconv','arb');
+  }
+
+  setTimeout(draw,380);
+  let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(draw,120);});
+})();
+</script>
 </body>
 </html>
